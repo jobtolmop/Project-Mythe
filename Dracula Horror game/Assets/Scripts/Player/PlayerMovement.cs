@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 6;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private float jumpHeight = 3;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -40,16 +41,21 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * movement.x + transform.forward * movement.y;
 
-        if (Input.GetButton("Sprint"))
+        if (Input.GetButton("Sprint") && grounded)
         {
             speed = runSpeed;
         }
         else
         {
             speed = walkSpeed;
-        }
+        }       
 
         controller.Move(move * speed * Time.deltaTime);
+
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        }
 
         velocity.y += gravity * Time.deltaTime;
 
