@@ -34,7 +34,10 @@ public class EnemyPlayerSpotter : MonoBehaviour
         {
             ObjectInSightCheck(playerCandle);
         }        
-        ObjectInSightCheck(player);
+        else
+        {
+            ObjectInSightCheck(player);
+        }        
     }
 
     private void ObjectInSightCheck(Transform thingToSee)
