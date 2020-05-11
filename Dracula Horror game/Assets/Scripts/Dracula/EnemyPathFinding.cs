@@ -7,21 +7,18 @@ public class EnemyPathFinding : MonoBehaviour
 {
     private NavMeshAgent agent;
 
-    private Transform player;
-    private Vector3 targetPos;
+    private EnemyDestinationChooser chooser;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        chooser = GetComponent<EnemyDestinationChooser>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        targetPos = player.position;
-
-        agent.SetDestination(targetPos);
+        agent.SetDestination(chooser.TargetPos);
     }
 }

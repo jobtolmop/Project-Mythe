@@ -1092,7 +1092,7 @@ GameObject:
   - component: {fileID: 660797348}
   - component: {fileID: 660797347}
   - component: {fileID: 660797346}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1368,9 +1368,11 @@ GameObject:
   - component: {fileID: 720493840}
   - component: {fileID: 720493841}
   - component: {fileID: 720493842}
-  m_Layer: 0
+  - component: {fileID: 720493843}
+  - component: {fileID: 720493844}
+  m_Layer: 11
   m_Name: Dracula
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1424,6 +1426,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023bd4bf6569052498264c5fccfbadd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &720493843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720493839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec765c00254bc84890d11b7129a0a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 55
+--- !u!114 &720493844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720493839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f47d88e80579c47ad2bd4a4b6fdc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 200
+  fov: 105
 --- !u!1 &752853150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1467,7 @@ GameObject:
   - component: {fileID: 752853153}
   - component: {fileID: 752853152}
   - component: {fileID: 752853151}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DraculaModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2463,7 +2494,7 @@ GameObject:
   - component: {fileID: 1378006510}
   m_Layer: 8
   m_Name: PhysicsInteraction
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

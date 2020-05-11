@@ -20,11 +20,14 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private bool crouching = false;
 
+    private Transform cam;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         roofCheck = transform.GetChild(4);
+        cam = Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -95,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
                 crouching = false;
                 controller.height = 2;
                 transform.GetChild(3).localScale = new Vector3(1, 1f, 1);
-                Camera.main.transform.localPosition = new Vector3(0, 0.8f, Camera.main.transform.localPosition.z);
+                cam.localPosition = new Vector3(0, 0.8f, cam.localPosition.z);
             }            
         }
         else
@@ -103,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             crouching = true;
             controller.height = 1;
             transform.GetChild(3).localScale = new Vector3(1, 0.5f, 1);
-            Camera.main.transform.localPosition = new Vector3(0, 0.25f, Camera.main.transform.localPosition.z);
+            cam.localPosition = new Vector3(0, 0.25f, cam.localPosition.z);
         }
     }
 
