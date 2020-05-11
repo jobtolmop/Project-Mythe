@@ -6,18 +6,19 @@ public class EnemyPlayerSpotter : MonoBehaviour
 {
     public bool PlayerSpotted { get; set; } = false;
 
-    private bool checkSeePlayer = true;
+    private float sightTimer = 0;
 
     private Transform player;
+    [SerializeField] private Transform playerCandle;
 
     public Transform Player { get { return player; } }
 
     private EnemyDestinationChooser chooser;
 
     [SerializeField] private float viewDistance = 60;
+    [SerializeField] private float feelDistance = 5;
     [SerializeField] private float fov = 105;
-
-    private Vector3 dirToPlayerDebug;
+    [SerializeField] private Transform eyes;
 
     // Start is called before the first frame update
     void Start()
@@ -29,52 +30,96 @@ public class EnemyPlayerSpotter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerSpotted)
+        if (playerCandle.gameObject.activeSelf)
         {
-            Debug.DrawRay(transform.position, dirToPlayerDebug, Color.red);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.forward, Color.green);
-        }
+            ObjectInSightCheck(playerCandle);
+        }        
+        ObjectInSightCheck(player);
+    }
 
-        if (checkSeePlayer && (player.position - transform.position).sqrMagnitude < viewDistance)
+    private void ObjectInSightCheck(Transform thingToSee)
+    {
+        if ((thingToSee.position - eyes.position).sqrMagnitude < viewDistance)
         {
-            Vector3 dirToPlayer = (player.position - transform.position).normalized;
-            dirToPlayerDebug = dirToPlayer;
+            Vector3 dirToObject = (thingToSee.position - eyes.position).normalized;
 
-            if (Vector3.Angle(transform.forward, dirToPlayer) < fov / 2)
+            if (Vector3.Angle(eyes.forward, dirToObject) < fov / 2)
             {
                 //Debug.Log("Player in field of view");
-                RaycastHit hit;                
+                RaycastHit hit;
 
                 int layer = ~LayerMask.GetMask("Enemy");
 
-                if (Physics.Raycast(transform.position, dirToPlayer, out hit, viewDistance, layer))
+                if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layer))
                 {
-                    if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
+                    if (hit.collider != null && (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("Candle")))
                     {
-                        Debug.Log("Player in sight");
-                        PlayerSpotted = true;
-                        checkSeePlayer = false;
-                        StartCoroutine(CheckPlayerDelay());
+                        //Only applies if looking for light
+                        bool seesLight = true;
+
+                        if (hit.collider.gameObject.CompareTag("Candle"))
+                        {
+                            seesLight = PointSeesCandlePos(hit.point);
+                            if (seesLight)
+                            {
+                                Debug.Log("Saw light!");
+                            }                            
+                        }
+
+                        if (seesLight)
+                        {
+                            Debug.DrawRay(eyes.position, dirToObject, Color.red);
+                            PlayerSpotted = true;
+                            sightTimer = 0;
+                            return;
+                        }                                   
                     }
                 }
             }
         }
 
-        if (checkSeePlayer)
+        if ((player.position - transform.position).sqrMagnitude < feelDistance)
         {
+            PlayerSpotted = true;
+            sightTimer = 0;
+            return;
+        }
+
+        Debug.DrawRay(eyes.position, transform.forward, Color.green);
+
+        if (sightTimer < 5)
+        {
+            sightTimer += Time.deltaTime;
+        }
+        else
+        {
+            sightTimer = 0;
             PlayerSpotted = false;
         }
     }
 
-    private IEnumerator CheckPlayerDelay()
+    public bool PointSeesCandlePos(Vector3 pos)
     {
-        yield return new WaitForSeconds(5);
+        int layer = ~LayerMask.GetMask("Candle") | ~LayerMask.GetMask("Enemy");
+        RaycastHit candleHit;
+        Vector3 dirToCandle = (playerCandle.GetChild(0).position - pos).normalized;
 
-        Debug.Log("Putting it back");
+        Debug.DrawRay(pos, dirToCandle, Color.magenta);
 
-        checkSeePlayer = true;
+        if (Physics.Raycast(pos, dirToCandle, out candleHit, 100, layer))
+        {
+            if (candleHit.collider != null && candleHit.collider.gameObject.CompareTag("CandleCol"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void SpottedPlayer()
+    {
+        PlayerSpotted = true;
+        sightTimer = 0;
     }
 }

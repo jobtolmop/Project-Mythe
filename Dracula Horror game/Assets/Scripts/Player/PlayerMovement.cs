@@ -15,9 +15,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 3;
 
     private Vector3 velocity = Vector3.zero;
-    private Transform roofCheck;
-    [SerializeField] private LayerMask groundMask;
 
+    [SerializeField] private Transform roofCheck;
+    [SerializeField] private Transform physicsObject;
+    [SerializeField] private LayerMask groundMask;
     [SerializeField] private bool crouching = false;
 
     private Transform cam;
@@ -26,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        roofCheck = transform.GetChild(4);
         cam = Camera.main.transform;
     }
 
@@ -35,8 +35,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        Vector3 move = transform.right * movement.x + transform.forward * movement.y;        
-
+        Vector3 move = transform.right * movement.x + transform.forward * movement.y;
+        if (move.magnitude > 1)
+        {
+            move.Normalize();
+        }
+        //Move is called before controls like jump and sprint check because isGrounded must be called after move()
         controller.Move(move * speed * Time.deltaTime);
 
         controller.Move(velocity * Time.deltaTime);
@@ -74,17 +78,17 @@ public class PlayerMovement : MonoBehaviour
                     speed = crouchSpeed;
                 }
             }
-        }
 
-        if (controller.isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2;
-        }
+            if (velocity.y < 0)
+            {
+                velocity.y = -2;
+            }
 
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-        }
+            if (Input.GetButtonDown("Jump"))
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+            }
+        }        
 
         velocity.y += gravity * Time.deltaTime;
     }
@@ -97,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 crouching = false;
                 controller.height = 2;
-                transform.GetChild(3).localScale = new Vector3(1, 1f, 1);
+                physicsObject.localScale = Vector3.one;
                 cam.localPosition = new Vector3(0, 0.8f, cam.localPosition.z);
             }            
         }
@@ -105,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         {
             crouching = true;
             controller.height = 1;
-            transform.GetChild(3).localScale = new Vector3(1, 0.5f, 1);
+            physicsObject.localScale = new Vector3(1, 0.5f, 1);
             cam.localPosition = new Vector3(0, 0.25f, cam.localPosition.z);
         }
     }
