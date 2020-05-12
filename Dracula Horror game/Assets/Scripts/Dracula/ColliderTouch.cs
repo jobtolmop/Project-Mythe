@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightTouch : MonoBehaviour
+public class ColliderTouch : MonoBehaviour
 {
     private EnemyPlayerSpotter spotter;
 

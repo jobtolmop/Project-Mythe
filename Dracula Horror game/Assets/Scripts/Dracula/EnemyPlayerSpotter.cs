@@ -20,6 +20,8 @@ public class EnemyPlayerSpotter : MonoBehaviour
     [SerializeField] private float fov = 105;
     [SerializeField] private Transform eyes;
 
+    private bool playerInLight = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,10 +34,20 @@ public class EnemyPlayerSpotter : MonoBehaviour
     {
         if (playerCandle.gameObject.activeSelf)
         {
+            viewDistance = 500;
             ObjectInSightCheck(playerCandle);
         }        
         else
         {
+            if (!playerInLight)
+            {
+                viewDistance = 300;
+            }
+            else
+            {
+                viewDistance = 500;
+            }
+           
             ObjectInSightCheck(player);
         }        
     }
@@ -88,7 +100,14 @@ public class EnemyPlayerSpotter : MonoBehaviour
             return;
         }
 
-        Debug.DrawRay(eyes.position, transform.forward, Color.green);
+        Color color = Color.green;
+
+        if (PlayerSpotted)
+        {
+            color = Color.cyan;
+        }
+
+        Debug.DrawRay(eyes.position, transform.forward, color);
 
         if (sightTimer < 5)
         {
@@ -107,7 +126,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
         RaycastHit candleHit;
         Vector3 dirToCandle = (playerCandle.GetChild(0).position - pos).normalized;
 
-        Debug.DrawRay(pos, dirToCandle, Color.magenta);
+        Debug.DrawRay(pos, dirToCandle, Color.magenta);     
 
         if (Physics.Raycast(pos, dirToCandle, out candleHit, 100, layer))
         {
@@ -116,7 +135,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                 return true;
             }
         }
-
+        
         return false;
     }
 
@@ -124,5 +143,10 @@ public class EnemyPlayerSpotter : MonoBehaviour
     {
         PlayerSpotted = true;
         sightTimer = 0;
+    }
+
+    public void PlayerInLight(bool enter)
+    {
+        playerInLight = enter;
     }
 }
