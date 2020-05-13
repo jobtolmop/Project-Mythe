@@ -55,8 +55,8 @@ public class EnemyDestinationChooser : MonoBehaviour
                     Debug.Log("Choose new location...");
                     heardSound = false;
                     standStillTimer = 0;
-                    locationMadeByRandom = false;
-                    alreadyInvoking = false;
+                    Invoke("ChooseRandomLocation", 2);
+                    alreadyInvoking = true;
                 }
             }
 
