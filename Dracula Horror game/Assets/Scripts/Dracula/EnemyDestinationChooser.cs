@@ -14,6 +14,8 @@ public class EnemyDestinationChooser : MonoBehaviour
     private bool alreadyInvoking = false;
     private bool locationMadeByRandom = false;
 
+    private bool heardSound = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,11 +37,15 @@ public class EnemyDestinationChooser : MonoBehaviour
         {
             Vector3 posCheck = transform.position;
             posCheck.y = 0;
-            if ((!locationMadeByRandom || posCheck == TargetPos && locationMadeByRandom) && !alreadyInvoking)
+            if ((!locationMadeByRandom || posCheck == TargetPos && locationMadeByRandom) && !alreadyInvoking && !heardSound)
             {                
                 Invoke("ChooseRandomLocation", 2);
                 alreadyInvoking = true;
-            }           
+            }
+            else if (posCheck == TargetPos && heardSound)
+            {
+                heardSound = false;
+            }
         }
     }
 
@@ -95,6 +101,13 @@ public class EnemyDestinationChooser : MonoBehaviour
                 Debug.Log("Someting is nearby the target pos");
             }
         }
+    }
+
+    public void HeardSound(Vector3 pos)
+    {
+        heardSound = true;
+        pos.y = 0;
+        TargetPos = pos;        
     }
 
     private void OnDrawGizmos()

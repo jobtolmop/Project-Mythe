@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject physicsInteraction;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("Die");
+            transform.parent.gameObject.layer = 18;
+            physicsInteraction.SetActive(false);
+            transform.parent.gameObject.AddComponent<CapsuleCollider>();
+            transform.parent.GetComponent<CapsuleCollider>().height = 2;
+            transform.parent.gameObject.AddComponent<Rigidbody>();
+            GetComponentInParent<Rigidbody>().AddForce(-transform.parent.forward * 10);
+            transform.parent.GetComponentInChildren<PlayerLook>().enabled = false;
+            GetComponentInParent<CharacterController>().enabled = false;
+            GetComponentInParent<PlayerMovement>().enabled = false;
+            GetComponentInParent<CandleControls>().enabled = false;
+            Destroy(gameObject);
+        }
     }
 }

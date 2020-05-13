@@ -8,6 +8,7 @@ TagManager:
   - Candle
   - CandleCol
   - Sound
+  - Audio
   layers:
   - Default
   - TransparentFX
@@ -27,8 +28,8 @@ TagManager:
   - Eyes
   - Window
   - Physics
-  - 
-  - 
+  - Dead
+  - DeathCol
   - 
   - 
   - 

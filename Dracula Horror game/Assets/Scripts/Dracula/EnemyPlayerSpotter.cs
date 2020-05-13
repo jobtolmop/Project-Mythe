@@ -66,7 +66,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                 //Debug.Log("Player in field of view");
                 RaycastHit hit;
 
-                int layer = ~LayerMask.GetMask("Enemy");
+                int layer = ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Window");
 
                 if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layer))
                 {
@@ -112,7 +112,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
         Debug.DrawRay(eyes.position, transform.forward, color);
 
-        if (sightTimer < 5)
+        if (sightTimer < 3)
         {
             sightTimer += Time.deltaTime;
         }
@@ -125,7 +125,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
     public bool PointSeesCandlePos(Vector3 pos)
     {
-        int layer = ~LayerMask.GetMask("Candle") | ~LayerMask.GetMask("Enemy");
+        int layer = ~LayerMask.GetMask("Candle") | ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Window");
         RaycastHit candleHit;
         Vector3 dirToCandle = (playerCandle.GetChild(0).position - pos).normalized;
 
