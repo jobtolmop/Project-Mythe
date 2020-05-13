@@ -16,7 +16,6 @@ public class WindowLight : MonoBehaviour
     {        
         if (other.GetComponent<CharacterController>() != null)
         {
-            Debug.Log(other);
             spotter.PlayerInLight(true);
         }
     }

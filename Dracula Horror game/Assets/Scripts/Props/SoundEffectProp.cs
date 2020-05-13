@@ -6,37 +6,44 @@ public class SoundEffectProp : MonoBehaviour
 {
     [SerializeField] private AudioSource hitSFX;
     [SerializeField] private AudioSource crashSFX;
+    [SerializeField] private float hitVel;
+    [SerializeField] private float crashVel;
     private AudioClip currSFX;
-    private Transform currGameObject;
+    private AudioSource currAudio;
 
     private AudioManager audioManager;
 
     private SphereCollider soundCollider;
 
+    private bool alreadyBreaking = false;
+
     private void Start()
     {
         //audioManager = GameObject.FindGameObjectWithTag("Audio").transform.GetChild(0).GetComponent<AudioManager>();
-        soundCollider = transform.GetChild(0).GetComponent<SphereCollider>();
+        soundCollider = transform.GetChild(1).GetComponent<SphereCollider>();
         Debug.Log(soundCollider);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > 10)
+        if (collision.relativeVelocity.magnitude > crashVel && !alreadyBreaking)
         {
+            alreadyBreaking = true;
             currSFX = crashSFX.clip;
-            currGameObject = crashSFX.transform;
+            currAudio = crashSFX;
             crashSFX.Play();
             if (!collision.gameObject.CompareTag("Enemy"))
             {
                 StartCoroutine("SoundDelay");
             }
+            Destroy(transform.GetChild(0).gameObject);
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
             Destroy(gameObject, crashSFX.clip.length);
         }
-        else if(collision.relativeVelocity.magnitude > 2)
+        else if(collision.relativeVelocity.magnitude > hitVel)
         {
             currSFX = hitSFX.clip;
-            currGameObject = hitSFX.transform;
+            currAudio = hitSFX;
             hitSFX.Play();
             if (!collision.gameObject.CompareTag("Enemy"))
             {
@@ -48,7 +55,7 @@ public class SoundEffectProp : MonoBehaviour
     private IEnumerator SoundDelay()
     {
         soundCollider.gameObject.SetActive(true);
-        soundCollider.radius = currGameObject.transform.localScale.x;
+        soundCollider.radius = currAudio.maxDistance;
 
         yield return new WaitForSeconds(currSFX.length);
 

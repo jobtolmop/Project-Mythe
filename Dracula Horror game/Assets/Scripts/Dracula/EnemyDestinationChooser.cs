@@ -14,7 +14,11 @@ public class EnemyDestinationChooser : MonoBehaviour
     private bool alreadyInvoking = false;
     private bool locationMadeByRandom = false;
 
+    public bool SearchLastPlayerLocation { get; set; } = false;
+
     private bool heardSound = false;
+
+    private float standStillTimer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -30,21 +34,51 @@ public class EnemyDestinationChooser : MonoBehaviour
         Debug.DrawRay(TargetPos, Vector3.up, Color.blue);
         if (spotter.PlayerSpotted)
         {
-            TargetPos = spotter.Player.position;
+            Vector3 playerPos = spotter.Player.position;
+            playerPos.y = 0;
+            TargetPos = playerPos;
             locationMadeByRandom = false;
+            standStillTimer = 0;
         }   
         else
         {
             Vector3 posCheck = transform.position;
             posCheck.y = 0;
-            if ((!locationMadeByRandom || posCheck == TargetPos && locationMadeByRandom) && !alreadyInvoking && !heardSound)
-            {                
+
+            if (posCheck != TargetPos && (posCheck - TargetPos).sqrMagnitude < 5 && (heardSound || SearchLastPlayerLocation))
+            {
+                standStillTimer += Time.deltaTime;
+                Debug.Log("standing here...");
+
+                if (standStillTimer > 5)
+                {
+                    Debug.Log("Choose new location...");
+                    heardSound = false;
+                    standStillTimer = 0;
+                    locationMadeByRandom = false;
+                    alreadyInvoking = false;
+                }
+            }
+
+            if ((!locationMadeByRandom || posCheck == TargetPos && locationMadeByRandom) && !alreadyInvoking && !heardSound && !SearchLastPlayerLocation)
+            {
+                standStillTimer = 0;
                 Invoke("ChooseRandomLocation", 2);
                 alreadyInvoking = true;
             }
-            else if (posCheck == TargetPos && heardSound)
+            else if (posCheck == TargetPos && heardSound && !SearchLastPlayerLocation)
             {
+                standStillTimer = 0;
                 heardSound = false;
+                locationMadeByRandom = false;
+                alreadyInvoking = false;
+            }
+            else if (posCheck == TargetPos && SearchLastPlayerLocation)
+            {
+                standStillTimer = 0;
+                SearchLastPlayerLocation = false;
+                locationMadeByRandom = false;
+                alreadyInvoking = false;
             }
         }
     }

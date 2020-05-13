@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
             transform.parent.GetComponent<CapsuleCollider>().height = 2;
             transform.parent.gameObject.AddComponent<Rigidbody>();
             GetComponentInParent<Rigidbody>().AddForce(-transform.parent.forward * 10);
+            GetComponentInParent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationY;
             transform.parent.GetComponentInChildren<PlayerLook>().enabled = false;
             GetComponentInParent<CharacterController>().enabled = false;
             GetComponentInParent<PlayerMovement>().enabled = false;

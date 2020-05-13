@@ -24,7 +24,7 @@ public class EnemyPathFinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (chooser.TargetPos == player.position)
+        if (spotter.PlayerSpotted)
         {
             agent.speed = 9.5f;
         }

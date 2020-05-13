@@ -120,6 +120,11 @@ public class EnemyPlayerSpotter : MonoBehaviour
         {
             sightTimer = 0;
             PlayerSpotted = false;
+            if (!chooser.SearchLastPlayerLocation)
+            {
+                chooser.SearchLastPlayerLocation = true;
+                chooser.TargetPos = new Vector3(player.position.x, 0, player.position.z);
+            }                            
         }
     }
 
