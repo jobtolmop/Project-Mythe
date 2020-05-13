@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Candle
   - CandleCol
+  - Sound
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - CandleCol
   - Eyes
   - Window
-  - 
+  - Physics
   - 
   - 
   - 

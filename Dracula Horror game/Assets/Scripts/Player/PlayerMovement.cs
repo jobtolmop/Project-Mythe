@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
 
+    private Vector2 movement;
     [SerializeField] private float speed = 6;
     [SerializeField] private float runSpeed = 12;
     [SerializeField] private float walkSpeed = 6;
@@ -20,20 +21,28 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform physicsObject;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private bool crouching = false;
+    [SerializeField] private bool jumping = false;
+
+    public bool Crouching { get { return crouching; } }
+    public bool Jumping { get { return jumping; } }
+    public Vector2 Movement { get { return movement; } }
 
     private Transform cam;
+
+    private PlayerSoundMaker soundMaker;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
+        //soundMaker = GetComponent<PlayerSoundMaker>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         Vector3 move = transform.right * movement.x + transform.forward * movement.y;
         if (move.magnitude > 1)
@@ -47,6 +56,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (controller.isGrounded)
         {
+            if (jumping)
+            {
+                jumping = false;
+                //soundMaker.PlayCoroutineJumpLand();
+            }
+
             if (!crouching)
             {
                 if (Input.GetButton("Sprint"))
@@ -85,7 +100,9 @@ public class PlayerMovement : MonoBehaviour
             }
 
             if (Input.GetButtonDown("Jump"))
-            {
+            {                
+                jumping = true;
+                //soundMaker.PlayCoroutineJumpLand();
                 velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             }
         }        

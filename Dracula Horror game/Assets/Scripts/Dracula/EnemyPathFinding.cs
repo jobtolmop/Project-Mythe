@@ -26,7 +26,7 @@ public class EnemyPathFinding : MonoBehaviour
     {
         if (chooser.TargetPos == player.position)
         {
-            agent.speed = 7;
+            agent.speed = 9.5f;
         }
         else
         {

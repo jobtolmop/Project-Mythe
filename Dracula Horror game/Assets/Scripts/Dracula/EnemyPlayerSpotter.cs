@@ -35,10 +35,13 @@ public class EnemyPlayerSpotter : MonoBehaviour
         if (playerCandle.gameObject.activeSelf)
         {
             viewDistance = 500;
+            fov = 150;
             ObjectInSightCheck(playerCandle);
         }        
         else
         {
+            fov = 120;
+
             if (!playerInLight)
             {
                 viewDistance = 300;
