@@ -9,6 +9,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
     private float sightTimer = 0;
 
     private Transform player;
+    private PlayerMovement playerMov;
     [SerializeField] private Transform playerCandle;
 
     public Transform Player { get { return player; } }
@@ -16,6 +17,8 @@ public class EnemyPlayerSpotter : MonoBehaviour
     private EnemyDestinationChooser chooser;
 
     [SerializeField] private float viewDistance = 60;
+    [SerializeField] private float playerCrouchviewDistance = 100;
+    [SerializeField] private float playerCrouchFov = 50;
     [SerializeField] private float feelDistance = 5;
     [SerializeField] private float fov = 105;
     [SerializeField] private Transform eyes;
@@ -26,29 +29,38 @@ public class EnemyPlayerSpotter : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerMov = player.GetComponent<PlayerMovement>();
         chooser = GetComponent<EnemyDestinationChooser>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float lessView = 0;
+        float lessFov = 0;
+        if (playerMov.Crouching)
+        {
+            lessView = playerCrouchviewDistance;
+            lessFov = playerCrouchFov;
+        }
+
         if (playerCandle.gameObject.activeSelf)
         {
-            viewDistance = 500;
-            fov = 150;
+            viewDistance = 500 - lessView;
+            fov = 150 - lessFov;
             ObjectInSightCheck(playerCandle);
         }        
         else
         {
-            fov = 120;
+            fov = 120 - lessFov;
 
             if (!playerInLight)
             {
-                viewDistance = 300;
+                viewDistance = 300 - lessView;
             }
             else
             {
-                viewDistance = 500;
+                viewDistance = 500- lessView;
             }
            
             ObjectInSightCheck(player);
@@ -60,6 +72,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
         if ((thingToSee.position - eyes.position).sqrMagnitude < viewDistance)
         {
             Vector3 dirToObject = (thingToSee.position - eyes.position).normalized;
+            //Debug.Log(dirToObject);
 
             if (Vector3.Angle(eyes.forward, dirToObject) < fov / 2)
             {
@@ -83,12 +96,20 @@ public class EnemyPlayerSpotter : MonoBehaviour
                                 Debug.Log("Saw light!");
                             }                            
                         }
-
+                        
                         if (seesLight)
                         {
                             Debug.DrawRay(eyes.position, dirToObject, Color.red);
                             PlayerSpotted = true;
                             sightTimer = 0;
+
+                            if (!AudioManager.instance.PlayingSong)
+                            {
+                                AudioManager.instance.Play("Chase");
+                                AudioManager.instance.Play("JumpScare");
+                            }
+
+                            AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
                             return;
                         }                                   
                     }
@@ -96,7 +117,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
             }
         }
 
-        if ((player.position - transform.position).sqrMagnitude < feelDistance)
+        if ((player.position - transform.position).sqrMagnitude < feelDistance && player.gameObject.layer == 8)
         {
             PlayerSpotted = true;
             sightTimer = 0;
@@ -119,12 +140,14 @@ public class EnemyPlayerSpotter : MonoBehaviour
         else
         {
             sightTimer = 0;
-            PlayerSpotted = false;
-            if (!chooser.SearchLastPlayerLocation)
+            if (!chooser.SearchLastPlayerLocation && PlayerSpotted)
             {
                 chooser.SearchLastPlayerLocation = true;
                 chooser.TargetPos = new Vector3(player.position.x, 0, player.position.z);
-            }                            
+
+                AudioManager.instance.FadeOut = true;
+            }
+            PlayerSpotted = false;                                        
         }
     }
 

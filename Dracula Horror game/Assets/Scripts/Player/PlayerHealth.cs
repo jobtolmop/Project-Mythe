@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameObject physicsInteraction;
+    [SerializeField] private GameObject deathPanel;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
+            deathPanel.SetActive(true);
             Debug.Log("Die");
             transform.parent.gameObject.layer = 18;
             physicsInteraction.SetActive(false);

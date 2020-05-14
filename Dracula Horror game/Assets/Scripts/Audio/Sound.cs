@@ -14,8 +14,6 @@ public class Sound
 
     public bool loop;
 
-    public float radius;
-
     [HideInInspector]
     public AudioSource source;
 }

@@ -15,6 +15,10 @@ public class SoundEffectProp : MonoBehaviour
 
     private SphereCollider soundCollider;
 
+    private GameObject personThatPushed;
+
+    public GameObject PersonThatPushed { set { personThatPushed = value; } }
+
     private bool alreadyBreaking = false;
 
     private void Start()
@@ -26,29 +30,48 @@ public class SoundEffectProp : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > crashVel && !alreadyBreaking)
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            personThatPushed = collision.gameObject;
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            personThatPushed = collision.gameObject;
+        }
+
+        if (collision.relativeVelocity.magnitude > crashVel && !alreadyBreaking && (collision.gameObject.GetComponent<Rigidbody>() == null || collision.gameObject.GetComponent<Rigidbody>().mass > 0.1f))
         {
             alreadyBreaking = true;
             currSFX = crashSFX.clip;
             currAudio = crashSFX;
             crashSFX.Play();
-            if (!collision.gameObject.CompareTag("Enemy"))
+            if (personThatPushed != collision.gameObject.CompareTag("Enemy"))
             {
                 StartCoroutine("SoundDelay");
             }
-            Destroy(transform.GetChild(0).gameObject);
+            
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-            Destroy(gameObject, crashSFX.clip.length);
+            Transform model = transform.GetChild(0);
+            model.GetComponent<BoxCollider>().enabled = false;
+
+            for (int i = 0; i < model.childCount; i++)
+            {
+                model.GetChild(i).GetComponent<BoxCollider>().enabled = true;
+                model.GetChild(i).gameObject.AddComponent<Rigidbody>();
+                model.GetChild(i).GetComponent<Rigidbody>().mass = 0.1f;
+                Destroy(model.GetChild(i).gameObject, 10);
+            }
+            Destroy(gameObject, 10);
         }
         else if(collision.relativeVelocity.magnitude > hitVel)
         {
             currSFX = hitSFX.clip;
             currAudio = hitSFX;
             hitSFX.Play();
-            if (!collision.gameObject.CompareTag("Enemy"))
+            if (personThatPushed != collision.gameObject.CompareTag("Enemy"))
             {
                 StartCoroutine("SoundDelay");
-            }            
+            }
         }
     }
 

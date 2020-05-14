@@ -6,14 +6,30 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
+    public static AudioManager instance;
+
     private Sound currSound;
 
     private Sound currS;
 
     public Sound CurrSound { get { return currSound; } }
 
+    public bool PlayingSong { get; set; } = false;
+    public bool FadeOut { get; set; } = false;
+
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -22,6 +38,22 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+        }
+    }
+
+    private void Update()
+    {
+        if (FadeOut)
+        {
+            if (currS.volume > 0)
+            {
+                currS.source.volume -= 0.001f;
+            }
+            else
+            {
+                currS.source.Stop();
+                FadeOut = false;
+            }
         }
     }
 
@@ -34,14 +66,14 @@ public class AudioManager : MonoBehaviour
             currSound = currS;
             Debug.Log("Playing music " + name);
         }
-
+        PlayingSong = true;
         currS.source.Play();
     }
 
     public void StopPlaying(string sound)
     {
         FindSound(sound);
-
+        PlayingSong = false;
         currS.source.Stop();
     }
 

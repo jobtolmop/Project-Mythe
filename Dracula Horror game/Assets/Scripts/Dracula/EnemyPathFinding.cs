@@ -11,6 +11,9 @@ public class EnemyPathFinding : MonoBehaviour
     private EnemyPlayerSpotter spotter;
 
     private Transform player;
+    [SerializeField] private AudioSource footSteps;
+
+    private bool alreadyPlayingFootSteps = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,5 +37,19 @@ public class EnemyPathFinding : MonoBehaviour
         }
 
         agent.SetDestination(chooser.TargetPos);
+
+        //Debug.Log(agent.velocity.magnitude);
+
+        if (agent.velocity.magnitude > 1 && !alreadyPlayingFootSteps)
+        {
+            footSteps.loop = true;
+            footSteps.Play();
+            alreadyPlayingFootSteps = true;
+        }
+        else if (agent.velocity.magnitude <= 1 && alreadyPlayingFootSteps)
+        {
+            footSteps.loop = false;
+            alreadyPlayingFootSteps = false;
+        }
     }
 }

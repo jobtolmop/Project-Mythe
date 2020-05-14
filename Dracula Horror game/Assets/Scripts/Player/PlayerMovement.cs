@@ -66,16 +66,21 @@ public class PlayerMovement : MonoBehaviour
                 //soundMaker.PlayCoroutineJumpLand();
             }
 
-            if (!crouching)
+            if (Input.GetButton("Sprint"))
             {
-                if (Input.GetButton("Sprint"))
+                if (crouching)
                 {
-                    if (speed < runSpeed)
-                    {
-                        speed += 7 * Time.deltaTime;
-                    }
+                    Crouch(false);
                 }
-                else
+
+                if (speed < runSpeed) 
+                {
+                    speed += 7 * Time.deltaTime;
+                }
+            }
+            else
+            {
+                if (!crouching)
                 {
                     if (speed > walkSpeed)
                     {
@@ -85,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         speed = walkSpeed;
                     }
-                }
+                }               
             }
 
             if (Input.GetButtonDown("Crouch"))
