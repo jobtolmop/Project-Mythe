@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerPickup : MonoBehaviour
 {
-    float throwForce = 1000;
+    float throwForce = 40000f;
     Vector3 objectPos;
     float distance;
 
