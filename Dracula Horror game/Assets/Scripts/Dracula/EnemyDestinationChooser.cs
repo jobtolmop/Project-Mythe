@@ -48,7 +48,7 @@ public class EnemyDestinationChooser : MonoBehaviour
             if (posCheck != TargetPos && (posCheck - TargetPos).sqrMagnitude < 5 && (heardSound || SearchLastPlayerLocation))
             {
                 standStillTimer += Time.deltaTime;
-                Debug.Log("standing here...");
+                //Debug.Log("standing here...");
 
                 if (standStillTimer > 5)
                 {
@@ -139,6 +139,12 @@ public class EnemyDestinationChooser : MonoBehaviour
 
     public void HeardSound(Vector3 pos)
     {
+        //AudioManager.instance.StopPlaying("HeartBeat");
+        if (!AudioManager.instance.FindSound("HeartBeat").source.isPlaying)
+        {
+            AudioManager.instance.Play("HeartBeat");
+        }
+        
         heardSound = true;
         pos.y = 0;
         TargetPos = pos;        

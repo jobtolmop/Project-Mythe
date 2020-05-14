@@ -45,13 +45,14 @@ public class AudioManager : MonoBehaviour
     {
         if (FadeOut)
         {
-            if (currS.volume > 0)
+            if (currSound.volume > 0)
             {
-                currS.source.volume -= 0.001f;
+                currSound.source.volume -= 0.001f;
             }
             else
             {
-                currS.source.Stop();
+                currSound.source.Stop();
+                PlayingSong = false;
                 FadeOut = false;
             }
         }
@@ -65,16 +66,19 @@ public class AudioManager : MonoBehaviour
         {
             currSound = currS;
             Debug.Log("Playing music " + name);
-        }
-        PlayingSong = true;
+            PlayingSong = true;
+        }        
         currS.source.Play();
     }
 
     public void StopPlaying(string sound)
     {
         FindSound(sound);
-        PlayingSong = false;
         currS.source.Stop();
+        if (currS.loop)
+        {
+            PlayingSong = false;
+        }        
     }
 
     public void Pause(string sound)
@@ -100,7 +104,9 @@ public class AudioManager : MonoBehaviour
 
     public Sound FindSound(string sound)
     {
+        currS = null;
         currS = Array.Find(sounds, item => item.name == sound);
+
         if (currS == null)
         {
             Debug.LogWarning("Sound: " + sound + " not found!");

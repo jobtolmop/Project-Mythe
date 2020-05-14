@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -26,5 +27,11 @@ public class PlayerHealth : MonoBehaviour
             GetComponentInParent<CandleControls>().enabled = false;
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator RestartRoom()
+    {
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

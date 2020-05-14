@@ -17,7 +17,7 @@ public class RaycastToItemPickup : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.forward, out hit, 3, layer))
             {
-                Debug.Log(hit.collider);
+                //Debug.Log(hit.collider);
 
                 if (hit.collider.gameObject.layer == 12)
                 {

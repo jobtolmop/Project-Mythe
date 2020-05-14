@@ -6,6 +6,8 @@ public class Pause : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
 
+    private float timer = 0;
+
     private void Start()
     {
         pausePanel.SetActive(false);
@@ -26,6 +28,20 @@ public class Pause : MonoBehaviour
                 pausePanel.SetActive(false);
                 Time.timeScale = 1f;
             }
+        }
+
+        if (Input.GetButton("Cancel"))
+        {
+            timer += Time.deltaTime;
+
+            if (timer > 10)
+            {
+                Application.Quit();
+            }
+        }
+        else
+        {
+            timer = 0;
         }
     }
 }

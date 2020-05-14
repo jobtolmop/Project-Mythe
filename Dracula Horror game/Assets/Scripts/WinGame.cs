@@ -20,4 +20,10 @@ public class WinGame : MonoBehaviour
             winPanel.SetActive(true);
         }
     }
+
+    private IEnumerator QuitGame()
+    {
+        yield return new WaitForSeconds(10);
+        Application.Quit();
+    }
 }

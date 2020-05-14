@@ -3236,6 +3236,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: HeartBeat
+    clip: {fileID: 8300000, guid: 56ec643b4fb342349b9b67733783caae, type: 3}
+    volume: 1
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &589148027
 Transform:
   m_ObjectHideFlags: 0

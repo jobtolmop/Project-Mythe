@@ -87,7 +87,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                     {
                         //Only applies if looking for light
                         bool seesLight = true;
-
+                        Debug.Log(hit.collider);
                         if (hit.collider.gameObject.CompareTag("Candle"))
                         {
                             seesLight = PointSeesCandlePos(hit.point);
@@ -133,7 +133,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
         Debug.DrawRay(eyes.position, transform.forward, color);
 
-        if (sightTimer < 3)
+        if (sightTimer < 4)
         {
             sightTimer += Time.deltaTime;
         }
@@ -147,6 +147,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
                 AudioManager.instance.FadeOut = true;
             }
+
             PlayerSpotted = false;                                        
         }
     }

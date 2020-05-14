@@ -25,7 +25,7 @@ public class SoundEffectProp : MonoBehaviour
     {
         //audioManager = GameObject.FindGameObjectWithTag("Audio").transform.GetChild(0).GetComponent<AudioManager>();
         soundCollider = transform.GetChild(1).GetComponent<SphereCollider>();
-        Debug.Log(soundCollider);
+        //Debug.Log(soundCollider);
     }
 
     private void OnCollisionEnter(Collision collision)

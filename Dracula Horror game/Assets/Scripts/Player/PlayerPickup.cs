@@ -22,14 +22,18 @@ public class PlayerPickup : MonoBehaviour
     private void Update()
     {
         //check if isHolding
-        if (isHolding == true)
+        if (isHolding)
         {
+            item.gameObject.layer = 11;
+            item.transform.GetChild(0).gameObject.layer = 11;
             item.GetComponent<Rigidbody>().velocity = Vector3.zero;
             item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             item.transform.SetParent(tempParent.transform);
 
             if (Input.GetMouseButtonDown(1))
             {
+                item.gameObject.layer = 11;
+                item.transform.GetChild(0).gameObject.layer = 11;
                 thrown = true;
                 canHold = false;
                 StartCoroutine("HoldDelay");
@@ -38,13 +42,15 @@ public class PlayerPickup : MonoBehaviour
         }
         else
         {
+            item.gameObject.layer = 12;
+            item.transform.GetChild(0).gameObject.layer = 12;
             objectPos = item.transform.position;
             item.transform.SetParent(null);
             item.GetComponent<Rigidbody>().useGravity = true;
             item.transform.position = objectPos;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && isHolding)
         {
             isHolding = false;
         }
