@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            StartCoroutine("RestartRoom");
             deathPanel.SetActive(true);
             Debug.Log("Die");
             transform.parent.gameObject.layer = 18;

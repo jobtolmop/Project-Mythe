@@ -10,6 +10,7 @@ TagManager:
   - Sound
   - Audio
   - Canvas
+  - PlayerCol
   layers:
   - Default
   - TransparentFX

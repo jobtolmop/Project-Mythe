@@ -11,6 +11,7 @@ public class Pause : MonoBehaviour
     private void Start()
     {
         pausePanel.SetActive(false);
+        QualitySettings.SetQualityLevel(5);
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class Pause : MonoBehaviour
 
         if (Input.GetButton("Cancel"))
         {
-            timer += Time.deltaTime;
+            timer += Time.fixedUnscaledDeltaTime;
 
             if (timer > 10)
             {
@@ -42,6 +43,15 @@ public class Pause : MonoBehaviour
         else
         {
             timer = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            QualitySettings.IncreaseLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            QualitySettings.DecreaseLevel();
         }
     }
 }

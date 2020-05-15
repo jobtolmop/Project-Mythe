@@ -46,21 +46,21 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
         if (playerCandle.gameObject.activeSelf)
         {
-            viewDistance = 500 - lessView;
+            viewDistance = 800 - lessView;
             fov = 150 - lessFov;
             ObjectInSightCheck(playerCandle);
         }        
         else
         {
-            fov = 120 - lessFov;
+            fov = 130 - lessFov;
 
             if (!playerInLight)
             {
-                viewDistance = 300 - lessView;
+                viewDistance = 600 - lessView;
             }
             else
             {
-                viewDistance = 500- lessView;
+                viewDistance = 800 - lessView;
             }
            
             ObjectInSightCheck(player);
@@ -73,7 +73,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
         {
             Vector3 dirToObject = (thingToSee.position - eyes.position).normalized;
             //Debug.Log(dirToObject);
-
+            //Debug.LogError("Collider currently hitting" + hit.collider);
             if (Vector3.Angle(eyes.forward, dirToObject) < fov / 2)
             {
                 //Debug.Log("Player in field of view");
@@ -83,11 +83,11 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
                 if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layer))
                 {
-                    if (hit.collider != null && (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.CompareTag("Candle")))
+                    if (hit.collider != null && (hit.collider.gameObject.CompareTag("PlayerCol") || hit.collider.gameObject.CompareTag("Candle")))
                     {
                         //Only applies if looking for light
                         bool seesLight = true;
-                        Debug.Log(hit.collider);
+                        //Debug.LogError("Collider currently hitting: " + hit.collider);
                         if (hit.collider.gameObject.CompareTag("Candle"))
                         {
                             seesLight = PointSeesCandlePos(hit.point);
@@ -105,6 +105,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
                             if (!AudioManager.instance.PlayingSong)
                             {
+                                AudioManager.instance.StopPlaying("Chase");
                                 AudioManager.instance.Play("Chase");
                                 AudioManager.instance.Play("JumpScare");
                             }
