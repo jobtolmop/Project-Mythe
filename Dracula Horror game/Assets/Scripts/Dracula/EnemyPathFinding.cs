@@ -29,11 +29,15 @@ public class EnemyPathFinding : MonoBehaviour
     {
         if (spotter.PlayerSpotted)
         {
-            agent.speed = 9.5f;
+            agent.speed = 14;
+            agent.angularSpeed = 690;
+            agent.acceleration = 10.5f;
         }
         else
         {
             agent.speed = 3;
+            agent.angularSpeed = 120;
+            agent.acceleration = 8;
         }
 
         agent.SetDestination(chooser.TargetPos);
