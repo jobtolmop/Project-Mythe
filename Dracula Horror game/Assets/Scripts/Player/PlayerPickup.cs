@@ -75,7 +75,9 @@ public class PlayerPickup : MonoBehaviour
     {
         if (canHold)
         {
-            GetComponent<SoundEffectProp>().PersonThatPushed = tempParent.transform.parent.gameObject;
+            if (GetComponent<SoundEffectProp>() != null) {
+                GetComponent<SoundEffectProp>().PersonThatPushed = tempParent.transform.parent.gameObject;
+            }
             isHolding = true;
             item.GetComponent<Rigidbody>().useGravity = false;
         }        
