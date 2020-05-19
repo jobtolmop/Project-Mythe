@@ -12271,6 +12271,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1777507235520491466, guid: 06b0406e16fcb8344b25a30b54f6fc3d,
+        type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1777507235520491466, guid: 06b0406e16fcb8344b25a30b54f6fc3d,
+        type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1777507235520491466, guid: 06b0406e16fcb8344b25a30b54f6fc3d,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1777507235520491479, guid: 06b0406e16fcb8344b25a30b54f6fc3d,
         type: 3}
       propertyPath: m_Name
@@ -12354,6 +12369,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 961966174}
     m_Modifications:
+    - target: {fileID: 3401962596709437520, guid: 437470859ac33f3459d9006df4728dff,
+        type: 3}
+      propertyPath: m_Mass
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401962596709437520, guid: 437470859ac33f3459d9006df4728dff,
+        type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3401962596709437520, guid: 437470859ac33f3459d9006df4728dff,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3401962596709437526, guid: 437470859ac33f3459d9006df4728dff,
         type: 3}
       propertyPath: m_LocalPosition.x
