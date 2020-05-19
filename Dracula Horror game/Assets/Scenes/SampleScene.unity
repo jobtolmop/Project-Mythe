@@ -195,8 +195,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rooms:
+  - {fileID: 7512820488042337596, guid: 6b81cf2d857cbf042b836e5c0da684ae, type: 3}
   - {fileID: 7286244655833393476, guid: 74f369dc38a60da42bbecec6f4958efe, type: 3}
-  - {fileID: 7286244655833393476, guid: 74f369dc38a60da42bbecec6f4958efe, type: 3}
+  placedRooms: []
   spawnLocation: {fileID: 7286244656493353242}
 --- !u!1 &82998267
 GameObject:
@@ -3888,7 +3889,7 @@ PrefabInstance:
     - target: {fileID: 7286244656111827070, guid: 74f369dc38a60da42bbecec6f4958efe,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7286244656111827070, guid: 74f369dc38a60da42bbecec6f4958efe,
         type: 3}

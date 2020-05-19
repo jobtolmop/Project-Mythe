@@ -5,15 +5,29 @@ using UnityEngine;
 public class RandomRoomGenerator : MonoBehaviour
 {
     [SerializeField] private List<GameObject> rooms = new List<GameObject>();
+    [SerializeField] private List<GameObject> placedRooms = new List<GameObject>();
     [SerializeField] private Transform spawnLocation;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < rooms.Count; i++)
+        int count = rooms.Count;
+
+        for (int i = 0; i < 8; i++)
         {
-            GameObject room = Instantiate(rooms[i], spawnLocation.position - rooms[i].transform.GetChild(0).localPosition, Quaternion.identity);
+            int rand = 0;
+
+            if (rooms.Count > 1)
+            {
+                rand = Random.Range(0, rooms.Count);
+            }
+            
+            GameObject room = Instantiate(rooms[rand], spawnLocation, false);
+            room.transform.localPosition -= room.transform.GetChild(0).localPosition;
+            room.transform.SetParent(null);            
+            placedRooms.Add(room);            
             spawnLocation = room.transform.GetChild(1).GetChild(0);
-        }        
+            //rooms.Remove(rooms[rand]);
+        }
     }
 }
