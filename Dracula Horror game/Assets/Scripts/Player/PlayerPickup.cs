@@ -55,7 +55,11 @@ public class PlayerPickup : MonoBehaviour
     {
         if (thrown)
         {
-            item.GetComponent<SoundEffectProp>().ThrownByPlayer = true;
+            if (item.GetComponent<SoundEffectProp>() != null)
+            {
+                item.GetComponent<SoundEffectProp>().ThrownByPlayer = true;
+            }
+            
             item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwForce);
             thrown = false;
         }        

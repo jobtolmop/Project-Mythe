@@ -24,8 +24,13 @@ public class RandomRoomGenerator : MonoBehaviour
             }
             
             GameObject room = Instantiate(rooms[rand], spawnLocation, false);
-            room.transform.localPosition -= room.transform.GetChild(0).localPosition;
-            room.transform.SetParent(null);            
+
+            if (room.transform.GetChild(0).childCount == 0)
+            {
+                room.transform.localPosition -= room.transform.GetChild(0).localPosition;                
+            }
+
+            room.transform.SetParent(null);
             placedRooms.Add(room);            
             spawnLocation = room.transform.GetChild(1).GetChild(0);
             //rooms.Remove(rooms[rand]);

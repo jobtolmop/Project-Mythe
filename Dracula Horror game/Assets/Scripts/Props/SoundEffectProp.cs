@@ -34,11 +34,11 @@ public class SoundEffectProp : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((player.position - transform.position).sqrMagnitude < 5)
+        if (player != null && (player.position - transform.position).sqrMagnitude < 5)
         {
             pushedByPlayer = true;
         }
-        else if ((enemy.position - transform.position).sqrMagnitude < 5)
+        else if (enemy != null && (enemy.position - transform.position).sqrMagnitude < 5)
         {
             pushedByPlayer = false;
         }
