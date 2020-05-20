@@ -27,22 +27,33 @@ public class EnemyPathFinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spotter.PlayerSpotted)
-        {
-            agent.speed = 14;
-            agent.angularSpeed = 690;
-            agent.acceleration = 10.5f;
-        }
-        else
-        {
-            agent.speed = 3;
-            agent.angularSpeed = 120;
-            agent.acceleration = 8;
-        }
+        //if (!spotter.IsAttacking)
+        //{
+            if (spotter.PlayerSpotted)
+            {
+                if (agent.speed < 14)
+                {
+                    agent.speed += 5 * Time.deltaTime;
+                }
+
+                agent.angularSpeed = 690;
+                agent.acceleration = 10.5f;
+            }
+            else
+            {
+                agent.speed = 3;
+                agent.angularSpeed = 120;
+                agent.acceleration = 8;
+            }
+        //}
+        //else
+        //{
+        //    agent.velocity = vector3.zero;
+        //}
 
         agent.SetDestination(chooser.TargetPos);
 
-        //Debug.Log(agent.velocity.magnitude);
+        //Debug.Log(agent.speed);
 
         if (agent.velocity.magnitude > 1 && !alreadyPlayingFootSteps)
         {
@@ -54,6 +65,14 @@ public class EnemyPathFinding : MonoBehaviour
         {
             footSteps.loop = false;
             alreadyPlayingFootSteps = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 12 && agent.velocity.magnitude > 7)
+        {
+            agent.speed = 7;
         }
     }
 }

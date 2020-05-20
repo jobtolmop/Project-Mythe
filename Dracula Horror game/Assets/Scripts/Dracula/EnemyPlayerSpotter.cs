@@ -12,6 +12,10 @@ public class EnemyPlayerSpotter : MonoBehaviour
     private PlayerMovement playerMov;
     [SerializeField] private Transform playerCandle;
 
+    private bool isAttacking = false;
+
+    public bool IsAttacking { get { return isAttacking; } }
+
     public Transform Player { get { return player; } }
 
     private EnemyDestinationChooser chooser;
@@ -22,6 +26,9 @@ public class EnemyPlayerSpotter : MonoBehaviour
     [SerializeField] private float feelDistance = 5;
     [SerializeField] private float fov = 105;
     [SerializeField] private Transform eyes;
+    [SerializeField] private GameObject playerHit;
+    [SerializeField] private LayerMask layerDetectPlayer;
+    [SerializeField] private LayerMask layerCandleDetect;
 
     private bool playerInLight = false;
 
@@ -79,15 +86,15 @@ public class EnemyPlayerSpotter : MonoBehaviour
                 //Debug.Log("Player in field of view");
                 RaycastHit hit;
 
-                int layer = ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Window");
-
-                if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layer))
+                if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layerDetectPlayer))
                 {
+                    //Debug.Log("Collider currently hitting: " + hit.collider);
+
                     if (hit.collider != null && (hit.collider.gameObject.CompareTag("PlayerCol") || hit.collider.gameObject.CompareTag("Candle")))
                     {
                         //Only applies if looking for light
                         bool seesLight = true;
-                        //Debug.LogError("Collider currently hitting: " + hit.collider);
+                        
                         if (hit.collider.gameObject.CompareTag("Candle"))
                         {
                             seesLight = PointSeesCandlePos(hit.point);
@@ -105,10 +112,14 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
                             if (!AudioManager.instance.PlayingSong)
                             {
-                                AudioManager.instance.StopPlaying("Chase");
                                 AudioManager.instance.Play("Chase");
                                 AudioManager.instance.Play("JumpScare");
                             }
+
+                            //if ((player.position - transform.position).sqrMagnitude < feelDistance && player.gameObject.layer == 8 && !isAttacking)
+                            //{
+                            //    StartCoroutine("AttackPlayer");
+                            //}
 
                             AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
                             return;
@@ -116,14 +127,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                     }
                 }
             }
-        }
-
-        if ((player.position - transform.position).sqrMagnitude < feelDistance && player.gameObject.layer == 8)
-        {
-            PlayerSpotted = true;
-            sightTimer = 0;
-            return;
-        }
+        }       
 
         Color color = Color.green;
 
@@ -155,13 +159,12 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
     public bool PointSeesCandlePos(Vector3 pos)
     {
-        int layer = ~LayerMask.GetMask("Candle") | ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Window");
         RaycastHit candleHit;
         Vector3 dirToCandle = (playerCandle.GetChild(0).position - pos).normalized;
 
         Debug.DrawRay(pos, dirToCandle, Color.magenta);     
 
-        if (Physics.Raycast(pos, dirToCandle, out candleHit, 100, layer))
+        if (Physics.Raycast(pos, dirToCandle, out candleHit, 100, layerCandleDetect))
         {
             if (candleHit.collider != null && candleHit.collider.gameObject.CompareTag("CandleCol"))
             {
@@ -182,4 +185,15 @@ public class EnemyPlayerSpotter : MonoBehaviour
     {
         playerInLight = enter;
     }
+
+    //private IEnumerator AttackPlayer()
+    //{
+    //    isAttacking = true;
+    //    yield return new WaitForSeconds(0.4f);
+    //    playerHit.SetActive(true);
+    //    yield return new WaitForSeconds(0.2f);
+    //    playerHit.SetActive(false);
+    //    yield return new WaitForSeconds(0.5f);
+    //    isAttacking = false;
+    //}
 }

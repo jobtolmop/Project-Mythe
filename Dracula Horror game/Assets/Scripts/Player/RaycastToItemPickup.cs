@@ -5,11 +5,12 @@ using UnityEngine;
 public class RaycastToItemPickup : MonoBehaviour
 {
     private bool alreadyPickedUp = false;
+    private GameObject pickedUpObject;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && !alreadyPickedUp)
+        if (Input.GetMouseButton(0))
         {
             RaycastHit hit;
 
@@ -19,16 +20,27 @@ public class RaycastToItemPickup : MonoBehaviour
             {
                 //Debug.Log(hit.collider);
 
-                if (hit.collider.gameObject.layer == 12)
+                if (hit.collider.gameObject.layer == 12 && pickedUpObject == null)
                 {
-                    hit.collider.GetComponentInParent<PlayerPickup>().Pickedup();
-                    alreadyPickedUp = true;
+                    pickedUpObject = hit.collider.transform.parent.gameObject;
+                    if (pickedUpObject.GetComponent<PlayerPickup>() != null)
+                    {
+                        pickedUpObject.GetComponent<PlayerPickup>().Pickedup();
+                    }                                       
                 }
-            }            
+            }
+
+            //Debug.Log((pickedUpObject.transform.position - transform.position).sqrMagnitude);
+
+            if (pickedUpObject != null && (pickedUpObject.transform.position - transform.position).sqrMagnitude > 20)
+            {
+                pickedUpObject.GetComponent<PlayerPickup>().Release();
+                pickedUpObject = null;
+            }
         }
         else
         {
-            alreadyPickedUp = false;
+            pickedUpObject = null;
         }
     }
 }

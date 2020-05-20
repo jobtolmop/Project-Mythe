@@ -31,8 +31,8 @@ TagManager:
   - Window
   - Physics
   - Dead
-  - DeathCol
-  - 
+  - HitCol
+  - AttackPlayer
   - 
   - 
   - 

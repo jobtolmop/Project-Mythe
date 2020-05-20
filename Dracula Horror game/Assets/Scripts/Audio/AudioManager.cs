@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        if (FadeOut)
+        if (FadeOut && currSound != null)
         {
             if (currSound.volume > 0)
             {

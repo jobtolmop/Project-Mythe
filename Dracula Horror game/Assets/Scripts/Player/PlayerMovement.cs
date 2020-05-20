@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
-        //soundMaker = GetComponent<PlayerSoundMaker>();
+        soundMaker = GetComponent<PlayerSoundMaker>();
     }
 
     // Update is called once per frame
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             if (jumping)
             {
                 jumping = false;
-                //soundMaker.PlayCoroutineJumpLand();
+                soundMaker.PlayCoroutineJumpLand();
             }
 
             if (Input.GetButton("Sprint"))
@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {                
                 jumping = true;
-                //soundMaker.PlayCoroutineJumpLand();
+                soundMaker.PlayCoroutineJumpLand();
                 velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             }
         }        

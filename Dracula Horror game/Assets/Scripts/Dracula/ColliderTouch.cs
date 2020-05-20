@@ -23,7 +23,7 @@ public class ColliderTouch : MonoBehaviour
         }
         else if(other.CompareTag("Sound") && !spotter.PlayerSpotted)
         {
-            chooser.HeardSound(other.transform.position);
+            chooser.HeardSound(other.transform.position, other.GetComponent<SphereCollider>().radius);
             Debug.Log("Heard Sound!!");
         }
     }

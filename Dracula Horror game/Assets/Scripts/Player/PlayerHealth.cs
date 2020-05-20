@@ -7,6 +7,20 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameObject physicsInteraction;
     [SerializeField] private GameObject deathPanel;
+    [SerializeField] private int health = 2;
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.isTrigger)
+    //    {
+    //        health--;
+
+    //        if (health <= 0)
+    //        {
+    //            Die();
+    //        }
+    //    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {

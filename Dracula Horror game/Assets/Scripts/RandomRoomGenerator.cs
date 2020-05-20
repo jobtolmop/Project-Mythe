@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RandomRoomGenerator : MonoBehaviour
 {
@@ -29,5 +30,7 @@ public class RandomRoomGenerator : MonoBehaviour
             spawnLocation = room.transform.GetChild(1).GetChild(0);
             //rooms.Remove(rooms[rand]);
         }
+
+        GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 }

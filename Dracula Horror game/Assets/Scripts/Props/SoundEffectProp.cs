@@ -14,29 +14,33 @@ public class SoundEffectProp : MonoBehaviour
     private AudioManager audioManager;
 
     private SphereCollider soundCollider;
+    private Transform player;
+    private Transform enemy;
 
-    private GameObject personThatPushed;
-
-    public GameObject PersonThatPushed { set { personThatPushed = value; } }
+    public bool ThrownByPlayer { get; set; } = false;
 
     private bool alreadyBreaking = false;
+
+    private bool pushedByPlayer = false;
 
     private void Start()
     {
         //audioManager = GameObject.FindGameObjectWithTag("Audio").transform.GetChild(0).GetComponent<AudioManager>();
         soundCollider = transform.GetChild(1).GetComponent<SphereCollider>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
         //Debug.Log(soundCollider);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if ((player.position - transform.position).sqrMagnitude < 5)
         {
-            personThatPushed = collision.gameObject;
+            pushedByPlayer = true;
         }
-        else if (collision.gameObject.CompareTag("Player"))
+        else if ((enemy.position - transform.position).sqrMagnitude < 5)
         {
-            personThatPushed = collision.gameObject;
+            pushedByPlayer = false;
         }
 
         if (collision.relativeVelocity.magnitude > crashVel && !alreadyBreaking && (collision.gameObject.GetComponent<Rigidbody>() == null || collision.gameObject.GetComponent<Rigidbody>().mass > 0.1f))
@@ -45,7 +49,7 @@ public class SoundEffectProp : MonoBehaviour
             currSFX = crashSFX.clip;
             currAudio = crashSFX;
             crashSFX.Play();
-            if (personThatPushed != collision.gameObject.CompareTag("Enemy"))
+            if (pushedByPlayer || ThrownByPlayer)
             {
                 StartCoroutine("SoundDelay");
             }
@@ -68,11 +72,13 @@ public class SoundEffectProp : MonoBehaviour
             currSFX = hitSFX.clip;
             currAudio = hitSFX;
             hitSFX.Play();
-            if (personThatPushed != collision.gameObject.CompareTag("Enemy"))
+            if (pushedByPlayer || ThrownByPlayer)
             {
                 StartCoroutine("SoundDelay");
             }
         }
+
+        ThrownByPlayer = false;
     }
 
     private IEnumerator SoundDelay()

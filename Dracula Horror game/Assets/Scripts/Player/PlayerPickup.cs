@@ -42,12 +42,7 @@ public class PlayerPickup : MonoBehaviour
         }
         else
         {
-            item.gameObject.layer = 12;
-            item.transform.GetChild(0).gameObject.layer = 12;
-            objectPos = item.transform.position;
-            item.transform.SetParent(null);
-            item.GetComponent<Rigidbody>().useGravity = true;
-            item.transform.position = objectPos;
+            Release();
         }
 
         if (Input.GetMouseButtonUp(0) && isHolding)
@@ -60,6 +55,7 @@ public class PlayerPickup : MonoBehaviour
     {
         if (thrown)
         {
+            item.GetComponent<SoundEffectProp>().ThrownByPlayer = true;
             item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwForce);
             thrown = false;
         }        
@@ -74,13 +70,20 @@ public class PlayerPickup : MonoBehaviour
     public void Pickedup()
     {
         if (canHold)
-        {
-            if (GetComponent<SoundEffectProp>() != null)
-            {
-                GetComponent<SoundEffectProp>().PersonThatPushed = tempParent.transform.parent.gameObject;
-            }            
+        {       
             isHolding = true;
             item.GetComponent<Rigidbody>().useGravity = false;
         }        
+    }
+
+    public void Release()
+    {
+        isHolding = false;
+        item.gameObject.layer = 12;
+        item.transform.GetChild(0).gameObject.layer = 12;
+        objectPos = item.transform.position;
+        item.transform.SetParent(null);
+        item.GetComponent<Rigidbody>().useGravity = true;
+        item.transform.position = objectPos;
     }
 }

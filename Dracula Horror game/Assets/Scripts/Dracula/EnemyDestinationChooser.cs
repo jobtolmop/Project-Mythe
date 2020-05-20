@@ -38,7 +38,7 @@ public class EnemyDestinationChooser : MonoBehaviour
             playerPos.y = 0;
             TargetPos = playerPos;
             locationMadeByRandom = false;
-            standStillTimer = 0;
+            standStillTimer = 0;           
         }   
         else
         {
@@ -137,7 +137,7 @@ public class EnemyDestinationChooser : MonoBehaviour
         }
     }
 
-    public void HeardSound(Vector3 pos)
+    public void HeardSound(Vector3 pos, float radius)
     {
         //AudioManager.instance.StopPlaying("HeartBeat");
         if (!AudioManager.instance.FindSound("HeartBeat").source.isPlaying)
