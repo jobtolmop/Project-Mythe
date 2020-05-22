@@ -26,6 +26,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
     [SerializeField] private float feelDistance = 5;
     [SerializeField] private float fov = 105;
     [SerializeField] private Transform eyes;
+    [SerializeField] private Transform cam;
     [SerializeField] private GameObject playerHit;
     [SerializeField] private LayerMask layerDetectPlayer;
     [SerializeField] private LayerMask layerCandleDetect;
@@ -37,6 +38,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerMov = player.GetComponent<PlayerMovement>();
+        cam = Camera.main.transform;
         chooser = GetComponent<EnemyDestinationChooser>();
     }
 
@@ -70,7 +72,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                 viewDistance = 800 - lessView;
             }
            
-            ObjectInSightCheck(player);
+            ObjectInSightCheck(cam);
         }        
     }
 

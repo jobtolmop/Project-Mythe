@@ -5,6 +5,7 @@ using UnityEngine;
 public class RaycastToItemPickup : MonoBehaviour
 {
     private bool alreadyPickedUp = false;
+    private bool doorHold = false;
     private GameObject pickedUpObject;
 
     // Update is called once per frame
@@ -22,11 +23,19 @@ public class RaycastToItemPickup : MonoBehaviour
 
                 if (hit.collider.gameObject.layer == 12 && pickedUpObject == null)
                 {
-                    pickedUpObject = hit.collider.transform.parent.gameObject;
-                    if (pickedUpObject.GetComponent<PlayerPickup>() != null)
+                    pickedUpObject = hit.collider.transform.parent.gameObject;                    
+
+                    if (pickedUpObject.CompareTag("Door"))
                     {
-                        pickedUpObject.GetComponent<PlayerPickup>().Pickedup();
-                    }                                       
+                        doorHold = true;
+                    }
+                    else
+                    {                       
+                        if (pickedUpObject.GetComponent<PlayerPickup>() != null)
+                        {
+                            pickedUpObject.GetComponent<PlayerPickup>().Pickedup();
+                        }
+                    }                                                         
                 }
             }
 
@@ -34,13 +43,30 @@ public class RaycastToItemPickup : MonoBehaviour
 
             if (pickedUpObject != null && (pickedUpObject.transform.position - transform.position).sqrMagnitude > 20)
             {
-                pickedUpObject.GetComponent<PlayerPickup>().Release();
+                if (pickedUpObject.GetComponent<PlayerPickup>() != null)
+                {
+                    pickedUpObject.GetComponent<PlayerPickup>().Release();
+                }                
                 pickedUpObject = null;
+                doorHold = false;
             }
         }
         else
         {
+            doorHold = false;
             pickedUpObject = null;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (doorHold && pickedUpObject != null)
+        {
+            Vector3 nextPos = transform.position + transform.forward * 2;
+            Vector3 currPos = pickedUpObject.transform.position;
+
+            pickedUpObject.GetComponent<Rigidbody>().velocity = (nextPos - currPos) * 20;
+            //Debug.Log(pickedUpObject.GetComponent<Rigidbody>().velocity);
+        }        
     }
 }

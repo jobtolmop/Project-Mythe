@@ -20,7 +20,7 @@ public class PaperSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        door.GetComponent<Animator>().speed = 0;
+        //door.GetComponent<Animator>().speed = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
             spawnLocations.Add(transform.GetChild(i));
@@ -41,6 +41,6 @@ public class PaperSpawner : MonoBehaviour
     {
         Debug.Log("YOU WIN!!!");
         won = true;
-        door.GetComponent<Animator>().speed = 1;
+        //door.GetComponent<Animator>().speed = 1;
     }
 }

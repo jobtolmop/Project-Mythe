@@ -7,9 +7,9 @@ public class EnemyDestinationChooser : MonoBehaviour
     public Vector3 TargetPos { get; set; }
 
     private EnemyPlayerSpotter spotter;
-    //private EnemyPathFinding pathFinding;
+    private EnemyPathFinding pathFinding;
 
-    [SerializeField] private LayerMask layerMask;
+    //[SerializeField] private LayerMask layerMask;
 
     private bool alreadyInvoking = false;
     private bool locationMadeByRandom = false;
@@ -17,14 +17,17 @@ public class EnemyDestinationChooser : MonoBehaviour
     public bool SearchLastPlayerLocation { get; set; } = false;
 
     private bool heardSound = false;
+    public bool HeardSoundBool { get { return heardSound; } }
 
     private float standStillTimer = 0;
+
+    private Collider ground;
 
     // Start is called before the first frame update
     void Start()
     {
         spotter = GetComponent<EnemyPlayerSpotter>();
-        //pathFinding = GetComponent<EnemyPathFinding>();
+        pathFinding = GetComponent<EnemyPathFinding>();
         TargetPos = transform.position;
     }
 
@@ -38,14 +41,17 @@ public class EnemyDestinationChooser : MonoBehaviour
             playerPos.y = 0;
             TargetPos = playerPos;
             locationMadeByRandom = false;
-            standStillTimer = 0;           
+            standStillTimer = 0;
+            alreadyInvoking = false;
+            heardSound = false;
+            SearchLastPlayerLocation = false;
         }   
         else
         {
             Vector3 posCheck = transform.position;
             posCheck.y = 0;
 
-            if (posCheck != TargetPos && (posCheck - TargetPos).sqrMagnitude < 5 && (heardSound || SearchLastPlayerLocation))
+            if (pathFinding.Agent.velocity.magnitude < 2 && posCheck != TargetPos)
             {
                 standStillTimer += Time.deltaTime;
                 //Debug.Log("standing here...");
@@ -87,29 +93,33 @@ public class EnemyDestinationChooser : MonoBehaviour
     {
         RaycastHit groundHit;
         
-        int layer = ~LayerMask.GetMask("Enemy");
+        int layer = LayerMask.GetMask("Ground");
         float x = 0;
         float z = 0;
         if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 100, layer))
         {
-            if (groundHit.collider != null && groundHit.collider.gameObject.layer == 10)
-            {
-                Collider ground = groundHit.collider;
+            ground = groundHit.collider;
 
-                x = ground.bounds.extents.x;
-                z = ground.bounds.extents.z;
-            }
+            Debug.Log(ground.gameObject);
+
+            x = ground.bounds.extents.x;
+            z = ground.bounds.extents.z;
         }
         else
         {
-            return;
+            if (ground == null)
+            {
+                return;
+            }            
         }
 
-        Vector3 maybeTargetPos = new Vector3(Random.Range(-x + 2, x - 2), 0, Random.Range(-z + 2, z - 2));
+        Vector3 maybeTargetPos = new Vector3(ground.transform.position.x + Random.Range(-x + 2, x - 2), 0, ground.transform.position.z + Random.Range(-z + 2, z - 2));
 
         RaycastHit hit;
 
-        int layerCheck = ~LayerMask.GetMask("Ground");
+        int layerCheck = LayerMask.GetMask("Ground") | LayerMask.GetMask("DontDetectGround");
+        layerCheck = ~layerCheck;
+
         if (Physics.Raycast(maybeTargetPos, Vector3.up, out hit, transform.localScale.y * 10, layerCheck))
         {
             if (hit.collider != null)
@@ -117,6 +127,7 @@ public class EnemyDestinationChooser : MonoBehaviour
                 locationMadeByRandom = false;
                 alreadyInvoking = false;
                 Debug.Log("Something is there");
+                Debug.Log(hit.collider.gameObject);
                 return;
             }
         }

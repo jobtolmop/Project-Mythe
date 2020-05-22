@@ -11,6 +11,7 @@ TagManager:
   - Audio
   - Canvas
   - PlayerCol
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - Physics
   - Dead
   - HitCol
-  - AttackPlayer
+  - DontDetectGround
   - 
   - 
   - 

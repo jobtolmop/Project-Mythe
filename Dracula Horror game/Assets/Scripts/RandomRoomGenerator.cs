@@ -14,7 +14,7 @@ public class RandomRoomGenerator : MonoBehaviour
     {
         int count = rooms.Count;
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < count; i++)
         {
             int rand = 0;
 
@@ -25,15 +25,12 @@ public class RandomRoomGenerator : MonoBehaviour
             
             GameObject room = Instantiate(rooms[rand], spawnLocation, false);
 
-            if (room.transform.GetChild(0).childCount == 0)
-            {
-                room.transform.localPosition -= room.transform.GetChild(0).localPosition;                
-            }
+            //room.transform.localRotation = spawnLocation.localRotation;
 
             room.transform.SetParent(null);
-            placedRooms.Add(room);            
-            spawnLocation = room.transform.GetChild(1).GetChild(0);
-            //rooms.Remove(rooms[rand]);
+            placedRooms.Add(room);
+            spawnLocation = room.transform.GetChild(1);
+            rooms.Remove(rooms[rand]);
         }
 
         GetComponent<NavMeshSurface>().BuildNavMesh();
