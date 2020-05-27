@@ -3,14 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Candle
-  - CandleCol
-  - Sound
-  - Audio
-  - Canvas
-  - PlayerCol
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -22,16 +15,16 @@ TagManager:
   - 
   - Player
   - Post process
-  - Ground
-  - Enemy
-  - Props
-  - Candle
-  - CandleCol
-  - Eyes
-  - Window
-  - Physics
-  - Dead
-  - DeathCol
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
