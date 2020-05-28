@@ -19,9 +19,17 @@ public class FootStepAudio : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        if (!Grounded)
+        {
+            source.enabled = false;
+        }
+    }
+
     public void StepLoop(float velocity, float pitch, float volume)
     {
-        if (velocity > 0.1f && Time.timeScale > 0 && Grounded)
+        if (velocity > 0.1f && Time.timeScale > 0)
         {
             source.volume = volume;
             source.pitch = Random.Range(pitch - 0.4f, pitch);

@@ -8,6 +8,7 @@ public class RandomRoomGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> rooms = new List<GameObject>();
     [SerializeField] private List<GameObject> placedRooms = new List<GameObject>();
     [SerializeField] private Transform spawnLocation;
+    [SerializeField] private GameObject endRoom;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,9 @@ public class RandomRoomGenerator : MonoBehaviour
             spawnLocation = room.transform.GetChild(1);
             rooms.Remove(rooms[rand]);
         }
+
+        GameObject roomEnd = Instantiate(endRoom, spawnLocation, false);
+        roomEnd.transform.SetParent(null);
 
         GetComponent<NavMeshSurface>().BuildNavMesh();
     }

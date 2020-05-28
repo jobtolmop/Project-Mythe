@@ -6,11 +6,20 @@ using UnityEngine.UI;
 public class PaperPickUp : MonoBehaviour
 {
     [SerializeField] private Sprite paperSprite;
+    [SerializeField] private UIHandler ui;
+
     public PaperSpawner spawner {get; set;}
     public Sprite PaperSprite { get { return paperSprite; } set { paperSprite = value; } }
 
+    public int Id { get; set; } = 0;
+
     [SerializeField] private AudioSource sfx;
     private bool pickedUp = false;
+
+    private void Start()
+    {
+        ui = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIHandler>();
+    }
 
     public void PickUpPage()
     {
@@ -36,6 +45,9 @@ public class PaperPickUp : MonoBehaviour
            
         spawner.PaperPanel.SetActive(true);
         spawner.PaperPanel.transform.GetChild(0).GetComponent<Image>().sprite = paperSprite;
+        ui.Ids.Add(Id);
+        ui.Ids.Sort(SortById);
+
         Time.timeScale = 0;
 
         if (!sfx.isPlaying)
@@ -58,5 +70,10 @@ public class PaperPickUp : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    static int SortById(int p1, int p2)
+    {
+        return p1.CompareTo(p2);
     }
 }
