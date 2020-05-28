@@ -5,37 +5,48 @@ using UnityEngine.UI;
 
 public class PaperPickUp : MonoBehaviour
 {
+    [SerializeField] private Sprite paperSprite;
     public PaperSpawner spawner {get; set;}
-
-    private GameObject playerPageAnim;
+    public Sprite PaperSprite { get { return paperSprite; } set { paperSprite = value; } }
 
     [SerializeField] private AudioSource sfx;
     private bool pickedUp = false;
 
-    private void Start()
+    public void PickUpPage()
     {
-        playerPageAnim = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (Input.GetButtonDown("PickUp") && other.CompareTag("Player") && !pickedUp)
+        if (pickedUp)
         {
-            pickedUp = true;
-            spawner.Papers.Remove(transform.parent.gameObject);
-            playerPageAnim.SetActive(false);
-            playerPageAnim.SetActive(true);
-            playerPageAnim.GetComponentInChildren<Text>().text = Mathf.Abs(spawner.Papers.Count - 6) + "/6";
-            if (!sfx.isPlaying)
-            {
-                sfx.Play();
-                StartCoroutine("WaitForSFX");
-            }            
-            if (spawner.Papers.Count <= 0)
-            {
-                spawner.Win();
-                AudioManager.instance.Play("Door_Open");
-            }
+            return;
+        }
+
+        pickedUp = true;
+            
+        //Controls page dont mess with the spawner
+        if (spawner != null)
+        {
+            spawner.Papers.Remove(gameObject);
+            spawner.PlayerPanel.SetActive(false);
+            spawner.PlayerPanel.SetActive(true);
+            spawner.PlayerPanel.GetComponentInChildren<Text>().text = Mathf.Abs(spawner.Papers.Count - spawner.PapersToSpawn) + "/" + spawner.PapersToSpawn;
+        }
+        else
+        {
+            spawner = FindObjectOfType<PaperSpawner>();
+        }
+           
+        spawner.PaperPanel.SetActive(true);
+        spawner.PaperPanel.transform.GetChild(0).GetComponent<Image>().sprite = paperSprite;
+        Time.timeScale = 0;
+
+        if (!sfx.isPlaying)
+        {
+            sfx.Play();
+            StartCoroutine("WaitForSFX");
+        }            
+        if (spawner.Papers.Count <= 0)
+        {
+            spawner.Win();
+            AudioManager.instance.Play("Door_Open");
         }
     }
 
@@ -46,6 +57,6 @@ public class PaperPickUp : MonoBehaviour
             yield return null;
         }
 
-        Destroy(transform.parent.gameObject);
+        Destroy(gameObject);
     }
 }

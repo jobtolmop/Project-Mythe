@@ -18,19 +18,31 @@ public class RaycastToItemPickup : MonoBehaviour
 
             int layer = LayerMask.GetMask("Props") | LayerMask.GetMask("Default");
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 4, layer))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 3, layer))
             {
                 //Debug.Log(hit.collider);
 
                 if (hit.collider.gameObject.layer == 12 && pickedUpObject == null)
                 {
-                    pickedUpObject = hit.collider.transform.parent.gameObject;                    
+                    if (hit.collider.transform.parent != null)
+                    {
+                        pickedUpObject = hit.collider.transform.parent.gameObject;
+                    }     
+                    else
+                    {
+                        pickedUpObject = hit.collider.gameObject;
+                    }
 
                     if (pickedUpObject.CompareTag("Door") && !doorHold)
                     {
                         doorRb = pickedUpObject.GetComponent<Rigidbody>();
                         doorHold = true;
                         pickedUpObject.GetComponent<SoundEffectProp>().DoorHold = true;                        
+                    }
+                    else if (pickedUpObject.CompareTag("Paper"))
+                    {
+                        pickedUpObject.GetComponent<PaperPickUp>().PickUpPage();
+                        pickedUpObject = null;
                     }
                     else
                     {                       

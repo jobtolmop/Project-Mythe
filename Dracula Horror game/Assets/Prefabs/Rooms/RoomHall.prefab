@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2582199993631473718}
   - component: {fileID: 2582199993631473719}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 2582199993656680042}
   - component: {fileID: 2582199993656680043}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: WallLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 2582199993824408444}
   - component: {fileID: 2582199993824408445}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: FrontWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1398,10 +1398,8 @@ MonoBehaviour:
   assetGuid: 
   m_IsSelectable: 1
   m_SelectedFaces: 
-  m_SelectedEdges:
-  - a: 41
-    b: 42
-  m_SelectedVertices: 290000002a000000
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!64 &2582199993824408445
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1591,7 +1589,7 @@ GameObject:
   - component: {fileID: 2582199994695287365}
   - component: {fileID: 8045470442943007954}
   m_Layer: 10
-  m_Name: Cube
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1900,7 +1898,7 @@ GameObject:
   - component: {fileID: 2582199994869751366}
   - component: {fileID: 2582199994869751367}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: WallRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2304,7 +2302,7 @@ GameObject:
   - component: {fileID: 2582199995250887610}
   - component: {fileID: 2582199995250887611}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: BackWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

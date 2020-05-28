@@ -157,14 +157,13 @@ public class EnemyDestinationChooser : MonoBehaviour
         int layerCheck = LayerMask.GetMask("Ground") | LayerMask.GetMask("DontDetectGround");
         layerCheck = ~layerCheck;
 
-        if (Physics.Raycast(maybeTargetPos, Vector3.up, out hit, transform.localScale.y * 10, layerCheck))
+        if (Physics.Raycast(maybeTargetPos, Vector3.up, out hit, transform.localScale.y, layerCheck))
         {
             if (hit.collider != null)
             {
                 locationMadeByRandom = false;
                 alreadyInvoking = false;
-                Debug.Log("Something is there");
-                Debug.Log(hit.collider.gameObject);
+                Debug.Log("Something is there " + hit.collider.gameObject);
                 return;
             }
         }

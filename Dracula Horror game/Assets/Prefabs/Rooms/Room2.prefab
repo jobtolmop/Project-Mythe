@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 429773117654298328}
   - component: {fileID: 429773117654298151}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: WallForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1671,17 +1671,9 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 15000000
-  m_SelectedEdges:
-  - a: 84
-    b: 85
-  - a: 86
-    b: 84
-  - a: 85
-    b: 87
-  - a: 87
-    b: 86
-  m_SelectedVertices: 54000000550000005600000057000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!64 &429773117654298151
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1710,7 +1702,7 @@ GameObject:
   - component: {fileID: 429773117673594528}
   - component: {fileID: 429773117673594543}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: WallRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2300,7 +2292,7 @@ GameObject:
   - component: {fileID: 429773118042168592}
   - component: {fileID: 429773118042168607}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: WallBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4219,7 +4211,7 @@ GameObject:
   - component: {fileID: 429773118466496718}
   - component: {fileID: 429773118466496717}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: WallLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4653,7 +4645,7 @@ GameObject:
   - component: {fileID: 4666091476164025357}
   - component: {fileID: 485373556866234643}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

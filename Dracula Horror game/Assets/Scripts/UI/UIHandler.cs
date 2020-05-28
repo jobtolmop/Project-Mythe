@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pause : MonoBehaviour
+public class UIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject paperPanel;
 
     private float timer = 0;
 
@@ -19,16 +20,24 @@ public class Pause : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if (Time.timeScale > 0)
+            if (paperPanel.activeSelf)
             {
-                pausePanel.SetActive(true);
-                Time.timeScale = 0f;
+                paperPanel.SetActive(false);
+                Time.timeScale = 1;
             }
             else
             {
-                pausePanel.SetActive(false);
-                Time.timeScale = 1f;
-            }
+                if (Time.timeScale > 0)
+                {
+                    pausePanel.SetActive(true);
+                    Time.timeScale = 0f;
+                }
+                else
+                {
+                    pausePanel.SetActive(false);
+                    Time.timeScale = 1f;
+                }
+            }            
         }
 
         if (Input.GetButton("Cancel"))

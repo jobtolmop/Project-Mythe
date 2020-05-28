@@ -10,6 +10,7 @@ public class PlayerPickup : MonoBehaviour
 
     private bool thrown = false;
     [SerializeField] private GameObject item;
+    private Rigidbody rb;
     [SerializeField] private GameObject tempParent;
     [SerializeField] private bool isHolding = false;
     private bool canHold = true;
@@ -17,6 +18,7 @@ public class PlayerPickup : MonoBehaviour
     private void Start()
     {
         tempParent = Camera.main.gameObject;
+        rb = item.GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -59,8 +61,13 @@ public class PlayerPickup : MonoBehaviour
             {
                 item.GetComponent<SoundEffectProp>().ThrownByPlayer = true;
             }
-            
-            item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwForce);
+            float multiplier = 1;
+
+            if (rb.mass < 10)
+            {
+                multiplier = 0.25f;
+            }
+            rb.AddForce(tempParent.transform.forward * (throwForce * multiplier));
             thrown = false;
         }        
     }
