@@ -142,8 +142,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 1.61, z: 0}
+  m_Size: {x: 1, y: 1.0121157, z: 1}
+  m_Center: {x: 0, y: 1.616058, z: 0}
 --- !u!1 &2459511699811009615
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +196,9 @@ MonoBehaviour:
   hitSFX: {fileID: 1089840774402074669}
   crashSFX: {fileID: 8949601641232969189}
   hitVel: 0.5
-  crashVel: 5
+  crashVel: 6
+  soundCollider: {fileID: 3629692688562447782}
+  model: {fileID: 2356412162140214847}
 --- !u!54 &1998541824776052804
 Rigidbody:
   m_ObjectHideFlags: 0

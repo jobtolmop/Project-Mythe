@@ -19,13 +19,13 @@ public class PaperPickUp : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetButtonDown("PickUpPage") && other.CompareTag("Player") && !pickedUp)
+        if (Input.GetButtonDown("PickUp") && other.CompareTag("Player") && !pickedUp)
         {
             pickedUp = true;
             spawner.Papers.Remove(transform.parent.gameObject);
             playerPageAnim.SetActive(false);
             playerPageAnim.SetActive(true);
-            playerPageAnim.GetComponentInChildren<Text>().text = Mathf.Abs(spawner.Papers.Count - 7) + "/7";
+            playerPageAnim.GetComponentInChildren<Text>().text = Mathf.Abs(spawner.Papers.Count - 6) + "/6";
             if (!sfx.isPlaying)
             {
                 sfx.Play();

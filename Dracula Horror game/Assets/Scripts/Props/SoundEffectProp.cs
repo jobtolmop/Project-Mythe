@@ -13,11 +13,13 @@ public class SoundEffectProp : MonoBehaviour
 
     private AudioManager audioManager;
 
-    private SphereCollider soundCollider;
+    [SerializeField] private SphereCollider soundCollider;
     private Transform player;
     private Transform enemy;
+    [SerializeField] private Transform model;
 
     public bool ThrownByPlayer { get; set; } = false;
+    public bool DoorHold { get; set; } = false;
 
     private bool alreadyBreaking = false;
 
@@ -26,7 +28,6 @@ public class SoundEffectProp : MonoBehaviour
     private void Start()
     {
         //audioManager = GameObject.FindGameObjectWithTag("Audio").transform.GetChild(0).GetComponent<AudioManager>();
-        soundCollider = transform.GetChild(1).GetComponent<SphereCollider>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
         //Debug.Log(soundCollider);
@@ -34,6 +35,11 @@ public class SoundEffectProp : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (DoorHold)
+        {
+            return;
+        }
+
         if (player != null && (player.position - transform.position).sqrMagnitude < 5)
         {
             pushedByPlayer = true;
@@ -55,16 +61,20 @@ public class SoundEffectProp : MonoBehaviour
             }
             
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-            Transform model = transform.GetChild(0);
-            model.GetComponent<BoxCollider>().enabled = false;
 
-            for (int i = 0; i < model.childCount; i++)
+            if (model.childCount > 0)
             {
-                model.GetChild(i).GetComponent<BoxCollider>().enabled = true;
-                model.GetChild(i).gameObject.AddComponent<Rigidbody>();
-                model.GetChild(i).GetComponent<Rigidbody>().mass = 0.1f;
-                Destroy(model.GetChild(i).gameObject, 10);
+                model.GetComponent<BoxCollider>().enabled = false;
+
+                for (int i = 0; i < model.childCount; i++)
+                {
+                    model.GetChild(i).GetComponent<BoxCollider>().enabled = true;
+                    model.GetChild(i).gameObject.AddComponent<Rigidbody>();
+                    model.GetChild(i).GetComponent<Rigidbody>().mass = 0.1f;
+                    Destroy(model.GetChild(i).gameObject, 10);
+                }
             }
+
             Destroy(gameObject, 10);
         }
         else if(collision.relativeVelocity.magnitude > hitVel)

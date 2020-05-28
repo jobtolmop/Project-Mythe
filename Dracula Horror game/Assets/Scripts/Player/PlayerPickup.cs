@@ -30,7 +30,7 @@ public class PlayerPickup : MonoBehaviour
             item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             item.transform.SetParent(tempParent.transform);
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetButtonDown("Throw"))
             {
                 item.gameObject.layer = 11;
                 item.transform.GetChild(0).gameObject.layer = 11;
@@ -45,7 +45,7 @@ public class PlayerPickup : MonoBehaviour
             Release();
         }
 
-        if (Input.GetMouseButtonUp(0) && isHolding)
+        if (Input.GetButtonUp("PickUp") && isHolding)
         {
             isHolding = false;
         }

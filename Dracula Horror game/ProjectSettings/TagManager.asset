@@ -12,6 +12,8 @@ TagManager:
   - Canvas
   - PlayerCol
   - Door
+  - Paper
+  - PaperSpawn
   layers:
   - Default
   - TransparentFX
@@ -34,7 +36,7 @@ TagManager:
   - Dead
   - HitCol
   - DontDetectGround
-  - 
+  - DoorBreak
   - 
   - 
   - 

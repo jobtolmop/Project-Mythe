@@ -92,7 +92,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                 {
                     //Debug.Log("Collider currently hitting: " + hit.collider);
 
-                    if (hit.collider != null && (hit.collider.gameObject.CompareTag("PlayerCol") || hit.collider.gameObject.CompareTag("Candle")))
+                    if (hit.collider.gameObject.CompareTag("PlayerCol") || hit.collider.gameObject.CompareTag("Candle"))
                     {
                         //Only applies if looking for light
                         bool seesLight = true;
@@ -140,7 +140,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
         Debug.DrawRay(eyes.position, transform.forward, color);
 
-        if (sightTimer < 4)
+        if (sightTimer < 3.5f)
         {
             sightTimer += Time.deltaTime;
         }

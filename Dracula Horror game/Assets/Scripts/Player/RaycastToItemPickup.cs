@@ -7,17 +7,18 @@ public class RaycastToItemPickup : MonoBehaviour
     private bool alreadyPickedUp = false;
     private bool doorHold = false;
     private GameObject pickedUpObject;
+    private Rigidbody doorRb;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetButton("PickUp"))
         {
             RaycastHit hit;
 
             int layer = LayerMask.GetMask("Props") | LayerMask.GetMask("Default");
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 3, layer))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 4, layer))
             {
                 //Debug.Log(hit.collider);
 
@@ -25,13 +26,15 @@ public class RaycastToItemPickup : MonoBehaviour
                 {
                     pickedUpObject = hit.collider.transform.parent.gameObject;                    
 
-                    if (pickedUpObject.CompareTag("Door"))
+                    if (pickedUpObject.CompareTag("Door") && !doorHold)
                     {
+                        doorRb = pickedUpObject.GetComponent<Rigidbody>();
                         doorHold = true;
+                        pickedUpObject.GetComponent<SoundEffectProp>().DoorHold = true;                        
                     }
                     else
                     {                       
-                        if (pickedUpObject.GetComponent<PlayerPickup>() != null)
+                        if (pickedUpObject.GetComponent<PlayerPickup>() != null && !doorHold)
                         {
                             pickedUpObject.GetComponent<PlayerPickup>().Pickedup();
                         }
@@ -46,14 +49,22 @@ public class RaycastToItemPickup : MonoBehaviour
                 if (pickedUpObject.GetComponent<PlayerPickup>() != null)
                 {
                     pickedUpObject.GetComponent<PlayerPickup>().Release();
-                }                
-                pickedUpObject = null;
+                }
+                if (pickedUpObject.GetComponent<SoundEffectProp>() != null)
+                {
+                    pickedUpObject.GetComponent<SoundEffectProp>().DoorHold = false;
+                }               
+                pickedUpObject = null;                
                 doorHold = false;
             }
         }
         else
         {
             doorHold = false;
+            if (pickedUpObject != null && pickedUpObject.GetComponent<SoundEffectProp>() != null)
+            {
+                pickedUpObject.GetComponent<SoundEffectProp>().DoorHold = false;
+            }            
             pickedUpObject = null;
         }
     }
@@ -65,7 +76,7 @@ public class RaycastToItemPickup : MonoBehaviour
             Vector3 nextPos = transform.position + transform.forward * 2;
             Vector3 currPos = pickedUpObject.transform.position;
 
-            pickedUpObject.GetComponent<Rigidbody>().velocity = (nextPos - currPos) * 20;
+            doorRb.velocity = (nextPos - currPos) * 20;
             //Debug.Log(pickedUpObject.GetComponent<Rigidbody>().velocity);
         }        
     }
