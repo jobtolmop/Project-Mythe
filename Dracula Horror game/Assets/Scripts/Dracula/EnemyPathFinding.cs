@@ -62,7 +62,7 @@ public class EnemyPathFinding : MonoBehaviour
         }
         else
         {
-            if (chooser.HeardSoundBool)
+            if (chooser.HeardSoundBool || chooser.GoCloserToPlayer)
             {
                 //if (agent.velocity.magnitude > 0.1f)
                 //{ 

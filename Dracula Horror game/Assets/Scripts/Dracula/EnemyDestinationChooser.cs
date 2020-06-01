@@ -40,8 +40,8 @@ public class EnemyDestinationChooser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log((spotter.Player.position - transform.position).sqrMagnitude);
-        if ((spotter.Player.position - transform.position).sqrMagnitude > 3000 && !goCloserToPlayer)
+        Debug.Log((spotter.Player.position - transform.position).sqrMagnitude);
+        if ((spotter.Player.position - transform.position).sqrMagnitude > 1500 && !goCloserToPlayer)
         {
             tooFarTimer += Time.deltaTime;
 
@@ -64,9 +64,7 @@ public class EnemyDestinationChooser : MonoBehaviour
         Debug.DrawRay(TargetPos, Vector3.up, Color.blue);
         if (spotter.PlayerSpotted)
         {
-            Vector3 playerPos = spotter.Player.position;
-            playerPos.y = 0;
-            TargetPos = playerPos;
+            TargetPos = spotter.Player.position;
             locationMadeByRandom = false;
             standStillTimer = 0;
             alreadyInvoking = false;
@@ -78,7 +76,7 @@ public class EnemyDestinationChooser : MonoBehaviour
             Vector3 posCheck = transform.position;
             posCheck.y = 0;
 
-            if (pathFinding.Agent.velocity.magnitude < 2 && posCheck != TargetPos && !InFrontOfDoor)
+            if (pathFinding.Agent.velocity.magnitude < 2 && posCheck != TargetPos && !InFrontOfDoor && !goCloserToPlayer)
             {
                 standStillTimer += Time.deltaTime;
                 Debug.Log("standing here...");

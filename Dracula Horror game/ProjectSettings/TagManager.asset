@@ -16,6 +16,7 @@ TagManager:
   - PaperSpawn
   - EndDoor
   - WinPanel
+  - Button
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ public class UIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject paperPanel;
+    [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject arrows;
 
     private PaperSpawner paperSpawner;
@@ -32,7 +33,7 @@ public class UIHandler : MonoBehaviour
     {
         PauseGameCheck();
 
-        QuitGameCheck();
+        //QuitGameCheck();
 
         PageScroll();
 
@@ -41,7 +42,7 @@ public class UIHandler : MonoBehaviour
 
     private void PauseGameCheck()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && !winPanel.activeSelf)
         {
             if (paperPanel.activeSelf)
             {

@@ -16,9 +16,9 @@ public class WinGame : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameObject.FindGameObjectWithTag("Enemy").SetActive(false);
-            other.GetComponent<PlayerMovement>().enabled = false;
             Time.timeScale = 0;
+            //GameObject.FindGameObjectWithTag("Enemy").SetActive(false);
+            //other.GetComponent<PlayerMovement>().enabled = false;            
             winPanel.SetActive(true);
             StartCoroutine("QuitGame");
         }
