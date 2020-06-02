@@ -87,10 +87,10 @@ public class FreezeDoor : MonoBehaviour
         if (health <= 0)
         {
             enemy.GetComponent<EnemyPathFinding>().CantMove = true;
-            gameObject.layer = 18;
-            transform.GetChild(0).gameObject.layer = 18;
-            transform.GetChild(0).GetComponent<BoxCollider>().size = new Vector3(2f, 3.8f, 0.26f);
-            rb.velocity = enemy.forward * 10;
+            //gameObject.layer = 18;
+            //transform.GetChild(0).gameObject.layer = 18;
+            //transform.GetChild(0).GetComponent<BoxCollider>().size = new Vector3(2f, 3f, 0.26f);
+            //rb.velocity = enemy.forward * 10;
             Destroy(trigger);
             Destroy(GetComponent<HingeJoint>());
             Destroy(obstacle);

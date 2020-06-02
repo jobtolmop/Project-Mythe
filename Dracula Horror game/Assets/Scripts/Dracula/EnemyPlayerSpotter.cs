@@ -109,14 +109,15 @@ public class EnemyPlayerSpotter : MonoBehaviour
                         if (seesLight)
                         {
                             Debug.DrawRay(eyes.position, dirToObject, Color.red);
-                            PlayerSpotted = true;
-                            sightTimer = 0;
 
-                            if (!AudioManager.instance.PlayingSong)
+                            if (!PlayerSpotted)
                             {
                                 AudioManager.instance.Play("Chase");
                                 AudioManager.instance.Play("JumpScare");
                             }
+
+                            PlayerSpotted = true;
+                            sightTimer = 0;                            
 
                             //if ((player.position - transform.position).sqrMagnitude < feelDistance && player.gameObject.layer == 8 && !isAttacking)
                             //{

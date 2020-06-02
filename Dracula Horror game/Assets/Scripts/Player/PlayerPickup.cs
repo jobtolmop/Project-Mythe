@@ -13,6 +13,7 @@ public class PlayerPickup : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private GameObject tempParent;
     [SerializeField] private bool isHolding = false;
+    [SerializeField] private float rotationSpeed = 10;
     private bool canHold = true;
 
     private void Start()
@@ -41,16 +42,28 @@ public class PlayerPickup : MonoBehaviour
                 StartCoroutine("HoldDelay");
                 isHolding = false;
             }
+            else if (Input.GetButton("Rotate"))
+            {
+                float x = Input.GetAxis("Mouse X") * rotationSpeed;
+                float y = Input.GetAxis("Mouse Y") * rotationSpeed;
+
+                //Vector3 tempVect = tempParent.transform.TransformVector(new Vector3(y, x, 0));
+
+                //item.transform.Rotate(-tempParent.transform.up * x);
+                //item.transform.Rotate(tempParent.transform.right * y);
+                item.transform.Rotate(tempParent.transform.up, x, Space.World);
+                item.transform.Rotate(tempParent.transform.right, -y, Space.World);
+            }
+
+            if (Input.GetButtonUp("PickUp"))
+            {
+                isHolding = false;
+            }
         }
         else
         {
             Release();
-        }
-
-        if (Input.GetButtonUp("PickUp") && isHolding)
-        {
-            isHolding = false;
-        }
+        }        
     }
 
     private void FixedUpdate()
