@@ -31,6 +31,8 @@ public class EnemyPlayerSpotter : MonoBehaviour
     [SerializeField] private LayerMask layerDetectPlayer;
     [SerializeField] private LayerMask layerCandleDetect;
 
+    private Vector3 lastSeenPos;
+
     private bool playerInLight = false;
 
     // Start is called before the first frame update
@@ -117,7 +119,9 @@ public class EnemyPlayerSpotter : MonoBehaviour
                             }
 
                             PlayerSpotted = true;
-                            sightTimer = 0;                            
+                            sightTimer = 0;
+
+                            lastSeenPos = player.position;
 
                             //if ((player.position - transform.position).sqrMagnitude < feelDistance && player.gameObject.layer == 8 && !isAttacking)
                             //{
@@ -151,7 +155,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
             if (!chooser.SearchLastPlayerLocation && PlayerSpotted)
             {
                 chooser.SearchLastPlayerLocation = true;
-                chooser.TargetPos = new Vector3(player.position.x, 0, player.position.z);
+                chooser.TargetPos = lastSeenPos;
 
                 AudioManager.instance.FadeOut = true;
             }

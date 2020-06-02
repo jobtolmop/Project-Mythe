@@ -59,7 +59,7 @@ public class FreezeDoor : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") && goodRotation)
         {
-            collision.GetComponent<EnemyDestinationChooser>().InFrontOfDoor = true;
+            collision.GetComponent<EnemyDestinationChooser>().DoorTrigger = trigger;
             //collision.gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
 
             if (!breaking)
@@ -73,7 +73,7 @@ public class FreezeDoor : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyDestinationChooser>().InFrontOfDoor = false;       
+            collision.GetComponent<EnemyDestinationChooser>().DoorTrigger = null;       
         }
     }
 
@@ -87,12 +87,13 @@ public class FreezeDoor : MonoBehaviour
         if (health <= 0)
         {
             enemy.GetComponent<EnemyPathFinding>().CantMove = true;
-            //gameObject.layer = 18;
-            //transform.GetChild(0).gameObject.layer = 18;
-            //transform.GetChild(0).GetComponent<BoxCollider>().size = new Vector3(2f, 3f, 0.26f);
-            //rb.velocity = enemy.forward * 10;
-            Destroy(trigger);
+            gameObject.layer = 18;
+            transform.GetChild(0).gameObject.layer = 18;
             Destroy(GetComponent<HingeJoint>());
+            transform.GetChild(0).GetComponent<BoxCollider>().size = new Vector3(2f, 3f, 0.26f);
+            rb.velocity = enemy.forward * 10;
+            Destroy(trigger);
+            enemy.GetComponent<EnemyDestinationChooser>().DoorTrigger = null;
             Destroy(obstacle);
             yield return new WaitForSeconds(2);
             enemy.GetComponent<EnemyPathFinding>().CantMove = false;

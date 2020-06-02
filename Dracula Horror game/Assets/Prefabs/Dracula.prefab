@@ -168,7 +168,7 @@ MonoBehaviour:
   footSteps: {fileID: 0}
   walkSpeed: 3
   hearRunSpeed: 6
-  runSpeed: 11
+  runSpeed: 10
   acceleration: 3
 --- !u!114 &8038991055223330555
 MonoBehaviour:

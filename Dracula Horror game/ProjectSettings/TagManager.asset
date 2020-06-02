@@ -17,6 +17,7 @@ TagManager:
   - EndDoor
   - WinPanel
   - Button
+  - PuzzleGround
   layers:
   - Default
   - TransparentFX

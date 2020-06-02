@@ -198,6 +198,7 @@ MonoBehaviour:
   - {fileID: 429773118463095903, guid: 6b81cf2d857cbf042b836e5c0da684ae, type: 3}
   - {fileID: 1389925202620366127, guid: 77509c1ab107e1b41a6e0cc14b135a61, type: 3}
   - {fileID: 2582199994510530945, guid: d3e6fb72b67e22e469d9a9058869e0b9, type: 3}
+  - {fileID: 1993083258662100239, guid: a25bdf3680ae1c84a8e04b930e09e40e, type: 3}
   placedRooms: []
   spawnLocation: {fileID: 421274955}
   endRoom: {fileID: 96611775618323634, guid: c14e6b6489167f74883eb29d042f981a, type: 3}
@@ -2309,6 +2310,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dracula
       objectReference: {fileID: 0}
+    - target: {fileID: 8038991055223330535, guid: 30af50177428da1488a76b6e34cddf20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8038991055223330552, guid: 30af50177428da1488a76b6e34cddf20,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2443,6 +2449,16 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 726f313557cb74c46b450159ad0cc89e, type: 2}
+    - target: {fileID: 9051989839624663426, guid: 8c516f3e9792a834e874b2b5d697ed5e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051989839873991595, guid: 8c516f3e9792a834e874b2b5d697ed5e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9051989839875566484, guid: 8c516f3e9792a834e874b2b5d697ed5e,
         type: 3}
       propertyPath: deathPanel

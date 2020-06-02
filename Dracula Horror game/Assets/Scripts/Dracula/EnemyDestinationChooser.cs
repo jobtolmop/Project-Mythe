@@ -18,7 +18,7 @@ public class EnemyDestinationChooser : MonoBehaviour
 
     private bool heardSound = false;
     public bool HeardSoundBool { get { return heardSound; } }
-    public bool InFrontOfDoor { get; set; } = false;
+    public BoxCollider DoorTrigger { get; set; }
 
     private float standStillTimer = 0;
     private float tooFarTimer = 0;
@@ -40,24 +40,14 @@ public class EnemyDestinationChooser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log((spotter.Player.position - transform.position).sqrMagnitude);
+        //Debug.Log((spotter.Player.position - transform.position).sqrMagnitude);
         if ((spotter.Player.position - transform.position).sqrMagnitude > 1500 && !goCloserToPlayer)
         {
             tooFarTimer += Time.deltaTime;
 
             if (tooFarTimer > tooFarSec)
             {
-                tooFarTimer = 0;
-                tooFarSec = Random.Range(4, 9);
-                goCloserToPlayer = true;
-                locationMadeByRandom = false;
-                standStillTimer = 0;
-                alreadyInvoking = false;
-                heardSound = false;
-                SearchLastPlayerLocation = false;
-                Vector3 playerPos = spotter.Player.position;
-                playerPos.y = 0;
-                TargetPos = playerPos;                
+                GoTowardsPlayer();          
             }            
         }
 
@@ -76,7 +66,7 @@ public class EnemyDestinationChooser : MonoBehaviour
             Vector3 posCheck = transform.position;
             posCheck.y = 0;
 
-            if (pathFinding.Agent.velocity.magnitude < 2 && posCheck != TargetPos && !InFrontOfDoor && !goCloserToPlayer)
+            if (pathFinding.Agent.velocity.magnitude < 2 && posCheck != TargetPos && DoorTrigger == null)
             {
                 standStillTimer += Time.deltaTime;
                 Debug.Log("standing here...");
@@ -86,6 +76,8 @@ public class EnemyDestinationChooser : MonoBehaviour
                     Debug.Log("Choose new location...");
                     heardSound = false;
                     standStillTimer = 0;
+                    goCloserToPlayer = false;
+                    tooFarTimer = 0;
                     Invoke("ChooseRandomLocation", 2);
                     alreadyInvoking = true;
                 }
@@ -122,6 +114,35 @@ public class EnemyDestinationChooser : MonoBehaviour
                 standStillTimer = 0;
             }
         }
+    }
+
+    private void GoTowardsPlayer()
+    {
+        RaycastHit groundHit;
+
+        int layer = LayerMask.GetMask("Ground");
+
+        if (Physics.Raycast(spotter.Player.position, Vector3.down, out groundHit, 100, layer))
+        {
+            Debug.Log(groundHit.collider.tag);
+            if (groundHit.collider.CompareTag("PuzzleGround"))
+            {
+                tooFarTimer = 0;
+                return;
+            }            
+        }
+
+        tooFarTimer = 0;
+        tooFarSec = Random.Range(4, 9);
+        goCloserToPlayer = true;
+        locationMadeByRandom = false;
+        standStillTimer = 0;
+        alreadyInvoking = false;
+        heardSound = false;
+        SearchLastPlayerLocation = false;
+        Vector3 playerPos = spotter.Player.position;
+        playerPos.y = 0;
+        TargetPos = playerPos;
     }
 
     private void ChooseRandomLocation()

@@ -12,12 +12,14 @@ public class PlayerPickup : MonoBehaviour
     [SerializeField] private GameObject item;
     private Rigidbody rb;
     [SerializeField] private GameObject tempParent;
+    private Transform prevParent;
     [SerializeField] private bool isHolding = false;
     [SerializeField] private float rotationSpeed = 10;
     private bool canHold = true;
 
     private void Start()
     {
+        prevParent = transform.parent;
         tempParent = Camera.main.gameObject;
         rb = item.GetComponent<Rigidbody>();
     }
@@ -106,7 +108,7 @@ public class PlayerPickup : MonoBehaviour
         item.gameObject.layer = 12;
         item.transform.GetChild(0).gameObject.layer = 12;
         objectPos = item.transform.position;
-        item.transform.SetParent(null);
+        item.transform.SetParent(prevParent);
         item.GetComponent<Rigidbody>().useGravity = true;
         item.transform.position = objectPos;
     }

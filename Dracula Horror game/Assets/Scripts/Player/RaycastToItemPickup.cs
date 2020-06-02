@@ -65,7 +65,6 @@ public class RaycastToItemPickup : MonoBehaviour
                 if (pickedUpObject.GetComponent<SoundEffectProp>() != null)
                 {                    
                     pickedUpObject.GetComponent<SoundEffectProp>().DoorHold = false;
-                    //pickedUpObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
                 pickedUpObject = null;                
                 doorHold = false;
