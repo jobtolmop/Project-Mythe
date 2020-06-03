@@ -16,6 +16,7 @@ public class FreezeDoor : MonoBehaviour
     private Transform enemy;
     private Rigidbody rb;
     private NavMeshObstacle obstacle;
+    private EnemyDestinationChooser enemyDestinationChooser;
     [SerializeField] private BoxCollider trigger;
 
     private void Start()
@@ -51,29 +52,37 @@ public class FreezeDoor : MonoBehaviour
         {
             rb.isKinematic = true;
             enemy = collision.transform;
+            enemyDestinationChooser = enemy.GetComponent<EnemyDestinationChooser>();
             collision.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
         }
     }
 
     private void OnTriggerStay(Collider collision)
     {
-        if (collision.CompareTag("Enemy") && goodRotation)
+        if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyDestinationChooser>().DoorTrigger = trigger;
-            //collision.gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
-
-            if (!breaking)
+            if (goodRotation)
             {
-                StartCoroutine("WaitDoorBreak");
-            }            
-        }
+                enemyDestinationChooser.DoorTrigger = trigger;
+                //collision.gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+
+                if (!breaking)
+                {
+                    StartCoroutine("WaitDoorBreak");
+                }
+            }
+            else
+            {
+                enemyDestinationChooser.DoorTrigger = null;
+            }                     
+        }        
     }
 
     private void OnTriggerExit(Collider collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyDestinationChooser>().DoorTrigger = null;       
+            enemyDestinationChooser.DoorTrigger = null;       
         }
     }
 
@@ -93,7 +102,7 @@ public class FreezeDoor : MonoBehaviour
             transform.GetChild(0).GetComponent<BoxCollider>().size = new Vector3(2f, 3f, 0.26f);
             rb.velocity = enemy.forward * 10;
             Destroy(trigger);
-            enemy.GetComponent<EnemyDestinationChooser>().DoorTrigger = null;
+            enemyDestinationChooser.DoorTrigger = null;
             Destroy(obstacle);
             yield return new WaitForSeconds(2);
             enemy.GetComponent<EnemyPathFinding>().CantMove = false;

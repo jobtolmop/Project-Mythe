@@ -29,7 +29,6 @@ public class SoundEffectProp : MonoBehaviour
     {
         //audioManager = GameObject.FindGameObjectWithTag("Audio").transform.GetChild(0).GetComponent<AudioManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
         //Debug.Log(soundCollider);
     }
 
@@ -44,7 +43,7 @@ public class SoundEffectProp : MonoBehaviour
         {
             pushedByPlayer = true;
         }
-        else if (enemy != null && (enemy.position - transform.position).sqrMagnitude < 5)
+        else
         {
             pushedByPlayer = false;
         }

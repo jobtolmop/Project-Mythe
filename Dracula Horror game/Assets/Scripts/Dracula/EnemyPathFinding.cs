@@ -36,6 +36,11 @@ public class EnemyPathFinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y > 10)
+        {
+            transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
+        }
+
         if (spotter.PlayerSpotted)
         {
             if (CantMove)

@@ -205,6 +205,11 @@ public class EnemyDestinationChooser : MonoBehaviour
 
     public void HeardSound(Vector3 pos, float radius)
     {
+        if (goCloserToPlayer)
+        {
+            return;
+        }
+
         //AudioManager.instance.StopPlaying("HeartBeat");
         if (!AudioManager.instance.FindSound("HeartBeat").source.isPlaying)
         {

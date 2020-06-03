@@ -35,7 +35,7 @@ public class PlayerPickup : MonoBehaviour
             item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             item.transform.SetParent(tempParent.transform);
 
-            if (Input.GetButtonDown("Throw"))
+            if (Input.GetButtonDown("Throw") && !item.CompareTag("Door"))
             {
                 item.gameObject.layer = 11;
                 item.transform.GetChild(0).gameObject.layer = 11;

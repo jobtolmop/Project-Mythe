@@ -147,7 +147,14 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
         if (sightTimer < 3.5f)
         {
-            sightTimer += Time.deltaTime;
+            if (PlayerSpotted)
+            {
+                sightTimer += Time.deltaTime;
+            }
+            else
+            {
+                sightTimer = 0;
+            }
         }
         else
         {

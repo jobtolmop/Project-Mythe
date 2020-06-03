@@ -108,7 +108,11 @@ public class UIHandler : MonoBehaviour
                 return;
             }
         }
-        
+
+        if (ids[0] != 0 && currId == 0)
+        {
+            paper.sprite = paperSpawner.Sprites[ids[0]];
+        }
 
         paper.gameObject.SetActive(true);
         arrows.SetActive(true);
