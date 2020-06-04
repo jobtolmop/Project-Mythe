@@ -40,16 +40,7 @@ public class EnemyDestinationChooser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log((spotter.Player.position - transform.position).sqrMagnitude);
-        if ((spotter.Player.position - transform.position).sqrMagnitude > 1500 && !goCloserToPlayer)
-        {
-            tooFarTimer += Time.deltaTime;
-
-            if (tooFarTimer > tooFarSec)
-            {
-                GoTowardsPlayer();          
-            }            
-        }
+        //Debug.Log((spotter.Player.position - transform.position).sqrMagnitude);        
 
         Debug.DrawRay(TargetPos, Vector3.up, Color.blue);
         if (spotter.PlayerSpotted)
@@ -63,6 +54,16 @@ public class EnemyDestinationChooser : MonoBehaviour
         }   
         else
         {
+            if ((spotter.Player.position - transform.position).sqrMagnitude > 1500 && !goCloserToPlayer)
+            {
+                tooFarTimer += Time.deltaTime;
+
+                if (tooFarTimer > tooFarSec)
+                {
+                    GoTowardsPlayer();
+                }
+            }
+
             Vector3 posCheck = transform.position;
             posCheck.y = 0;
 
@@ -73,13 +74,30 @@ public class EnemyDestinationChooser : MonoBehaviour
 
                 if (standStillTimer > 5)
                 {
-                    Debug.Log("Choose new location...");
-                    heardSound = false;
-                    standStillTimer = 0;
-                    goCloserToPlayer = false;
-                    tooFarTimer = 0;
-                    Invoke("ChooseRandomLocation", 2);
-                    alreadyInvoking = true;
+                    if (goCloserToPlayer)
+                    {
+                        RaycastHit groundHit;
+
+                        int layer = LayerMask.GetMask("Ground");
+
+                        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 100, layer))
+                        {
+                            ground = groundHit.collider;
+                            
+                        }
+
+                        TargetPos = new Vector3(ground.transform.position.x, 0, ground.transform.position.z);
+                    }
+                    else
+                    {
+                        Debug.Log("Choose new location...");
+                        heardSound = false;
+                        standStillTimer = 0;
+                        goCloserToPlayer = false;
+                        tooFarTimer = 0;
+                        Invoke("ChooseRandomLocation", 2);
+                        alreadyInvoking = true;
+                    }                    
                 }
             }
             else
@@ -87,13 +105,14 @@ public class EnemyDestinationChooser : MonoBehaviour
                 standStillTimer = 0;
             }
 
-            
+            //Check if target pos is made by random and if he is on that location
             if ((!locationMadeByRandom || posCheck == TargetPos && locationMadeByRandom) && !alreadyInvoking && !heardSound && !SearchLastPlayerLocation && !goCloserToPlayer)
             {
                 standStillTimer = 0;
                 Invoke("ChooseRandomLocation", 2);
                 alreadyInvoking = true;
             }
+            //Check if target pos is the location of a sound and if he is on that location
             else if (posCheck == TargetPos && heardSound && !SearchLastPlayerLocation && !goCloserToPlayer)
             {
                 standStillTimer = 0;
@@ -101,6 +120,7 @@ public class EnemyDestinationChooser : MonoBehaviour
                 locationMadeByRandom = false;
                 alreadyInvoking = false;
             }
+            //Check if target pos is the location of a sound and if he is on that location
             else if (posCheck == TargetPos && SearchLastPlayerLocation && !goCloserToPlayer)
             {
                 standStillTimer = 0;
@@ -108,6 +128,7 @@ public class EnemyDestinationChooser : MonoBehaviour
                 locationMadeByRandom = false;
                 alreadyInvoking = false;
             }
+            //If he is on the pos when he wanted to go closer to the player
             else if (goCloserToPlayer && posCheck == TargetPos)
             {
                 goCloserToPlayer = false;

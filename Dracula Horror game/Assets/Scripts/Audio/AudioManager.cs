@@ -14,7 +14,6 @@ public class AudioManager : MonoBehaviour
 
     public Sound CurrSound { get { return currSound; } }
 
-    public bool PlayingSong { get; set; } = false;
     public bool FadeOut { get; set; } = false;
 
     void Awake()
@@ -52,7 +51,6 @@ public class AudioManager : MonoBehaviour
             else
             {
                 currSound.source.Stop();
-                PlayingSong = false;
                 FadeOut = false;
             }
         }
@@ -60,13 +58,13 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
+        Debug.Log("Seraching for music " + name);
         FindSound(name);
 
         if (currS.loop)
         {
             currSound = currS;
             Debug.Log("Playing music " + name);
-            PlayingSong = true;
         }        
         currS.source.Play();
     }
@@ -75,10 +73,6 @@ public class AudioManager : MonoBehaviour
     {
         FindSound(sound);
         currS.source.Stop();
-        if (currS.loop)
-        {
-            PlayingSong = false;
-        }        
     }
 
     public void Pause(string sound)

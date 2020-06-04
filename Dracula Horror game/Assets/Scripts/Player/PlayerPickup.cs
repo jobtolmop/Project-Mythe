@@ -15,6 +15,7 @@ public class PlayerPickup : MonoBehaviour
     private Transform prevParent;
     [SerializeField] private bool isHolding = false;
     [SerializeField] private float rotationSpeed = 10;
+    [SerializeField] private float multiplier = 1;
     private bool canHold = true;
 
     private void Start()
@@ -76,12 +77,7 @@ public class PlayerPickup : MonoBehaviour
             {
                 item.GetComponent<SoundEffectProp>().ThrownByPlayer = true;
             }
-            float multiplier = 1;
 
-            if (rb.mass < 10)
-            {
-                multiplier = 0.25f;
-            }
             rb.AddForce(tempParent.transform.forward * (throwForce * multiplier));
             thrown = false;
         }        

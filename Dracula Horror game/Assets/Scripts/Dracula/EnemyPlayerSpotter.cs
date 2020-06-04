@@ -127,8 +127,11 @@ public class EnemyPlayerSpotter : MonoBehaviour
                             //{
                             //    StartCoroutine("AttackPlayer");
                             //}
-
-                            AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
+                            if (AudioManager.instance.CurrSound != null)
+                            {
+                                AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
+                            }
+                            
                             return;
                         }                                   
                     }

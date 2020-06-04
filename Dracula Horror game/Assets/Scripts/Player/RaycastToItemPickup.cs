@@ -16,16 +16,17 @@ public class RaycastToItemPickup : MonoBehaviour
         {
             RaycastHit hit;
 
-            int layer = LayerMask.GetMask("Props") | LayerMask.GetMask("Default");
+            int layer = LayerMask.GetMask("Props") | LayerMask.GetMask("Default") | LayerMask.GetMask("Door");
 
             if (Physics.Raycast(transform.position, transform.forward, out hit, 3, layer))
             {
-                //Debug.Log(hit.collider);
+                Debug.Log(hit.collider.gameObject);
 
-                if (hit.collider.gameObject.layer == 12 && pickedUpObject == null)
+                if ((hit.collider.gameObject.layer == 12 || hit.collider.gameObject.layer == 23) && pickedUpObject == null)
                 {
-                    if (hit.collider.transform.parent != null)
+                    if (!hit.collider.CompareTag("Door") && !hit.collider.CompareTag("Paper"))
                     {
+                        
                         pickedUpObject = hit.collider.transform.parent.gameObject;
                     }     
                     else

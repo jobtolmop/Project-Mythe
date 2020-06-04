@@ -2325,6 +2325,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 7602589349781980458, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8836282409154146947, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
         type: 3}
       propertyPath: m_Name

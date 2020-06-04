@@ -48,7 +48,7 @@ public class SoundEffectProp : MonoBehaviour
             pushedByPlayer = false;
         }
 
-        if (collision.relativeVelocity.magnitude > crashVel && !alreadyBreaking && (collision.gameObject.GetComponent<Rigidbody>() == null || collision.gameObject.GetComponent<Rigidbody>().mass > 0.1f))
+        if (collision.relativeVelocity.magnitude > crashVel && !alreadyBreaking && (collision.gameObject.GetComponent<Rigidbody>() == null || collision.gameObject.GetComponent<Rigidbody>().mass > 10f))
         {
             alreadyBreaking = true;
             currSFX = crashSFX.clip;

@@ -28,8 +28,8 @@ public class PaperSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        door = GameObject.FindGameObjectWithTag("EndDoor").transform;
-        door.GetComponent<Animator>().speed = 0;
+        //door = GameObject.FindGameObjectWithTag("EndDoor").transform;
+        //door.GetComponent<Animator>().speed = 0;
         spawnLocations.AddRange(GameObject.FindGameObjectsWithTag("PaperSpawn"));
 
         for (int i = 0; i < papersToSpawn; i++)

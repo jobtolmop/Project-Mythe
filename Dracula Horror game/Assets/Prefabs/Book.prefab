@@ -64,6 +64,8 @@ MonoBehaviour:
   item: {fileID: 1777507235520491479}
   tempParent: {fileID: 0}
   isHolding: 0
+  rotationSpeed: 10
+  multiplier: 0.25
 --- !u!65 &3614667561543290714
 BoxCollider:
   m_ObjectHideFlags: 0
