@@ -73,31 +73,14 @@ public class EnemyDestinationChooser : MonoBehaviour
                 Debug.Log("standing here...");
 
                 if (standStillTimer > 5)
-                {
-                    if (goCloserToPlayer)
-                    {
-                        RaycastHit groundHit;
-
-                        int layer = LayerMask.GetMask("Ground");
-
-                        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 100, layer))
-                        {
-                            ground = groundHit.collider;
-                            
-                        }
-
-                        TargetPos = new Vector3(ground.transform.position.x, 0, ground.transform.position.z);
-                    }
-                    else
-                    {
-                        Debug.Log("Choose new location...");
-                        heardSound = false;
-                        standStillTimer = 0;
-                        goCloserToPlayer = false;
-                        tooFarTimer = 0;
-                        Invoke("ChooseRandomLocation", 2);
-                        alreadyInvoking = true;
-                    }                    
+                {                    
+                    Debug.Log("Choose new location...");
+                    heardSound = false;
+                    standStillTimer = 0;
+                    goCloserToPlayer = false;
+                    tooFarTimer = 0;
+                    Invoke("ChooseRandomLocation", 2);
+                    alreadyInvoking = true;                    
                 }
             }
             else
