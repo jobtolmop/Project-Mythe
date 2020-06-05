@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Transform cam;
 
-    //private PlayerSoundMaker soundMaker;
+    private PlayerSoundMaker soundMaker;
     private FootStepAudio footStepAudio;
 
     // Start is called before the first frame update
