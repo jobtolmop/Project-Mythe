@@ -11,6 +11,14 @@ TagManager:
   - Audio
   - Canvas
   - PlayerCol
+  - Door
+  - Paper
+  - PaperSpawn
+  - EndDoor
+  - WinPanel
+  - Button
+  - PuzzleGround
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -31,11 +39,11 @@ TagManager:
   - Window
   - Physics
   - Dead
-  - DeathCol
-  - 
-  - 
-  - 
-  - 
+  - HitCol
+  - DontDetectGround
+  - DoorBreak
+  - Casing
+  - Door
   - 
   - 
   - 

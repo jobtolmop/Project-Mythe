@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: cf163c6ff13dbd64e91677a288862592
+=======
+guid: af64358a6ee592e4099a05827f8955f2
+>>>>>>> Jordan
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []

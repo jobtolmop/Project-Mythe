@@ -5,37 +5,60 @@ using UnityEngine.UI;
 
 public class PaperPickUp : MonoBehaviour
 {
-    public PaperSpawner spawner {get; set;}
+    [SerializeField] private Sprite paperSprite;
+    [SerializeField] private UIHandler ui;
 
-    private GameObject playerPageAnim;
+    public PaperSpawner spawner {get; set;}
+    public Sprite PaperSprite { get { return paperSprite; } set { paperSprite = value; } }
+
+    public int Id { get; set; } = 0;
 
     [SerializeField] private AudioSource sfx;
     private bool pickedUp = false;
 
     private void Start()
     {
-        playerPageAnim = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;
+        ui = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIHandler>();
     }
 
-    private void OnTriggerStay(Collider other)
+    public void PickUpPage()
     {
-        if (Input.GetButtonDown("PickUpPage") && other.CompareTag("Player") && !pickedUp)
+        if (pickedUp)
         {
-            pickedUp = true;
-            spawner.Papers.Remove(transform.parent.gameObject);
-            playerPageAnim.SetActive(false);
-            playerPageAnim.SetActive(true);
-            playerPageAnim.GetComponentInChildren<Text>().text = Mathf.Abs(spawner.Papers.Count - 7) + "/7";
-            if (!sfx.isPlaying)
-            {
-                sfx.Play();
-                StartCoroutine("WaitForSFX");
-            }            
-            if (spawner.Papers.Count <= 0)
-            {
-                spawner.Win();
-                AudioManager.instance.Play("Door_Open");
-            }
+            return;
+        }
+
+        pickedUp = true;
+            
+        //Controls page dont mess with the spawner
+        if (spawner != null)
+        {
+            spawner.Papers.Remove(gameObject);
+            spawner.PlayerPanel.SetActive(false);
+            spawner.PlayerPanel.SetActive(true);
+            spawner.PlayerPanel.GetComponentInChildren<Text>().text = Mathf.Abs(spawner.Papers.Count - spawner.PapersToSpawn) + "/" + spawner.PapersToSpawn;
+        }
+        else
+        {
+            spawner = FindObjectOfType<PaperSpawner>();
+        }
+           
+        spawner.PaperPanel.SetActive(true);
+        spawner.PaperPanel.transform.GetChild(0).GetComponent<Image>().sprite = paperSprite;
+        ui.Ids.Add(Id);
+        ui.Ids.Sort(SortById);
+
+        Time.timeScale = 0;
+
+        if (!sfx.isPlaying)
+        {
+            sfx.Play();
+            StartCoroutine("WaitForSFX");
+        }            
+        if (spawner.Papers.Count <= 0)
+        {
+            spawner.Win();
+            AudioManager.instance.Play("Door_Open");
         }
     }
 
@@ -46,6 +69,11 @@ public class PaperPickUp : MonoBehaviour
             yield return null;
         }
 
-        Destroy(transform.parent.gameObject);
+        Destroy(gameObject);
+    }
+
+    static int SortById(int p1, int p2)
+    {
+        return p1.CompareTo(p2);
     }
 }

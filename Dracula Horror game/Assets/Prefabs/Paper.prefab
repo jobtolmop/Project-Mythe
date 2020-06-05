@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7790882187421722814}
   - component: {fileID: 6322725103924091032}
   - component: {fileID: 3180654568643965550}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4576223301903863420}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &6322725103924091032
 Light:
@@ -86,7 +86,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -118,9 +118,10 @@ GameObject:
   - component: {fileID: 4576223301903863422}
   - component: {fileID: 4576223301903863423}
   - component: {fileID: 6894791204772482275}
-  m_Layer: 0
+  - component: {fileID: 6065626698396474111}
+  m_Layer: 12
   m_Name: Paper
-  m_TagString: Untagged
+  m_TagString: Paper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +137,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 0.6, y: 0.001, z: 1}
   m_Children:
-  - {fileID: 1421392816549216623}
   - {fileID: 7790882187421722814}
   - {fileID: 4045171490610426958}
   m_Father: {fileID: 0}
@@ -217,65 +217,21 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!1 &6166237032293011093
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1421392816549216623}
-  - component: {fileID: 2026989837832633031}
-  - component: {fileID: 6087515352529223908}
-  m_Layer: 16
-  m_Name: PickUpRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1421392816549216623
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6166237032293011093}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4576223301903863420}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2026989837832633031
+  m_CollisionDetection: 1
+--- !u!114 &6065626698396474111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6166237032293011093}
+  m_GameObject: {fileID: 4576223301903863408}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e6baa7c832357e4bb415b8084aa123c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paperSprite: {fileID: 0}
   sfx: {fileID: 1430536304084906067}
---- !u!135 &6087515352529223908
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6166237032293011093}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8313005051019433221
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4045171490610426958}
   - component: {fileID: 1430536304084906067}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +261,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4576223301903863420}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1430536304084906067
 AudioSource:

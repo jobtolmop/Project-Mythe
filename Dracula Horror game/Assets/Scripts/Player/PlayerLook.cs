@@ -17,6 +17,11 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButton("Rotate"))
+        {
+            return;
+        }
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;  
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 

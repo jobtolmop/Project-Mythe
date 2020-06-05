@@ -7,11 +7,27 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameObject physicsInteraction;
     [SerializeField] private GameObject deathPanel;
+    [SerializeField] private int health = 2;
+    private bool dying = false;
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.isTrigger)
+    //    {
+    //        health--;
+
+    //        if (health <= 0)
+    //        {
+    //            Die();
+    //        }
+    //    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && !dying)
         {
+            dying = true;
             StartCoroutine("RestartRoom");
             deathPanel.SetActive(true);
             Debug.Log("Die");
@@ -26,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
             GetComponentInParent<CharacterController>().enabled = false;
             GetComponentInParent<PlayerMovement>().enabled = false;
             GetComponentInParent<CandleControls>().enabled = false;
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

@@ -12,6 +12,10 @@ public class EnemyPlayerSpotter : MonoBehaviour
     private PlayerMovement playerMov;
     [SerializeField] private Transform playerCandle;
 
+    private bool isAttacking = false;
+
+    public bool IsAttacking { get { return isAttacking; } }
+
     public Transform Player { get { return player; } }
 
     private EnemyDestinationChooser chooser;
@@ -22,6 +26,12 @@ public class EnemyPlayerSpotter : MonoBehaviour
     [SerializeField] private float feelDistance = 5;
     [SerializeField] private float fov = 105;
     [SerializeField] private Transform eyes;
+    [SerializeField] private Transform cam;
+    [SerializeField] private GameObject playerHit;
+    [SerializeField] private LayerMask layerDetectPlayer;
+    [SerializeField] private LayerMask layerCandleDetect;
+
+    private Vector3 lastSeenPos;
 
     private bool playerInLight = false;
 
@@ -30,6 +40,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerMov = player.GetComponent<PlayerMovement>();
+        cam = Camera.main.transform;
         chooser = GetComponent<EnemyDestinationChooser>();
     }
 
@@ -63,7 +74,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                 viewDistance = 800 - lessView;
             }
            
-            ObjectInSightCheck(player);
+            ObjectInSightCheck(cam);
         }        
     }
 
@@ -79,15 +90,15 @@ public class EnemyPlayerSpotter : MonoBehaviour
                 //Debug.Log("Player in field of view");
                 RaycastHit hit;
 
-                int layer = ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Window");
-
-                if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layer))
+                if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layerDetectPlayer))
                 {
-                    if (hit.collider != null && (hit.collider.gameObject.CompareTag("PlayerCol") || hit.collider.gameObject.CompareTag("Candle")))
+                    //Debug.Log("Collider currently hitting: " + hit.collider);
+
+                    if (hit.collider.gameObject.CompareTag("PlayerCol") || hit.collider.gameObject.CompareTag("Candle"))
                     {
                         //Only applies if looking for light
                         bool seesLight = true;
-                        //Debug.LogError("Collider currently hitting: " + hit.collider);
+                        
                         if (hit.collider.gameObject.CompareTag("Candle"))
                         {
                             seesLight = PointSeesCandlePos(hit.point);
@@ -100,30 +111,15 @@ public class EnemyPlayerSpotter : MonoBehaviour
                         if (seesLight)
                         {
                             Debug.DrawRay(eyes.position, dirToObject, Color.red);
-                            PlayerSpotted = true;
-                            sightTimer = 0;
 
-                            if (!AudioManager.instance.PlayingSong)
-                            {
-                                AudioManager.instance.StopPlaying("Chase");
-                                AudioManager.instance.Play("Chase");
-                                AudioManager.instance.Play("JumpScare");
-                            }
-
-                            AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
+                            SpottedPlayer();                            
+                            
                             return;
                         }                                   
                     }
                 }
             }
-        }
-
-        if ((player.position - transform.position).sqrMagnitude < feelDistance && player.gameObject.layer == 8)
-        {
-            PlayerSpotted = true;
-            sightTimer = 0;
-            return;
-        }
+        }       
 
         Color color = Color.green;
 
@@ -134,17 +130,24 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
         Debug.DrawRay(eyes.position, transform.forward, color);
 
-        if (sightTimer < 4)
+        if (sightTimer < 3.5f)
         {
-            sightTimer += Time.deltaTime;
+            if (PlayerSpotted)
+            {
+                sightTimer += Time.deltaTime;
+            }
+            else
+            {
+                sightTimer = 0;
+            }
         }
         else
         {
             sightTimer = 0;
-            if (!chooser.SearchLastPlayerLocation && PlayerSpotted)
+            if (chooser.EnemyState != EnemyDestinationChooser.state.SEARCHLASTSEEN && PlayerSpotted)
             {
-                chooser.SearchLastPlayerLocation = true;
-                chooser.TargetPos = new Vector3(player.position.x, 0, player.position.z);
+                chooser.EnemyState = EnemyDestinationChooser.state.SEARCHLASTSEEN;
+                chooser.TargetPos = lastSeenPos;
 
                 AudioManager.instance.FadeOut = true;
             }
@@ -155,13 +158,12 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
     public bool PointSeesCandlePos(Vector3 pos)
     {
-        int layer = ~LayerMask.GetMask("Candle") | ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Window");
         RaycastHit candleHit;
         Vector3 dirToCandle = (playerCandle.GetChild(0).position - pos).normalized;
 
         Debug.DrawRay(pos, dirToCandle, Color.magenta);     
 
-        if (Physics.Raycast(pos, dirToCandle, out candleHit, 100, layer))
+        if (Physics.Raycast(pos, dirToCandle, out candleHit, 100, layerCandleDetect))
         {
             if (candleHit.collider != null && candleHit.collider.gameObject.CompareTag("CandleCol"))
             {
@@ -174,12 +176,36 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
     public void SpottedPlayer()
     {
+        if (!PlayerSpotted)
+        {
+            AudioManager.instance.Play("Chase");
+            AudioManager.instance.Play("JumpScare");
+        }
+
         PlayerSpotted = true;
         sightTimer = 0;
+
+        lastSeenPos = player.position;
+
+        if (AudioManager.instance.CurrSound != null)
+        {
+            AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
+        }
     }
 
     public void PlayerInLight(bool enter)
     {
         playerInLight = enter;
     }
+
+    //private IEnumerator AttackPlayer()
+    //{
+    //    isAttacking = true;
+    //    yield return new WaitForSeconds(0.4f);
+    //    playerHit.SetActive(true);
+    //    yield return new WaitForSeconds(0.2f);
+    //    playerHit.SetActive(false);
+    //    yield return new WaitForSeconds(0.5f);
+    //    isAttacking = false;
+    //}
 }

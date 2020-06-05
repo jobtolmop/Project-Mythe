@@ -7,116 +7,212 @@ public class EnemyDestinationChooser : MonoBehaviour
     public Vector3 TargetPos { get; set; }
 
     private EnemyPlayerSpotter spotter;
-    //private EnemyPathFinding pathFinding;
+    private EnemyPathFinding pathFinding;
 
-    [SerializeField] private LayerMask layerMask;
+    //[SerializeField] private LayerMask layerMask;
 
-    private bool alreadyInvoking = false;
-    private bool locationMadeByRandom = false;
+    [SerializeField] private bool alreadyInvoking = false;
+    //private bool locationMadeByRandom = false;
 
-    public bool SearchLastPlayerLocation { get; set; } = false;
+    //public bool SearchLastPlayerLocation { get; set; } = false;
 
-    private bool heardSound = false;
+    //private bool heardSound = false;
+    //public bool HeardSoundBool { get { return heardSound; } }
+    public BoxCollider DoorTrigger { get; set; }
 
     private float standStillTimer = 0;
+    private float tooFarTimer = 0;
+    private float tooFarSec = 5;
+    //private bool goCloserToPlayer = false;
+    //public bool GoCloserToPlayer { get { return goCloserToPlayer; } }
+
+    public enum state { RANDOM, HEARDSOUND, SEARCHLASTSEEN, GOTOWARDSPLAYER}
+
+    [SerializeField] private state enemyState = state.RANDOM;
+
+    public state EnemyState { get { return enemyState; } set { enemyState = value; } }
+
+    private Collider ground;
 
     // Start is called before the first frame update
     void Start()
     {
         spotter = GetComponent<EnemyPlayerSpotter>();
-        //pathFinding = GetComponent<EnemyPathFinding>();
-        TargetPos = transform.position;
+        pathFinding = GetComponent<EnemyPathFinding>();
+        Invoke("ChooseRandomLocation", 2);
+        alreadyInvoking = true;
+        tooFarSec = Random.Range(2, 6);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log((spotter.Player.position - transform.position).sqrMagnitude);        
+
         Debug.DrawRay(TargetPos, Vector3.up, Color.blue);
         if (spotter.PlayerSpotted)
         {
-            Vector3 playerPos = spotter.Player.position;
-            playerPos.y = 0;
-            TargetPos = playerPos;
-            locationMadeByRandom = false;
+            TargetPos = spotter.Player.position;
+            enemyState = state.RANDOM;
             standStillTimer = 0;
+            alreadyInvoking = false;
         }   
         else
         {
-            Vector3 posCheck = transform.position;
-            posCheck.y = 0;
-
-            if (posCheck != TargetPos && (posCheck - TargetPos).sqrMagnitude < 5 && (heardSound || SearchLastPlayerLocation))
+            if ((spotter.Player.position - transform.position).sqrMagnitude > 1500 && pathFinding.Agent.velocity.magnitude > 2 && /*!goCloserToPlayer*/ enemyState != state.GOTOWARDSPLAYER)
             {
-                standStillTimer += Time.deltaTime;
-                //Debug.Log("standing here...");
+                tooFarTimer += Time.deltaTime;
 
-                if (standStillTimer > 5)
+                if (tooFarTimer > tooFarSec)
                 {
-                    Debug.Log("Choose new location...");
-                    heardSound = false;
-                    standStillTimer = 0;
-                    Invoke("ChooseRandomLocation", 2);
-                    alreadyInvoking = true;
+                    GoTowardsPlayer();
                 }
             }
 
-            if ((!locationMadeByRandom || posCheck == TargetPos && locationMadeByRandom) && !alreadyInvoking && !heardSound && !SearchLastPlayerLocation)
+            Vector3 posCheck = transform.position;
+            posCheck.y = 0;
+
+            if (pathFinding.Agent.velocity.magnitude < 2 && posCheck != TargetPos && DoorTrigger == null)
+            {
+                standStillTimer += Time.deltaTime;
+                Debug.Log("standing here...");
+
+                if (standStillTimer > 5)
+                {
+                    MakeNewRandomLocation();
+                    enemyState = state.RANDOM;
+                }
+            }
+            else
             {
                 standStillTimer = 0;
-                Invoke("ChooseRandomLocation", 2);
-                alreadyInvoking = true;
             }
-            else if (posCheck == TargetPos && heardSound && !SearchLastPlayerLocation)
+
+            if (enemyState == state.RANDOM)
+            {
+                if (posCheck == TargetPos && !alreadyInvoking)
+                {
+                    MakeNewRandomLocation();
+                }
+            }
+            else
+            {
+                if (posCheck == TargetPos)
+                {
+                    standStillTimer = 0;
+                    enemyState = state.RANDOM;
+                    alreadyInvoking = false;
+                }
+            }
+
+            //Check if target pos is the location of a sound and if he is on that location
+            /*if (posCheck == TargetPos && heardSound && !SearchLastPlayerLocation && !goCloserToPlayer)
             {
                 standStillTimer = 0;
                 heardSound = false;
                 locationMadeByRandom = false;
                 alreadyInvoking = false;
             }
-            else if (posCheck == TargetPos && SearchLastPlayerLocation)
+            //Check if target pos is the location of a sound and if he is on that location
+            else if (posCheck == TargetPos && SearchLastPlayerLocation && !goCloserToPlayer)
             {
                 standStillTimer = 0;
                 SearchLastPlayerLocation = false;
                 locationMadeByRandom = false;
                 alreadyInvoking = false;
             }
+            //If he is on the pos when he wanted to go closer to the player
+            else if (goCloserToPlayer && posCheck == TargetPos)
+            {
+                goCloserToPlayer = false;
+                standStillTimer = 0;
+            }
+            //Check if target pos is made by random and if he is on that location
+            else if ((!locationMadeByRandom || posCheck == TargetPos && locationMadeByRandom) && !alreadyInvoking)
+            {
+                standStillTimer = 0;
+                Invoke("ChooseRandomLocation", 2);
+                alreadyInvoking = true;
+            }*/
         }
+    }
+
+    private void MakeNewRandomLocation()
+    {
+        standStillTimer = 0;
+        Invoke("ChooseRandomLocation", 2);
+        alreadyInvoking = true;
+    }
+
+    private void GoTowardsPlayer()
+    {
+        RaycastHit groundHit;
+
+        int layer = LayerMask.GetMask("Ground");
+
+        if (Physics.Raycast(spotter.Player.position, Vector3.down, out groundHit, 100, layer))
+        {
+            Debug.Log(groundHit.collider.tag);
+            if (groundHit.collider.CompareTag("PuzzleGround"))
+            {
+                tooFarTimer = 0;
+                return;
+            }            
+        }
+
+        standStillTimer = 0;
+        tooFarTimer = 0;
+        tooFarSec = Random.Range(4, 9);
+        /*goCloserToPlayer = true;
+        locationMadeByRandom = false;
+        standStillTimer = 0;
+        alreadyInvoking = false;
+        heardSound = false;
+        SearchLastPlayerLocation = false;*/
+        alreadyInvoking = false;
+        enemyState = state.GOTOWARDSPLAYER;
+        Vector3 playerPos = spotter.Player.position;
+        playerPos.y = 0;
+        TargetPos = playerPos;
     }
 
     private void ChooseRandomLocation()
     {
         RaycastHit groundHit;
         
-        int layer = ~LayerMask.GetMask("Enemy");
+        int layer = LayerMask.GetMask("Ground");
         float x = 0;
         float z = 0;
         if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 100, layer))
         {
-            if (groundHit.collider != null && groundHit.collider.gameObject.layer == 10)
-            {
-                Collider ground = groundHit.collider;
+            ground = groundHit.collider;
 
-                x = ground.bounds.extents.x;
-                z = ground.bounds.extents.z;
-            }
+            Debug.Log(ground.gameObject);
+
+            x = ground.bounds.extents.x;
+            z = ground.bounds.extents.z;
         }
         else
         {
-            return;
+            if (ground == null)
+            {
+                return;
+            }            
         }
 
-        Vector3 maybeTargetPos = new Vector3(Random.Range(-x + 2, x - 2), 0, Random.Range(-z + 2, z - 2));
+        Vector3 maybeTargetPos = new Vector3(ground.transform.position.x + Random.Range(-x + 2, x - 2), 0, ground.transform.position.z + Random.Range(-z + 2, z - 2));
 
         RaycastHit hit;
 
-        int layerCheck = ~LayerMask.GetMask("Ground");
-        if (Physics.Raycast(maybeTargetPos, Vector3.up, out hit, transform.localScale.y * 10, layerCheck))
+        int layerCheck = LayerMask.GetMask("Ground") | LayerMask.GetMask("DontDetectGround");
+        layerCheck = ~layerCheck;
+
+        if (Physics.Raycast(maybeTargetPos, Vector3.up, out hit, transform.localScale.y, layerCheck))
         {
             if (hit.collider != null)
             {
-                locationMadeByRandom = false;
                 alreadyInvoking = false;
-                Debug.Log("Something is there");
+                Debug.Log("Something is there " + hit.collider.gameObject);
                 return;
             }
         }
@@ -126,26 +222,25 @@ public class EnemyDestinationChooser : MonoBehaviour
             {
                 TargetPos = maybeTargetPos;
                 alreadyInvoking = false;
-                locationMadeByRandom = true;
             }   
             else
             {
-                locationMadeByRandom = false;
                 alreadyInvoking = false;
                 Debug.Log("Someting is nearby the target pos");
             }
         }
     }
 
-    public void HeardSound(Vector3 pos)
+    public void HeardSound(Vector3 pos, float radius)
     {
         //AudioManager.instance.StopPlaying("HeartBeat");
         if (!AudioManager.instance.FindSound("HeartBeat").source.isPlaying)
         {
             AudioManager.instance.Play("HeartBeat");
         }
-        
-        heardSound = true;
+
+        enemyState = state.HEARDSOUND;
+
         pos.y = 0;
         TargetPos = pos;        
     }

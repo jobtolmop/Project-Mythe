@@ -6,32 +6,44 @@ public class PaperSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject paperPref;
     [SerializeField] private Transform door;
-
-    [SerializeField] private float distanceBetweenPapers = 40;
+    
     [SerializeField] private int papersToSpawn = 10;
+    public int PapersToSpawn { get { return papersToSpawn; } }
 
     private List<GameObject> papers = new List<GameObject>();
-    private List<Transform> spawnLocations = new List<Transform>();
+    private List<GameObject> spawnLocations = new List<GameObject>();
+    [SerializeField] private Texture[] textures;
+    [SerializeField] private Sprite[] sprites;
+    public Sprite[] Sprites { get { return sprites; } }
+    [SerializeField] private Material mat;
 
     public List<GameObject> Papers { get { return papers; } }
 
-    private bool won = false;
+    [SerializeField] private GameObject paperPanel;
+    public GameObject PaperPanel { get { return paperPanel; } }
+
+    [SerializeField] private GameObject playerPanel;
+    public GameObject PlayerPanel { get { return playerPanel; } }
 
     // Start is called before the first frame update
     void Start()
     {
-        door.GetComponent<Animator>().speed = 0;
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            spawnLocations.Add(transform.GetChild(i));
-        }
+        //door = GameObject.FindGameObjectWithTag("EndDoor").transform;
+        //door.GetComponent<Animator>().speed = 0;
+        spawnLocations.AddRange(GameObject.FindGameObjectsWithTag("PaperSpawn"));
 
         for (int i = 0; i < papersToSpawn; i++)
         {
             int rand = Random.Range(0, spawnLocations.Count);
 
-            GameObject paper = Instantiate(paperPref, spawnLocations[rand].position, Quaternion.identity);
-            paper.GetComponentInChildren<PaperPickUp>().spawner = GetComponent<PaperSpawner>();
+            GameObject paper = Instantiate(paperPref, spawnLocations[rand].transform.position, Quaternion.identity);
+            Material newMat = new Material(mat);
+            newMat.mainTexture = textures[i];
+            paper.GetComponent<MeshRenderer>().material = newMat;
+            PaperPickUp pickUp = paper.GetComponentInChildren<PaperPickUp>();
+            pickUp.spawner = GetComponent<PaperSpawner>();
+            pickUp.PaperSprite = sprites[i];
+            pickUp.Id = i + 1;
             papers.Add(paper);
             spawnLocations.RemoveAt(rand);
         }        
@@ -40,7 +52,6 @@ public class PaperSpawner : MonoBehaviour
     public void Win()
     {
         Debug.Log("YOU WIN!!!");
-        won = true;
         door.GetComponent<Animator>().speed = 1;
     }
 }

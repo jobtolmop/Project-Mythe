@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 1777507235520491464}
   - component: {fileID: 1777507235520491466}
   - component: {fileID: 1777507235520491465}
+<<<<<<< HEAD
   m_Layer: 0
+=======
+  m_Layer: 12
+>>>>>>> Jordan
   m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +33,11 @@ Transform:
   m_LocalPosition: {x: -23.710566, y: 0.58825594, z: -18.579077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+<<<<<<< HEAD
   - {fileID: 6759988421663286335}
+=======
+  - {fileID: 7327389382748546295}
+>>>>>>> Jordan
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -64,26 +72,41 @@ MonoBehaviour:
   item: {fileID: 1777507235520491479}
   tempParent: {fileID: 0}
   isHolding: 0
+<<<<<<< HEAD
 --- !u!65 &1777507235839859470
+=======
+  rotationSpeed: 10
+  multiplier: 0.25
+--- !u!65 &3614667561543290714
+>>>>>>> Jordan
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 7749310122222458412}
+=======
+  m_GameObject: {fileID: 6047001737202816740}
+>>>>>>> Jordan
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.099999905, z: 0.30703515}
   m_Center: {x: 0, y: 0, z: 0.0035175607}
+<<<<<<< HEAD
 --- !u!1001 &1777507235797651237
+=======
+--- !u!1001 &2362886895591722989
+>>>>>>> Jordan
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1777507235520491464}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -105,45 +128,97 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
+=======
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+>>>>>>> Jordan
         type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
+=======
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+>>>>>>> Jordan
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
+=======
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+>>>>>>> Jordan
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
+=======
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+>>>>>>> Jordan
         type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
+=======
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+>>>>>>> Jordan
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
+=======
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+>>>>>>> Jordan
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
+=======
+    - target: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+>>>>>>> Jordan
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: -1504981713932161579, guid: cf163c6ff13dbd64e91677a288862592,
+=======
+    - target: {fileID: -1504981713932161579, guid: af64358a6ee592e4099a05827f8955f2,
+>>>>>>> Jordan
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8dbd393d39cb9994f971a9aa22cf7ae6, type: 2}
+<<<<<<< HEAD
     - target: {fileID: -927199367670048503, guid: cf163c6ff13dbd64e91677a288862592,
         type: 3}
       propertyPath: m_Name
@@ -162,4 +237,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: cf163c6ff13dbd64e91677a288862592,
     type: 3}
   m_PrefabInstance: {fileID: 1777507235797651237}
+=======
+    - target: {fileID: -927199367670048503, guid: af64358a6ee592e4099a05827f8955f2,
+        type: 3}
+      propertyPath: m_Name
+      value: boek_prop
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: af64358a6ee592e4099a05827f8955f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af64358a6ee592e4099a05827f8955f2, type: 3}
+--- !u!1 &6047001737202816740 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: af64358a6ee592e4099a05827f8955f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2362886895591722989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7327389382748546295 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2362886895591722989}
+>>>>>>> Jordan
   m_PrefabAsset: {fileID: 0}

@@ -31,13 +31,15 @@ public class PlayerMovement : MonoBehaviour
     private Transform cam;
 
     private PlayerSoundMaker soundMaker;
+    private FootStepAudio footStepAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
-        //soundMaker = GetComponent<PlayerSoundMaker>();
+        soundMaker = GetComponent<PlayerSoundMaker>();
+        footStepAudio = GetComponentInChildren<FootStepAudio>();
     }
 
     // Update is called once per frame
@@ -58,16 +60,19 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        footStepAudio.Grounded = controller.isGrounded;
+
         if (controller.isGrounded)
         {
             if (jumping)
             {
                 jumping = false;
-                //soundMaker.PlayCoroutineJumpLand();
+                soundMaker.PlayCoroutineJumpLand();
             }
 
             if (Input.GetButton("Sprint"))
             {
+                footStepAudio.StepLoop(movement.magnitude, 1.8f, 1);
                 if (crouching)
                 {
                     Crouch(false);
@@ -82,6 +87,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (!crouching)
                 {
+                    //if (movement.magnitude > 0.1f)
+                    //{
+                    //    footStepAudio.StartStepping(0.1f, 0.7f);
+                    //}
+
+                    footStepAudio.StepLoop(movement.magnitude, 1f, 0.8f);
+
                     if (speed > walkSpeed)
                     {
                         speed -= 10 * Time.deltaTime;
@@ -90,7 +102,15 @@ public class PlayerMovement : MonoBehaviour
                     {
                         speed = walkSpeed;
                     }
-                }               
+                }    
+                else
+                {
+                    footStepAudio.StepLoop(movement.magnitude, 0.8f, 0.6f);
+                    /*if (movement.magnitude > 0.1f)
+                    {
+                        footStepAudio.StartStepping(0.2f, 0.4f);
+                    }*/
+                }
             }
 
             if (Input.GetButtonDown("Crouch"))
@@ -98,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
                 Crouch(!crouching);
 
                 if (crouching)
-                {
+                {                    
                     speed = crouchSpeed;
                 }
             }
@@ -111,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {                
                 jumping = true;
-                //soundMaker.PlayCoroutineJumpLand();
+                soundMaker.PlayCoroutineJumpLand();
                 velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             }
         }        

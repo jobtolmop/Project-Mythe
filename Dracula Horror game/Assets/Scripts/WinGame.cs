@@ -8,6 +8,7 @@ public class WinGame : MonoBehaviour
 
     private void Start()
     {
+        winPanel = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(5).gameObject;
         winPanel.SetActive(false);
     }
 
@@ -15,8 +16,9 @@ public class WinGame : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameObject.FindGameObjectWithTag("Enemy").SetActive(false);
-            other.GetComponent<PlayerMovement>().enabled = false;
+            Time.timeScale = 0;
+            //GameObject.FindGameObjectWithTag("Enemy").SetActive(false);
+            //other.GetComponent<PlayerMovement>().enabled = false;            
             winPanel.SetActive(true);
             StartCoroutine("QuitGame");
         }
