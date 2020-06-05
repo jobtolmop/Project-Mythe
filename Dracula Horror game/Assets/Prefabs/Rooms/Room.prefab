@@ -2300,6 +2300,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5104363530449439975}
     m_Modifications:
+    - target: {fileID: 2722848478895816314, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 4584262447995933372, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
         type: 3}
       propertyPath: m_Size.z
@@ -2310,6 +2315,21 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.028974533
       objectReference: {fileID: 0}
+    - target: {fileID: 6262719933540206455, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
+        type: 3}
+      propertyPath: model
+      value: 
+      objectReference: {fileID: 3049298671099090648}
+    - target: {fileID: 6262719933540206455, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
+        type: 3}
+      propertyPath: soundCollider
+      value: 
+      objectReference: {fileID: 4212194558081266823}
+    - target: {fileID: 6262719933540206455, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
+        type: 3}
+      propertyPath: crashSFX
+      value: 
+      objectReference: {fileID: 4776277034275800515}
     - target: {fileID: 6637523640919281941, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -2392,6 +2412,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16a5dfc2bba08fc4f92d119a47e6a247, type: 3}
+--- !u!135 &4212194558081266823 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2722848478895816314, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
+    type: 3}
+  m_PrefabInstance: {fileID: 2287046728257915645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &4776277034275800515 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6770465266776526654, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
+    type: 3}
+  m_PrefabInstance: {fileID: 2287046728257915645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3049298671099090648 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3885603850625145893, guid: 16a5dfc2bba08fc4f92d119a47e6a247,
+    type: 3}
+  m_PrefabInstance: {fileID: 2287046728257915645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7286244656111827057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8836282409154146956, guid: 16a5dfc2bba08fc4f92d119a47e6a247,

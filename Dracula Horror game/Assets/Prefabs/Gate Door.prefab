@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2648287, y: 4.528361, z: 3.9351654}
-  m_Center: {x: -0.017014384, y: -0.25, z: 1.0058441}
+  m_Size: {x: 2.2648287, y: 4.528361, z: 1.8512585}
+  m_Center: {x: -0.017014384, y: -0.25, z: 2.0477977}
 --- !u!114 &7051744322113301690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,11 +59,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  rb: {fileID: 2033195198482391808}
-  secondRb: {fileID: 8776218534555089258}
-  obstacle: {fileID: 3045241697497886996}
+  explodingDoor: 1
+  rb: {fileID: 8776218534555089258}
+  obstacle: {fileID: 2323864398286478047}
   trigger: {fileID: 7698940919868922417}
   door: {fileID: 6707449387397329453}
+  sfx: {fileID: 1187531566702781859}
 --- !u!54 &7880763779256538953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,6 +173,7 @@ GameObject:
   - component: {fileID: 2033195198482391808}
   - component: {fileID: 5491685817837065728}
   - component: {fileID: 1187531566702781859}
+  - component: {fileID: 1820060252574387038}
   m_Layer: 23
   m_Name: left
   m_TagString: Untagged
@@ -277,9 +279,25 @@ MonoBehaviour:
   hitSFX: {fileID: 1207281279474855611}
   crashSFX: {fileID: 7834657770399675521}
   hitVel: 7
-  crashVel: 20
+  crashVel: 999
   soundCollider: {fileID: 2565421972360994399}
   model: {fileID: 2217552174403885218}
+--- !u!208 &1820060252574387038
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728308769335409951}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 2.5, z: 1.04}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.5, z: 1}
+  m_TimeToStationary: 0.5
 --- !u!1 &1909179997915440193
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +738,7 @@ Transform:
   - {fileID: 2315740712984881193}
   - {fileID: 174877596315610317}
   - {fileID: 1862171602324942699}
+  - {fileID: 5364287194875987799}
   - {fileID: 978795408919454642}
   - {fileID: 1874681994191992474}
   - {fileID: 3602551813978666571}
@@ -739,6 +758,7 @@ GameObject:
   - component: {fileID: 8776218534555089258}
   - component: {fileID: 3633440084245529175}
   - component: {fileID: 8370011176005266819}
+  - component: {fileID: 2323864398286478047}
   m_Layer: 23
   m_Name: right
   m_TagString: Untagged
@@ -842,9 +862,25 @@ MonoBehaviour:
   hitSFX: {fileID: 1207281279474855611}
   crashSFX: {fileID: 7834657770399675521}
   hitVel: 7
-  crashVel: 20
+  crashVel: 999
   soundCollider: {fileID: 2565421972360994399}
   model: {fileID: 5356279622360123960}
+--- !u!208 &2323864398286478047
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987465931920660939}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 2.5, z: 1.04}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.5, z: -1}
+  m_TimeToStationary: 0.5
 --- !u!1 &5060025629302091296
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +910,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 189286740505967004}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1207281279474855611
 AudioSource:
@@ -897,7 +933,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 3
-  MaxDistance: 100
+  MaxDistance: 45
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1001,7 +1037,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 189286740505967004}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &2565421972360994399
 SphereCollider:
@@ -1014,7 +1050,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5104220993283317120
 GameObject:
@@ -1335,7 +1371,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 174877596315610317}
-  - component: {fileID: 3045241697497886996}
   m_Layer: 21
   m_Name: Doors
   m_TagString: Untagged
@@ -1359,22 +1394,87 @@ Transform:
   m_Father: {fileID: 189286740505967004}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &3045241697497886996
-NavMeshObstacle:
+--- !u!1 &8011730568920777233
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6707449387397329453}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5364287194875987799}
+  - component: {fileID: 5147012686373631986}
+  - component: {fileID: 7906460072329787732}
+  - component: {fileID: 226546865437276573}
+  m_Layer: 21
+  m_Name: Door trigger (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5364287194875987799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011730568920777233}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: -1.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189286740505967004}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5147012686373631986
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011730568920777233}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 2.25, z: 2}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 0
-  m_Center: {x: 0, y: 2.5, z: 1}
-  m_TimeToStationary: 0.5
+  serializedVersion: 2
+  m_Size: {x: 2.2648287, y: 4.528361, z: 1.8512585}
+  m_Center: {x: -0.017014384, y: -0.25, z: 2.0477977}
+--- !u!114 &7906460072329787732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011730568920777233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc7bc2a933cbb343b9ff7a600d4e472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  explodingDoor: 1
+  rb: {fileID: 2033195198482391808}
+  obstacle: {fileID: 1820060252574387038}
+  trigger: {fileID: 5147012686373631986}
+  door: {fileID: 6707449387397329453}
+  sfx: {fileID: 1187531566702781859}
+--- !u!54 &226546865437276573
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011730568920777233}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8730774255515626633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1504,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 189286740505967004}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7834657770399675521
 AudioSource:
@@ -1419,7 +1519,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 0a8792cd2d17e7548af4625b8e2de97e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.75
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1427,7 +1527,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 20
-  MaxDistance: 100
+  MaxDistance: 60
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

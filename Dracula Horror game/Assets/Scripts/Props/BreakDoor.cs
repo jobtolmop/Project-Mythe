@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class BreakDoor : MonoBehaviour
 {
     [SerializeField] private float health = 3;
+    [SerializeField] private bool explodingDoor = false;
 
     private bool breaking = false;
 
@@ -15,21 +16,23 @@ public class BreakDoor : MonoBehaviour
     private bool goodRotation = false;
     private Transform enemy;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Rigidbody secondRb;
     [SerializeField] private NavMeshObstacle obstacle;
     private EnemyDestinationChooser enemyDestinationChooser;
     [SerializeField] private BoxCollider trigger;
     [SerializeField] private GameObject door;
+    [SerializeField] private SoundEffectProp sfx;
 
     private void Start()
     {
         obstacle.carving = false;
-        neutralPos = transform.rotation;
+        neutralPos = rb.transform.rotation;
+        enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
+        enemyDestinationChooser = enemy.GetComponent<EnemyDestinationChooser>();
     }
 
     private void Update()
     {
-        if (Math.Round(transform.rotation.y, 1) == Math.Round(neutralPos.y, 1))
+        if (Math.Round(rb.transform.rotation.y, 1) == Math.Round(neutralPos.y, 1))
         {
             goodRotation = true;            
         }           
@@ -46,15 +49,9 @@ public class BreakDoor : MonoBehaviour
             obstacle.carving = true;
             rb.isKinematic = true;
 
-            if (secondRb != null)
-            {
-                secondRb.isKinematic = true;
-            }
-
-            enemy = collision.transform;
-            enemyDestinationChooser = enemy.GetComponent<EnemyDestinationChooser>();
+            //enemy = collision.transform;
+            //enemyDestinationChooser = enemy.GetComponent<EnemyDestinationChooser>();
             collision.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
-
         }
     }
 
@@ -91,20 +88,17 @@ public class BreakDoor : MonoBehaviour
     private IEnumerator WaitDoorBreak()
     {
         rb.isKinematic = true;
-        if (secondRb != null)
-        {
-            secondRb.isKinematic = true;
-        }
+
         breaking = true;
         yield return new WaitForSeconds(1);
         health -= 1;
-        if (secondRb != null)
-        {
-            secondRb.isKinematic = false;
-        }
+        sfx.HitSFX.Play();
+
         if (health <= 0)
         {
             enemy.GetComponent<EnemyPathFinding>().CantMove = true;
+            sfx.CrashSFX.Play();
+            Destroy(sfx.SoundCollider);
             //gameObject.layer = 18;
             //transform.GetChild(0).gameObject.layer = 18;
             //Destroy(GetComponent<HingeJoint>());
@@ -116,7 +110,28 @@ public class BreakDoor : MonoBehaviour
             yield return new WaitForSeconds(2);
             enemy.GetComponent<EnemyPathFinding>().CantMove = false;
             obstacle.carving = false;
-            Destroy(door);
+            if (explodingDoor)
+            {
+                rb.GetComponent<BoxCollider>().enabled = false;
+
+                for (int i = 0; i < rb.transform.childCount; i++)
+                {
+                    if (rb.transform.GetChild(i).GetComponent<MeshCollider>() != null)
+                    {
+                        Destroy(rb.transform.GetChild(i).GetComponent<MeshCollider>());
+                    }
+
+                    rb.transform.GetChild(i).gameObject.AddComponent<Rigidbody>();
+                    rb.transform.GetChild(i).gameObject.AddComponent<BoxCollider>();
+                    rb.transform.GetChild(i).GetComponent<Rigidbody>().mass = 3f;
+                    Destroy(rb.transform.GetChild(i).gameObject, 10);
+                }
+            }
+            else
+            {
+                Destroy(door);
+            }
+            
             Destroy(gameObject);
         }
 

@@ -5,7 +5,9 @@ using UnityEngine;
 public class SoundEffectProp : MonoBehaviour
 {
     [SerializeField] private AudioSource hitSFX;
+    public AudioSource HitSFX { get { return hitSFX; } }
     [SerializeField] private AudioSource crashSFX;
+    public AudioSource CrashSFX { get { return crashSFX; } }
     [SerializeField] private float hitVel;
     [SerializeField] private float crashVel;
     private AudioClip currSFX;
@@ -14,6 +16,7 @@ public class SoundEffectProp : MonoBehaviour
     private AudioManager audioManager;
 
     [SerializeField] private SphereCollider soundCollider;
+    public SphereCollider SoundCollider { get { return soundCollider; } }
     private Transform player;
     private Transform enemy;
     [SerializeField] private Transform model;
@@ -97,7 +100,7 @@ public class SoundEffectProp : MonoBehaviour
 
         yield return new WaitForSeconds(currSFX.length);
 
-        soundCollider.radius = 0.1f;
+        soundCollider.radius = 0.01f;
         soundCollider.gameObject.SetActive(false);
     }
 }

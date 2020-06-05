@@ -16,6 +16,7 @@ public class EnemyPathFinding : MonoBehaviour
     [SerializeField] private FootStepAudio footSteps;
     [SerializeField] private float walkSpeed = 3;
     [SerializeField] private float hearRunSpeed = 6;
+    [SerializeField] private float closerRunSpeed = 8;
     [SerializeField] private float runSpeed = 12;
     [SerializeField] private float acceleration = 3;
 
@@ -67,7 +68,7 @@ public class EnemyPathFinding : MonoBehaviour
         }
         else
         {
-            if (chooser.HeardSoundBool || chooser.GoCloserToPlayer)
+            if (chooser.EnemyState == EnemyDestinationChooser.state.HEARDSOUND)
             {
                 //if (agent.velocity.magnitude > 0.1f)
                 //{ 
@@ -77,6 +78,19 @@ public class EnemyPathFinding : MonoBehaviour
                 footSteps.StepLoop(agent.velocity.magnitude, 1.3f, 0.9f);
 
                 agent.speed = hearRunSpeed;
+            }
+            else if (chooser.EnemyState == EnemyDestinationChooser.state.GOTOWARDSPLAYER)
+            {
+                if ((spotter.Player.position - transform.position).sqrMagnitude > 500)
+                {
+                    agent.speed = runSpeed + 5;
+                }
+                else
+                {
+                    agent.speed = closerRunSpeed;
+                }
+
+                footSteps.StepLoop(agent.velocity.magnitude, 1.5f, 0.92f);
             }
             else
             {

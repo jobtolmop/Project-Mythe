@@ -168,6 +168,7 @@ MonoBehaviour:
   footSteps: {fileID: 0}
   walkSpeed: 3
   hearRunSpeed: 6
+  closerRunSpeed: 8
   runSpeed: 10
   acceleration: 3
 --- !u!114 &8038991055223330555
@@ -182,6 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec765c00254bc84890d11b7129a0a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyInvoking: 1
+  enemyState: 0
 --- !u!114 &8038991055223330556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,10 +208,10 @@ MonoBehaviour:
   playerHit: {fileID: 0}
   layerDetectPlayer:
     serializedVersion: 2
-    m_Bits: 194359
+    m_Bits: 12777271
   layerCandleDetect:
     serializedVersion: 2
-    m_Bits: 972599
+    m_Bits: 13555511
 --- !u!136 &8038991055223330557
 CapsuleCollider:
   m_ObjectHideFlags: 0

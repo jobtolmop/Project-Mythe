@@ -112,25 +112,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                         {
                             Debug.DrawRay(eyes.position, dirToObject, Color.red);
 
-                            if (!PlayerSpotted)
-                            {
-                                AudioManager.instance.Play("Chase");
-                                AudioManager.instance.Play("JumpScare");
-                            }
-
-                            PlayerSpotted = true;
-                            sightTimer = 0;
-
-                            lastSeenPos = player.position;
-
-                            //if ((player.position - transform.position).sqrMagnitude < feelDistance && player.gameObject.layer == 8 && !isAttacking)
-                            //{
-                            //    StartCoroutine("AttackPlayer");
-                            //}
-                            if (AudioManager.instance.CurrSound != null)
-                            {
-                                AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
-                            }
+                            SpottedPlayer();                            
                             
                             return;
                         }                                   
@@ -162,9 +144,9 @@ public class EnemyPlayerSpotter : MonoBehaviour
         else
         {
             sightTimer = 0;
-            if (!chooser.SearchLastPlayerLocation && PlayerSpotted)
+            if (chooser.EnemyState != EnemyDestinationChooser.state.SEARCHLASTSEEN && PlayerSpotted)
             {
-                chooser.SearchLastPlayerLocation = true;
+                chooser.EnemyState = EnemyDestinationChooser.state.SEARCHLASTSEEN;
                 chooser.TargetPos = lastSeenPos;
 
                 AudioManager.instance.FadeOut = true;
@@ -194,8 +176,21 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
     public void SpottedPlayer()
     {
+        if (!PlayerSpotted)
+        {
+            AudioManager.instance.Play("Chase");
+            AudioManager.instance.Play("JumpScare");
+        }
+
         PlayerSpotted = true;
         sightTimer = 0;
+
+        lastSeenPos = player.position;
+
+        if (AudioManager.instance.CurrSound != null)
+        {
+            AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
+        }
     }
 
     public void PlayerInLight(bool enter)
