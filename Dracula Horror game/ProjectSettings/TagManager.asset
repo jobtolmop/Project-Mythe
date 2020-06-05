@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Candle
+  - CandleCol
+  - Sound
+  - Audio
+  - Canvas
+  - PlayerCol
+  - Door
+  - Paper
+  - PaperSpawn
+  - EndDoor
+  - WinPanel
+  - Button
+  - PuzzleGround
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -15,20 +30,20 @@ TagManager:
   - 
   - Player
   - Post process
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Enemy
+  - Props
+  - Candle
+  - CandleCol
+  - Eyes
+  - Window
+  - Physics
+  - Dead
+  - HitCol
+  - DontDetectGround
+  - DoorBreak
+  - Casing
+  - Door
   - 
   - 
   - 
