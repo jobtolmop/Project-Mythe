@@ -37,10 +37,11 @@ public class EnemyPathFinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y > 10 || transform.position.y < -10)
+        if (transform.position.y > 10 || transform.position.y < -10 || agent.nextPosition.y > 10)
         {
-            transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
+            agent.Warp(new Vector3(agent.nextPosition.x, 1.8f, agent.nextPosition.z));
         }
+       
 
         if (spotter.PlayerSpotted)
         {

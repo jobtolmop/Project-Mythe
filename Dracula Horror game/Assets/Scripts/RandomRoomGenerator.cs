@@ -9,6 +9,7 @@ public class RandomRoomGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> placedRooms = new List<GameObject>();
     [SerializeField] private Transform spawnLocation;
     [SerializeField] private GameObject endRoom;
+    [SerializeField] private GameObject draculaPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,14 @@ public class RandomRoomGenerator : MonoBehaviour
 
             room.transform.SetParent(null);
             placedRooms.Add(room);
+
+            if (i == 1)
+            {
+                GameObject dracula = Instantiate(draculaPrefab, spawnLocation, false);
+                dracula.transform.localPosition += new Vector3(0, 0, 4);
+                dracula.transform.SetParent(null);
+            }
+
             spawnLocation = room.transform.GetChild(1);
             rooms.Remove(rooms[rand]);
         }

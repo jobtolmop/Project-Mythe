@@ -21,6 +21,7 @@ public class BreakDoor : MonoBehaviour
     [SerializeField] private BoxCollider trigger;
     [SerializeField] private GameObject door;
     [SerializeField] private SoundEffectProp sfx;
+    [SerializeField] private Transform model;
 
     private void Start()
     {
@@ -96,7 +97,6 @@ public class BreakDoor : MonoBehaviour
 
         if (health <= 0)
         {
-            enemy.GetComponent<EnemyPathFinding>().CantMove = true;
             sfx.CrashSFX.Play();
             Destroy(sfx.SoundCollider);
             //gameObject.layer = 18;
@@ -107,34 +107,40 @@ public class BreakDoor : MonoBehaviour
             //Destroy(trigger);
             //enemyDestinationChooser.DoorTrigger = null;
             //Destroy(obstacle);
-            yield return new WaitForSeconds(2);
-            enemy.GetComponent<EnemyPathFinding>().CantMove = false;
             obstacle.carving = false;
+
             if (explodingDoor)
             {
-                rb.GetComponent<BoxCollider>().enabled = false;
-
-                for (int i = 0; i < rb.transform.childCount; i++)
+                if (model.GetComponent<BoxCollider>() == null)
                 {
-                    if (rb.transform.GetChild(i).GetComponent<MeshCollider>() != null)
+                    model.GetComponentInParent<BoxCollider>().enabled = false;
+                }
+                else
+                {
+                    model.GetComponent<BoxCollider>().enabled = false;
+                }                
+
+                for (int i = 0; i < model.transform.childCount; i++)
+                {
+                    Transform child = model.transform.GetChild(i);
+                    if (child.GetComponent<MeshCollider>() != null)
                     {
-                        Destroy(rb.transform.GetChild(i).GetComponent<MeshCollider>());
+                        Destroy(child.GetComponent<MeshCollider>());
                     }
 
-                    rb.transform.GetChild(i).gameObject.AddComponent<Rigidbody>();
-                    rb.transform.GetChild(i).gameObject.AddComponent<BoxCollider>();
-                    rb.transform.GetChild(i).GetComponent<Rigidbody>().mass = 3f;
-                    Destroy(rb.transform.GetChild(i).gameObject, 10);
+                    child.gameObject.AddComponent<Rigidbody>();
+                    child.gameObject.AddComponent<BoxCollider>();
+                    child.GetComponent<Rigidbody>().mass = 3f;
+                    Destroy(child.gameObject, 10);                    
                 }
-            }
-            else
-            {
-                Destroy(door);
-            }
-            
-            Destroy(gameObject);
+                Destroy(obstacle);
+                Destroy(trigger);
+                Destroy(gameObject, 10);
+            }      
         }
-
-        breaking = false;        
+        else
+        {
+            breaking = false;
+        }        
     }
 }

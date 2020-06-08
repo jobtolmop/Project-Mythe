@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 189286740505967004}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7698940919868922417
 BoxCollider:
@@ -65,6 +65,7 @@ MonoBehaviour:
   trigger: {fileID: 7698940919868922417}
   door: {fileID: 6707449387397329453}
   sfx: {fileID: 1187531566702781859}
+  model: {fileID: 5356279622360123960}
 --- !u!54 &7880763779256538953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -106,12 +107,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173977062251748768}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000029802322, y: 3.0359287, z: 2.748324}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.0359287, z: 2.7483258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2217552174403885218}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2735368103891980593
 MeshFilter:
@@ -192,9 +193,9 @@ Transform:
   m_LocalPosition: {x: -0.0009824039, y: 0.11814615, z: -1.0744134}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6905545438002229154}
-  - {fileID: 4501360802685825696}
   - {fileID: 8845367112420086220}
+  - {fileID: 4501360802685825696}
+  - {fileID: 6905545438002229154}
   - {fileID: 3791095729979081669}
   - {fileID: 6420589572023142832}
   m_Father: {fileID: 174877596315610317}
@@ -496,8 +497,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141038139903703524}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.10450083, y: 1.4999495, z: 1.0399225}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.10450162, y: 1.4999495, z: 1.0399228}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2217552174403885218}
@@ -737,8 +738,8 @@ Transform:
   m_Children:
   - {fileID: 2315740712984881193}
   - {fileID: 174877596315610317}
-  - {fileID: 1862171602324942699}
   - {fileID: 5364287194875987799}
+  - {fileID: 1862171602324942699}
   - {fileID: 978795408919454642}
   - {fileID: 1874681994191992474}
   - {fileID: 3602551813978666571}
@@ -1200,12 +1201,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5523506195749043534}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000029802322, y: 4.185915, z: 2.0798454}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.185915, z: 2.0798457}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2217552174403885218}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1076776045720215768
 MeshFilter:
@@ -1407,7 +1408,7 @@ GameObject:
   - component: {fileID: 7906460072329787732}
   - component: {fileID: 226546865437276573}
   m_Layer: 21
-  m_Name: Door trigger (1)
+  m_Name: Door trigger L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1421,11 +1422,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8011730568920777233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -1.95}
+  m_LocalPosition: {x: 0, y: 3, z: -1.950001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 189286740505967004}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5147012686373631986
 BoxCollider:
@@ -1459,6 +1460,7 @@ MonoBehaviour:
   trigger: {fileID: 5147012686373631986}
   door: {fileID: 6707449387397329453}
   sfx: {fileID: 1187531566702781859}
+  model: {fileID: 2217552174403885218}
 --- !u!54 &226546865437276573
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
     private Transform player;
     private PlayerMovement playerMov;
-    [SerializeField] private Transform playerCandle;
+    private Transform playerCandle;
 
     private bool isAttacking = false;
 
@@ -42,6 +42,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
         playerMov = player.GetComponent<PlayerMovement>();
         cam = Camera.main.transform;
         chooser = GetComponent<EnemyDestinationChooser>();
+        playerCandle = GameObject.FindGameObjectWithTag("Candle").transform;
     }
 
     // Update is called once per frame
