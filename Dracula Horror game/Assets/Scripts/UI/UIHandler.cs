@@ -9,6 +9,9 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject paperPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject arrows;
+    [SerializeField] private Transform dotImage;
+
+    public Transform Dot { get { return dotImage; } }
 
     private PaperSpawner paperSpawner;
     [SerializeField] private Image paper;

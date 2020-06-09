@@ -15,9 +15,12 @@ public class PaperPickUp : MonoBehaviour
 
     [SerializeField] private AudioSource sfx;
     private bool pickedUp = false;
+    [SerializeField] private bool destroy = true;
+    [SerializeField] [TextArea] private string textToDisplay = "";
 
     private void Start()
     {
+        textToDisplay = textToDisplay.Replace("\new", "\n");
         ui = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIHandler>();
     }
 
@@ -45,16 +48,23 @@ public class PaperPickUp : MonoBehaviour
            
         spawner.PaperPanel.SetActive(true);
         spawner.PaperPanel.transform.GetChild(0).GetComponent<Image>().sprite = paperSprite;
-        ui.Ids.Add(Id);
-        ui.Ids.Sort(SortById);
+        spawner.PaperPanel.transform.GetChild(1).GetComponent<Text>().text = textToDisplay;
+
+        if (destroy)
+        {
+            ui.Ids.Add(Id);
+            ui.Ids.Sort(SortById);
+        }        
 
         Time.timeScale = 0;
 
         if (!sfx.isPlaying)
         {
             sfx.Play();
+
             StartCoroutine("WaitForSFX");
         }            
+
         if (spawner.Papers.Count <= 0)
         {
             spawner.Win();
@@ -69,7 +79,15 @@ public class PaperPickUp : MonoBehaviour
             yield return null;
         }
 
-        Destroy(gameObject);
+        if (destroy)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            pickedUp = false;
+            spawner = null;
+        }        
     }
 
     static int SortById(int p1, int p2)

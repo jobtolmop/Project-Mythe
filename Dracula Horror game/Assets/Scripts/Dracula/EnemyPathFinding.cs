@@ -20,8 +20,6 @@ public class EnemyPathFinding : MonoBehaviour
     [SerializeField] private float runSpeed = 12;
     [SerializeField] private float acceleration = 3;
 
-    private bool alreadyPlayingFootSteps = false;
-
     public bool CantMove { get; set; } = false;
 
     // Start is called before the first frame update
@@ -42,17 +40,17 @@ public class EnemyPathFinding : MonoBehaviour
             agent.Warp(new Vector3(transform.position.x, 1.8f, transform.position.z));
         }
 
+        if (CantMove)
+        {
+            agent.velocity = Vector3.zero;
+            return;
+        }
+
         if (spotter.PlayerSpotted)
         {
-            if (CantMove)
-            {
-                agent.velocity = Vector3.zero;
-                return;
-            }
-
             if (agent.speed < runSpeed)
             {
-                agent.speed += 3 * Time.deltaTime;
+                agent.speed += acceleration * Time.deltaTime;
             }
 
             //if (agent.velocity.magnitude > 0.1f)
@@ -116,17 +114,12 @@ public class EnemyPathFinding : MonoBehaviour
     {
         if (collision.gameObject.layer == 12 && agent.velocity.magnitude > 7)
         {
-            if (agent.speed < 8)
+            float colMass = collision.gameObject.GetComponent<Rigidbody>().mass / 10 / 2;
+           
+            if (agent.speed > 3)
             {
-                if (agent.speed > 0)
-                {
-                    agent.speed -= 1;
-                }                
-            }
-            else
-            {
-                agent.speed = 7;
-            }            
+                agent.speed -= colMass;
+            }             
         }
     }
 }

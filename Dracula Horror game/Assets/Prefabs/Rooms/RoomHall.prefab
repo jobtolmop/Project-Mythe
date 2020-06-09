@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2582199993631473721}
   - component: {fileID: 2582199993631473718}
   - component: {fileID: 2582199993631473719}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}

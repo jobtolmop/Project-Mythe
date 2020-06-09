@@ -23,7 +23,6 @@ public class EnemyPlayerSpotter : MonoBehaviour
     [SerializeField] private float viewDistance = 60;
     [SerializeField] private float playerCrouchviewDistance = 100;
     [SerializeField] private float playerCrouchFov = 50;
-    [SerializeField] private float feelDistance = 5;
     [SerializeField] private float fov = 105;
     [SerializeField] private Transform eyes;
     [SerializeField] private Transform cam;

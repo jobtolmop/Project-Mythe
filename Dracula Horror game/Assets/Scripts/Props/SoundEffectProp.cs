@@ -30,9 +30,7 @@ public class SoundEffectProp : MonoBehaviour
 
     private void Start()
     {
-        //audioManager = GameObject.FindGameObjectWithTag("Audio").transform.GetChild(0).GetComponent<AudioManager>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //Debug.Log(soundCollider);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -96,7 +94,7 @@ public class SoundEffectProp : MonoBehaviour
     private IEnumerator SoundDelay()
     {
         soundCollider.gameObject.SetActive(true);
-        soundCollider.radius = currAudio.maxDistance;
+        soundCollider.radius = currAudio.maxDistance * 2;
 
         yield return new WaitForSeconds(currSFX.length);
 

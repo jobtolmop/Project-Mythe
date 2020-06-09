@@ -26,7 +26,8 @@ public class PlayerMovement : MonoBehaviour
     public bool Crouching { get { return crouching; } }
     public bool Jumping { get { return jumping; } }
     public Vector2 Movement { get { return movement; } }
-    public bool CantMove { get; set; } = false;
+    [SerializeField] private bool cantMove = false;
+    public bool CantMove { set { cantMove = value; } }
 
     private Transform cam;
 
@@ -45,18 +46,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!CantMove)
+        if (cantMove)
         {
-            movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            return;
+        }
 
-            Vector3 move = transform.right * movement.x + transform.forward * movement.y;
-            if (move.magnitude > 1)
-            {
-                move.Normalize();
-            }
-            //Move is called before controls like jump and sprint check because isGrounded must be called after move()
-            controller.Move(move * speed * Time.deltaTime);
-        }        
+        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        Vector3 move = transform.right * movement.x + transform.forward * movement.y;
+        if (move.magnitude > 1)
+        {
+            move.Normalize();
+        }
+        //Move is called before controls like jump and sprint check because isGrounded must be called after move()
+        controller.Move(move * speed * Time.deltaTime);      
 
         controller.Move(velocity * Time.deltaTime);
 

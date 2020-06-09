@@ -100,7 +100,6 @@ public class PlayerPickup : MonoBehaviour
 
     public void Release()
     {
-        isHolding = false;
         item.gameObject.layer = 12;
         item.transform.GetChild(0).gameObject.layer = 12;
         objectPos = item.transform.position;

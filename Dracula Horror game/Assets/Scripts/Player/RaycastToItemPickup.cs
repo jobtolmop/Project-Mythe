@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class RaycastToItemPickup : MonoBehaviour
 {
-    private bool alreadyPickedUp = false;
     private bool doorHold = false;
     private GameObject pickedUpObject;
     private Rigidbody doorRb;
+    private UIHandler ui;
+
+    private void Start()
+    {
+        ui = FindObjectOfType<UIHandler>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,12 +23,17 @@ public class RaycastToItemPickup : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 3, layer))
         {
-            //Debug.Log(hit.collider.gameObject);
-
-            if ((hit.collider.gameObject.layer == 12 || hit.collider.gameObject.layer == 23) && pickedUpObject == null)
+            if (hit.collider.gameObject.layer == 12 || hit.collider.gameObject.layer == 23)
             {
+                ui.Dot.localScale = new Vector3(1.5f, 1.5f, 1);
+
                 if (Input.GetButton("PickUp"))
                 {
+                    if (pickedUpObject != null)
+                    {
+                        return;
+                    }
+
                     //Debug.Log((pickedUpObject.transform.position - transform.position).sqrMagnitude);
 
                     if (!hit.collider.CompareTag("Door") && !hit.collider.CompareTag("Paper"))
@@ -69,13 +79,19 @@ public class RaycastToItemPickup : MonoBehaviour
                     }
                 }
                 else
-                {
+                {                    
                     Release();
                 }
+            }
+            else
+            {
+                ui.Dot.localScale = Vector3.one;
             }
         }
         else
         {
+            ui.Dot.localScale = Vector3.one;
+
             if (!Input.GetButton("PickUp"))
             {
                 Release();
@@ -84,7 +100,7 @@ public class RaycastToItemPickup : MonoBehaviour
     }
 
     private void Release()
-    {
+    {        
         doorHold = false;
         if (pickedUpObject != null && pickedUpObject.GetComponent<SoundEffectProp>() != null)
         {

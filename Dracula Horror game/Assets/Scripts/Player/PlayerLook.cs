@@ -6,6 +6,7 @@ public class PlayerLook : MonoBehaviour
 {
     [SerializeField] private float mouseSensitivity = 100;
     [SerializeField] private float xRotation = 0;
+    [SerializeField] private bool cantMove = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Rotate"))
+        if (Input.GetButton("Rotate") || cantMove)
         {
             return;
         }

@@ -231,7 +231,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paperSprite: {fileID: 0}
+  ui: {fileID: 0}
   sfx: {fileID: 1430536304084906067}
+  destroy: 1
+  textToDisplay: 
 --- !u!1 &8313005051019433221
 GameObject:
   m_ObjectHideFlags: 0

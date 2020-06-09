@@ -66,7 +66,7 @@ public class EnemyDestinationChooser : MonoBehaviour
             if (pathFinding.Agent.velocity.magnitude < 2 && posCheck != TargetPos && DoorTrigger == null)
             {
                 standStillTimer += Time.deltaTime;
-                Debug.Log("standing here...");
+                //Debug.Log("standing here...");
 
                 if (standStillTimer > 5)
                 {

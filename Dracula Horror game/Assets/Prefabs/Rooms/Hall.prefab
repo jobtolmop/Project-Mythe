@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5259100024008942881}
   - component: {fileID: 6347186897064592814}
   - component: {fileID: 3751577047747512138}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Void3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
