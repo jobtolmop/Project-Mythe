@@ -52,6 +52,6 @@ public class PaperSpawner : MonoBehaviour
     public void Win()
     {
         Debug.Log("YOU WIN!!!");
-        door.GetComponent<Animator>().speed = 1;
+        //door.GetComponent<Animator>().speed = 1;
     }
 }

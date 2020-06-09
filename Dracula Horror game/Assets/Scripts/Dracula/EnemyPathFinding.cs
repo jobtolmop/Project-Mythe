@@ -39,7 +39,7 @@ public class EnemyPathFinding : MonoBehaviour
     {
         if (transform.position.y > 10 || transform.position.y < -10 || agent.nextPosition.y > 10)
         {
-            agent.Warp(new Vector3(agent.nextPosition.x, 1.8f, agent.nextPosition.z));
+            agent.Warp(new Vector3(transform.position.x, 1.8f, transform.position.z));
         }
        
 

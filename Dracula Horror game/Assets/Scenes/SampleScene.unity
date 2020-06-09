@@ -2514,8 +2514,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1189695340}
   - component: {fileID: 1189695339}
+  - component: {fileID: 1189695341}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: TutorialCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2529,11 +2530,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189695338}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5606322, y: 5.954461, z: 1}
-  m_Center: {x: -0.57786083, y: 0.9512963, z: 0}
+  m_Size: {x: 2.5606322, y: 5.6956334, z: 1}
+  m_Center: {x: -0.57786083, y: 0.8218825, z: 0}
 --- !u!4 &1189695340
 Transform:
   m_ObjectHideFlags: 0
@@ -2548,6 +2549,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1189695341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189695338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ef0f50a04f43448aaddf7e4dae652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1487577417
 GameObject:
   m_ObjectHideFlags: 0

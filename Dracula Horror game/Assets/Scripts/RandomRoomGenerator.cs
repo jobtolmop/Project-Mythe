@@ -16,6 +16,8 @@ public class RandomRoomGenerator : MonoBehaviour
     {
         int count = rooms.Count;
 
+        int randDraculaSpawn = Random.Range(1, 4);
+
         for (int i = 0; i < count; i++)
         {
             int rand = 0;
@@ -32,7 +34,7 @@ public class RandomRoomGenerator : MonoBehaviour
             room.transform.SetParent(null);
             placedRooms.Add(room);
 
-            if (i == 1)
+            if (i == randDraculaSpawn)
             {
                 GameObject dracula = Instantiate(draculaPrefab, spawnLocation, false);
                 dracula.transform.localPosition += new Vector3(0, 0, 4);

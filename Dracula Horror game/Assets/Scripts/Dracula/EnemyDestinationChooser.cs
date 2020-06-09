@@ -5,26 +5,17 @@ using UnityEngine;
 public class EnemyDestinationChooser : MonoBehaviour
 {
     public Vector3 TargetPos { get; set; }
+    public bool DontGoAfterPlayer { get; set; } = true;
 
     private EnemyPlayerSpotter spotter;
     private EnemyPathFinding pathFinding;
 
-    //[SerializeField] private LayerMask layerMask;
-
     [SerializeField] private bool alreadyInvoking = false;
-    //private bool locationMadeByRandom = false;
-
-    //public bool SearchLastPlayerLocation { get; set; } = false;
-
-    //private bool heardSound = false;
-    //public bool HeardSoundBool { get { return heardSound; } }
     public BoxCollider DoorTrigger { get; set; }
 
     private float standStillTimer = 0;
     private float tooFarTimer = 0;
     private float tooFarSec = 5;
-    //private bool goCloserToPlayer = false;
-    //public bool GoCloserToPlayer { get { return goCloserToPlayer; } }
 
     public enum state { RANDOM, HEARDSOUND, SEARCHLASTSEEN, GOTOWARDSPLAYER}
 
@@ -59,7 +50,7 @@ public class EnemyDestinationChooser : MonoBehaviour
         }   
         else
         {
-            if ((spotter.Player.position - transform.position).sqrMagnitude > 1500 && pathFinding.Agent.velocity.magnitude > 2 && /*!goCloserToPlayer*/ enemyState != state.GOTOWARDSPLAYER)
+            if ((spotter.Player.position - transform.position).sqrMagnitude > 1500 && pathFinding.Agent.velocity.magnitude > 2 && enemyState != state.GOTOWARDSPLAYER && !DontGoAfterPlayer)
             {
                 tooFarTimer += Time.deltaTime;
 
@@ -233,6 +224,11 @@ public class EnemyDestinationChooser : MonoBehaviour
 
     public void HeardSound(Vector3 pos, float radius)
     {
+        if (DontGoAfterPlayer)
+        {
+            return;
+        }
+
         //AudioManager.instance.StopPlaying("HeartBeat");
         if (!AudioManager.instance.FindSound("HeartBeat").source.isPlaying)
         {

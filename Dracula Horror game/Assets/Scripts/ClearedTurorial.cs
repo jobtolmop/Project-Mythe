@@ -12,9 +12,11 @@ public class ClearedTurorial : MonoBehaviour
         chooser = FindObjectOfType<EnemyDestinationChooser>(); 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            chooser.DontGoAfterPlayer = false;
+        }
     }
 }
