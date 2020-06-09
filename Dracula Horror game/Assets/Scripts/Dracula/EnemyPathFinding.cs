@@ -41,7 +41,6 @@ public class EnemyPathFinding : MonoBehaviour
         {
             agent.Warp(new Vector3(transform.position.x, 1.8f, transform.position.z));
         }
-       
 
         if (spotter.PlayerSpotted)
         {
