@@ -5,7 +5,7 @@ using UnityEngine;
 public class RopeSpawn : MonoBehaviour
 {
     [SerializeField]
-    GameObject partPrefab, parentObject;
+    GameObject partPrefab, parentObject, chandelier;
 
     [SerializeField]
     [Range(1, 1000)]
@@ -15,33 +15,11 @@ public class RopeSpawn : MonoBehaviour
     float partDistance = 0.21f;
 
     [SerializeField]
-    bool reset, spawn, snapFirst, snapLast;
-
+    bool snapFirst, snapLast;
+    
     private void Start()
     {
-        snapFirst = true;
-        snapLast = true;
-        spawn = true;
-    }
-
-    void Update()
-    {
-        if (reset)
-        {
-            foreach(GameObject tmp in GameObject.FindGameObjectsWithTag("Player"))
-            {
-                Destroy(tmp);
-            }
-
-            reset = false;
-        }
-
-        if (spawn)
-        {
-            Spawn();
-
-            spawn = false;
-        }
+        Spawn();
     }
 
     public void Spawn()
@@ -70,6 +48,10 @@ public class RopeSpawn : MonoBehaviour
                 tmp.GetComponent<CharacterJoint>().connectedBody = parentObject.transform.Find((parentObject.transform.childCount - 1).ToString()).GetComponent<Rigidbody>();
             }
         }
+
+        GameObject chand = Instantiate(chandelier, new Vector3(transform.position.x, transform.position.y + partDistance * (parentObject.transform.childCount - 1), transform.position.z), Quaternion.identity, parentObject.transform);
+        chand.GetComponent<CharacterJoint>().connectedBody = parentObject.transform.GetChild(parentObject.transform.childCount - 2).GetComponent<Rigidbody>();
+
         if (snapLast)
         {
             parentObject.transform.Find((parentObject.transform.childCount).ToString()).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
