@@ -71,7 +71,6 @@ Transform:
   - {fileID: 7752133037894735196}
   - {fileID: 4072465672965927625}
   - {fileID: 2222800912695212744}
-  - {fileID: 9124488762300847903}
   m_Father: {fileID: 7341124820563520270}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5664,102 +5663,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 189898591631520905}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1033661967157717601
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 521692058646152716}
-    m_Modifications:
-    - target: {fileID: 1970203590373698045, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: textToDisplay
-      value: 'If you''re chased by Dracula you can throw props towards him so he''ll
-        be slowed down depending on the weight of the object how slower he''ll be
-        when hit.
-
-
-        You can also lead him into props while running or close
-        a door becuase he needs to break it.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452530, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_Name
-      value: Tutorial Paper (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 34.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.001
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dc5468a5b0b94d34582acaa4d513f3ce, type: 3}
---- !u!4 &9124488762300847903 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8140533655391452542, guid: dc5468a5b0b94d34582acaa4d513f3ce,
-    type: 3}
-  m_PrefabInstance: {fileID: 1033661967157717601}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1232637377164701726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7426,15 +7329,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7341124821160236298}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1639599672932715523 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6c7d27cd6d08fa34b8cb425d63df54f0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7341124821160236298}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2349294539448434192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6c7d27cd6d08fa34b8cb425d63df54f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7341124821160236298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1639599672932715523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6c7d27cd6d08fa34b8cb425d63df54f0,
     type: 3}
   m_PrefabInstance: {fileID: 7341124821160236298}
   m_PrefabAsset: {fileID: 0}
