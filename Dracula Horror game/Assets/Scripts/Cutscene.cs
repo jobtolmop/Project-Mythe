@@ -32,6 +32,7 @@ public class Cutscene : MonoBehaviour
     {
         enemy = FindObjectOfType<EnemyPathFinding>();
         enemy.CantMove = true;
+        GetComponentInChildren<PlayerLook>().CantMove = true;
     }
 
     public void CloseDoor()
@@ -46,6 +47,7 @@ public class Cutscene : MonoBehaviour
         enemy.CantMove = false;        
         GetComponent<PlayerMovement>().CantMove = false;
         GetComponentInChildren<FootStepAudio>().enabled = true;
+        GetComponentInChildren<PlayerLook>().CantMove = false;
         Destroy(anim);
         Destroy(text);
         Destroy(this);

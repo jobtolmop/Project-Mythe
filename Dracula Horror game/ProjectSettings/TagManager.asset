@@ -19,6 +19,7 @@ TagManager:
   - Button
   - PuzzleGround
   - Key
+  - Chandelier
   layers:
   - Default
   - TransparentFX
@@ -45,8 +46,8 @@ TagManager:
   - Casing
   - Door
   - Roof
-  - 
-  - 
+  - Rope
+  - ChandelierBox
   - 
   - 
   - 

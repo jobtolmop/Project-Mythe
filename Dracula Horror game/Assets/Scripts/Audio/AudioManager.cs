@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
 
     public bool FadeOut { get; set; } = false;
 
+    public float FadeOutRate { get; set; } = 0.001f;
+
     void Awake()
     {
         if (instance == null)
@@ -46,7 +48,7 @@ public class AudioManager : MonoBehaviour
         {
             if (currSound.volume > 0)
             {
-                currSound.source.volume -= 0.001f;
+                currSound.source.volume -= FadeOutRate;
             }
             else
             {

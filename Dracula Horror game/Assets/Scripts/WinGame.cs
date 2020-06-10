@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WinGame : MonoBehaviour
 {
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private PaperSpawner spawner;
 
     private void Start()
     {
         winPanel = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(5).gameObject;
+        spawner = FindObjectOfType<PaperSpawner>();
         winPanel.SetActive(false);
     }
 
@@ -20,6 +23,12 @@ public class WinGame : MonoBehaviour
             //GameObject.FindGameObjectWithTag("Enemy").SetActive(false);
             //other.GetComponent<PlayerMovement>().enabled = false;            
             winPanel.SetActive(true);
+
+            if (spawner.WonGame)
+            {
+                winPanel.transform.GetChild(1).GetComponent<Text>().text = "You uncovered the truth and you told the people in your village about what had happened with you and the people who went missing in this mansion. When you showed the documents alot of people believed your story so the village is planning on an attack to kill that monster! You decide to not go there as well, because you don't want to see that place ever again...";
+            } 
+
             StartCoroutine("QuitGame");
         }
     }

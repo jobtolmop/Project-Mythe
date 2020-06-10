@@ -195,7 +195,7 @@ public class EnemyDestinationChooser : MonoBehaviour
 
         RaycastHit hit;
 
-        int layerCheck = LayerMask.GetMask("Ground") | LayerMask.GetMask("DontDetectGround");
+        int layerCheck = LayerMask.GetMask("Ground") | LayerMask.GetMask("DontDetectGround") | LayerMask.GetMask("ChandelierBox");
         layerCheck = ~layerCheck;
 
         if (Physics.Raycast(maybeTargetPos, Vector3.up, out hit, transform.localScale.y, layerCheck))

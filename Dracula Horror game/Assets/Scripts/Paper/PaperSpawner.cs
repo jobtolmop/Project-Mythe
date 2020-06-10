@@ -25,6 +25,8 @@ public class PaperSpawner : MonoBehaviour
     [SerializeField] private GameObject playerPanel;
     public GameObject PlayerPanel { get { return playerPanel; } }
 
+    public bool WonGame { get; set; } = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,6 @@ public class PaperSpawner : MonoBehaviour
     public void Win()
     {
         Debug.Log("YOU WIN!!!");
-        //door.GetComponent<Animator>().speed = 1;
+        WonGame = true;
     }
 }

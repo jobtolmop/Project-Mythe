@@ -232,7 +232,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
+  m_Height: 2.5
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.8
@@ -311,6 +311,8 @@ MonoBehaviour:
   leftDoor: {fileID: 0}
   rightDoor: {fileID: 0}
   doorBash: {fileID: 0}
+  anim: {fileID: 0}
+  text: {fileID: 0}
 --- !u!95 &2909843385415263213
 Animator:
   serializedVersion: 3
@@ -894,7 +896,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsInteraction: {fileID: 9051989838947038577}
   deathPanel: {fileID: 0}
-  health: 2
 --- !u!1 &9051989840204010840
 GameObject:
   m_ObjectHideFlags: 0

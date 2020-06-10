@@ -12,9 +12,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
     private PlayerMovement playerMov;
     private Transform playerCandle;
 
-    private bool isAttacking = false;
-
-    public bool IsAttacking { get { return isAttacking; } }
+    public bool PlayerDead { get; set; } = false;
 
     public Transform Player { get { return player; } }
 
@@ -80,7 +78,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
     private void ObjectInSightCheck(Transform thingToSee)
     {
-        if ((thingToSee.position - eyes.position).sqrMagnitude < viewDistance)
+        if ((thingToSee.position - eyes.position).sqrMagnitude < viewDistance && !PlayerDead)
         {
             Vector3 dirToObject = (thingToSee.position - eyes.position).normalized;
             //Debug.Log(dirToObject);
@@ -176,6 +174,11 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
     public void SpottedPlayer()
     {
+        if (PlayerDead)
+        {
+            return;
+        }
+
         if (!PlayerSpotted)
         {
             AudioManager.instance.Play("Chase");
@@ -189,6 +192,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
         if (AudioManager.instance.CurrSound != null)
         {
+            AudioManager.instance.FadeOutRate = 0.001f;
             AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
         }
     }

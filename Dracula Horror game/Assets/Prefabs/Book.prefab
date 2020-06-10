@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1777507235520491464}
   - component: {fileID: 1777507235520491466}
   - component: {fileID: 1777507235520491465}
+  - component: {fileID: 2008774585649414505}
   m_Layer: 12
   m_Name: Book
   m_TagString: Untagged
@@ -66,6 +67,17 @@ MonoBehaviour:
   isHolding: 0
   rotationSpeed: 10
   multiplier: 0.25
+--- !u!192 &2008774585649414505
+OcclusionArea:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777507235520491479}
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.0999999, z: 0.3070351}
+  m_Center: {x: 0, y: 0, z: 0.003517561}
+  m_IsViewVolume: 1
 --- !u!65 &3614667561543290714
 BoxCollider:
   m_ObjectHideFlags: 0

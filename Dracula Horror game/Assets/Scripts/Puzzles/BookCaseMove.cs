@@ -21,7 +21,7 @@ public class BookCaseMove : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (button.ButtonPressed || (enemy.position - transform.position).sqrMagnitude < 50)
+        if (button.ButtonPressed || (enemy.position - transform.position).sqrMagnitude < 100)
         {
             transform.position = Vector3.MoveTowards(transform.position, posToMove, speed * Time.deltaTime);
         }

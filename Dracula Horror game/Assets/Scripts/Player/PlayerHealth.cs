@@ -7,7 +7,6 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameObject physicsInteraction;
     [SerializeField] private GameObject deathPanel;
-    [SerializeField] private int health = 2;
     private bool dying = false;
 
     //private void OnTriggerEnter(Collider other)
@@ -30,11 +29,10 @@ public class PlayerHealth : MonoBehaviour
             dying = true;
             StartCoroutine("RestartRoom");
             deathPanel.SetActive(true);
-            Debug.Log("Die");
             transform.parent.gameObject.layer = 18;
             physicsInteraction.SetActive(false);
             transform.parent.gameObject.AddComponent<CapsuleCollider>();
-            transform.parent.GetComponent<CapsuleCollider>().height = 2;
+            transform.parent.GetComponent<CapsuleCollider>().height = 2.5f;
             transform.parent.gameObject.AddComponent<Rigidbody>();
             GetComponentInParent<Rigidbody>().AddForce(-transform.parent.forward * 10);
             GetComponentInParent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationY;
@@ -42,7 +40,8 @@ public class PlayerHealth : MonoBehaviour
             GetComponentInParent<CharacterController>().enabled = false;
             GetComponentInParent<PlayerMovement>().enabled = false;
             GetComponentInParent<CandleControls>().enabled = false;
-            //Destroy(gameObject);
+            other.GetComponent<EnemyPlayerSpotter>().PlayerDead = true;
+            AudioManager.instance.FadeOutRate = 0.005f;
         }
     }
 

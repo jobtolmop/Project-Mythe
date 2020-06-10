@@ -74,16 +74,23 @@ public class PlayerMovement : MonoBehaviour
             }
 
             if (Input.GetButton("Sprint"))
-            {
-                footStepAudio.StepLoop(movement.magnitude, 1.8f, 1);
+            {                
                 if (crouching)
                 {
                     Crouch(false);
                 }
 
-                if (speed < runSpeed) 
+                if (!crouching)
                 {
-                    speed += 7 * Time.deltaTime;
+                    footStepAudio.StepLoop(movement.magnitude, 1.8f, 1);
+                    if (speed < runSpeed)
+                    {
+                        speed += 7 * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    footStepAudio.StepLoop(movement.magnitude, 0.8f, 0.6f);
                 }
             }
             else
@@ -149,15 +156,15 @@ public class PlayerMovement : MonoBehaviour
             if (!Physics.CheckSphere(roofCheck.position, roofDistance, groundMask))
             {
                 crouching = false;
-                controller.height = 2;
+                controller.height = 2.5f;
                 physicsObject.localScale = Vector3.one;
-                cam.localPosition = new Vector3(0, 0.8f, cam.localPosition.z);
+                cam.localPosition = new Vector3(0, 0.95f, cam.localPosition.z);
             }            
         }
         else
         {
             crouching = true;
-            controller.height = 1;
+            controller.height = 1.25f;
             physicsObject.localScale = new Vector3(1, 0.5f, 1);
             cam.localPosition = new Vector3(0, 0.25f, cam.localPosition.z);
         }
