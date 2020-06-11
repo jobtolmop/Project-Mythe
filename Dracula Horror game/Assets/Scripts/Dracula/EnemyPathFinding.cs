@@ -11,6 +11,7 @@ public class EnemyPathFinding : MonoBehaviour
 
     private EnemyDestinationChooser chooser;
     private EnemyPlayerSpotter spotter;
+    private Animator anim;
 
     private Transform player;
     [SerializeField] private FootStepAudio footSteps;
@@ -29,12 +30,14 @@ public class EnemyPathFinding : MonoBehaviour
         chooser = GetComponent<EnemyDestinationChooser>();
         spotter = GetComponent<EnemyPlayerSpotter>();
         player = spotter.Player;
-        footSteps = GetComponentInChildren<FootStepAudio>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        anim.SetFloat("Speed", agent.velocity.magnitude);
+
         if (transform.position.y > 10 || transform.position.y < -10 || agent.nextPosition.y > 10)
         {
             agent.Warp(new Vector3(transform.position.x, 1.8f, transform.position.z));
@@ -53,12 +56,7 @@ public class EnemyPathFinding : MonoBehaviour
                 agent.speed += acceleration * Time.deltaTime;
             }
 
-            //if (agent.velocity.magnitude > 0.1f)
-            //{
-            //    footSteps.StartStepping(0.2f, 1);
-            //}
-
-            footSteps.StepLoop(agent.velocity.magnitude, 1.9f, 1);
+            anim.speed = 2.5f;
 
             agent.angularSpeed = 690;
             agent.acceleration = 10.5f;
@@ -68,12 +66,7 @@ public class EnemyPathFinding : MonoBehaviour
         {
             if (chooser.EnemyState == EnemyDestinationChooser.state.HEARDSOUND)
             {
-                //if (agent.velocity.magnitude > 0.1f)
-                //{ 
-                //    footSteps.StartStepping(0.4f, 0.9f);
-                //}
-
-                footSteps.StepLoop(agent.velocity.magnitude, 1.3f, 0.9f);
+                anim.speed = 1.6f;
 
                 agent.speed = hearRunSpeed;
             }
@@ -88,16 +81,12 @@ public class EnemyPathFinding : MonoBehaviour
                     agent.speed = closerRunSpeed;
                 }
 
-                footSteps.StepLoop(agent.velocity.magnitude, 1.5f, 0.92f);
+                anim.speed = 1.6f;
             }
             else
             {
-                /*if (agent.velocity.magnitude > 0.1f)
-                {
-                    footSteps.StartStepping(0.7f, 0.8f);
-                }*/
-                footSteps.StepLoop(agent.velocity.magnitude, 1f, 0.8f);
                 agent.speed = walkSpeed;
+                anim.speed = 0.8f;
             }
                 
             agent.angularSpeed = 120;
@@ -105,9 +94,12 @@ public class EnemyPathFinding : MonoBehaviour
             agent.autoBraking = true;
         }
 
-        agent.SetDestination(chooser.TargetPos);
+        if (agent.velocity.magnitude < 0.01f)
+        {
+            anim.speed = 1;
+        }
 
-        //Debug.Log(agent.speed);
+        agent.SetDestination(chooser.TargetPos);
     }
 
     private void OnCollisionEnter(Collision collision)

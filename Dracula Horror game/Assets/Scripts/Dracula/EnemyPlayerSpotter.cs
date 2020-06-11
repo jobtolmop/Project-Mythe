@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyPlayerSpotter : MonoBehaviour
 {
     public bool PlayerSpotted { get; set; } = false;
+    public bool TouchingLight { get; set; } = false;
 
     private float sightTimer = 0;
 
@@ -81,8 +82,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
         if ((thingToSee.position - eyes.position).sqrMagnitude < viewDistance && !PlayerDead)
         {
             Vector3 dirToObject = (thingToSee.position - eyes.position).normalized;
-            //Debug.Log(dirToObject);
-            //Debug.LogError("Collider currently hitting" + hit.collider);
+
             if (Vector3.Angle(eyes.forward, dirToObject) < fov / 2)
             {
                 //Debug.Log("Player in field of view");
@@ -117,7 +117,13 @@ public class EnemyPlayerSpotter : MonoBehaviour
                     }
                 }
             }
-        }       
+        }
+
+        if (TouchingLight)
+        {
+            sightTimer = 0;
+            return;
+        }
 
         Color color = Color.green;
 
@@ -193,6 +199,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
         if (AudioManager.instance.CurrSound != null)
         {
             AudioManager.instance.FadeOutRate = 0.001f;
+            AudioManager.instance.FadeOut = false;
             AudioManager.instance.CurrSound.source.volume = AudioManager.instance.CurrSound.volume;
         }
     }

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class FootStepAudio : MonoBehaviour
 {
-    //[SerializeField] private AudioClip[] clips;
+    [SerializeField] private AudioClip[] clips;
 
     private AudioSource source;
     public bool Grounded { get; set; } = true;
-
     //private bool delayTimer = false;
     //private float currVolume = 1;
     //private float timer = 0;
@@ -17,11 +16,18 @@ public class FootStepAudio : MonoBehaviour
     void Start()
     {
         source = GetComponent<AudioSource>();
+
+        if (clips.Length > 0)
+        {
+            source.enabled = true;
+            source.playOnAwake = false;
+            source.loop = false;
+        }
     }
 
     private void Update()
     {
-        if (!Grounded)
+        if (!Grounded && clips.Length == 0)
         {
             source.enabled = false;
         }
@@ -39,6 +45,14 @@ public class FootStepAudio : MonoBehaviour
         {
             source.enabled = false;
         }        
+    }
+
+    public void Step()
+    {
+        int rand = Random.Range(0, clips.Length);
+
+        source.pitch = Random.Range(0.8f, 1);
+        source.PlayOneShot(clips[rand]);        
     }
 
     /*public void StartStepping(float delay, float volume)

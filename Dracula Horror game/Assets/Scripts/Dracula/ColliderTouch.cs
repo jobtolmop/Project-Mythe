@@ -20,11 +20,20 @@ public class ColliderTouch : MonoBehaviour
         {
             Debug.Log("Light touches me");
             spotter.SpottedPlayer();
+            spotter.TouchingLight = true;
         }
         else if(other.CompareTag("Sound") && !spotter.PlayerSpotted)
         {
             chooser.HeardSound(other.transform.position, other.GetComponent<SphereCollider>().radius);
             Debug.Log("Heard Sound!!");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Candle") && spotter.TouchingLight)
+        {
+            spotter.TouchingLight = false;
         }
     }
 }
