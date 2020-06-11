@@ -57,6 +57,7 @@ public class UIHandler : MonoBehaviour
                 if (Time.timeScale > 0)
                 {
                     pausePanel.SetActive(true);
+                    pausePanel.GetComponentInChildren<Text>().text = Mathf.Abs(paperSpawner.Papers.Count - paperSpawner.PapersToSpawn) + "/" + paperSpawner.PapersToSpawn;
                     Time.timeScale = 0f;
                 }
                 else
@@ -120,6 +121,21 @@ public class UIHandler : MonoBehaviour
         paper.gameObject.SetActive(true);
         arrows.SetActive(true);
 
+        if (currId == 0)
+        {
+            arrows.transform.GetChild(0).gameObject.SetActive(false);
+            arrows.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else if(currId == ids.Count - 1)
+        {
+            arrows.transform.GetChild(0).gameObject.SetActive(true);
+            arrows.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        else
+        {
+            arrows.transform.GetChild(0).gameObject.SetActive(true);
+            arrows.transform.GetChild(1).gameObject.SetActive(true);
+        }
 
         if (Input.GetButtonDown("Right"))
         {
