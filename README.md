@@ -35,7 +35,7 @@ PC
 |<img width=500/>|<img width=300/>|
 
    [Backlog]: <https://trello.com/b/sZ4u4PUp/mythe-team-9-dracula>
-   [Logboek]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/logboek.pdf>
+   [Logboek]: <https://github.com/jobtolmop/Project-Mythe/blob/master/Project%20Mythe%20.docx>
    [GameDesignDoc]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/GameDesignDoc.pdf>
    [RetrospectiveVerslagen]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/RetrospectiveVerslagen.pdf>
    [ReviewVerslagen]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/ReviewVerslagen.pdf>
