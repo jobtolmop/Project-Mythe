@@ -5,7 +5,7 @@ Platform:
 PC
 
 ### Korte omschrijving van de game
-...
+Een first person horror game in het kasteel van Dracula! 
 
 ---
 #### Producten Werkproces 1
