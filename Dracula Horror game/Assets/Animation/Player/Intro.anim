@@ -617,7 +617,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 14.483334
+  - time: 14.25
     functionName: CloseDoor
     data: 
     objectReferenceParameter: {fileID: 0}

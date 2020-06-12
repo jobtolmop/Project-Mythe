@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
+    //[SerializeField] private Transform armRot;
     [SerializeField] private float mouseSensitivity = 100;
     [SerializeField] private float xRotation = 0;
     [SerializeField] private bool cantMove = false;
@@ -31,6 +32,7 @@ public class PlayerLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90, 90);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        //armRot.localRotation = transform.localRotation;
 
         transform.parent.Rotate(transform.parent.up * mouseX);
     }

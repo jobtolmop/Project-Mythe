@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1168335515332931644}
   - component: {fileID: 2681650438257355743}
   - component: {fileID: 8817211484207315467}
-  m_Layer: 26
+  m_Layer: 27
   m_Name: ChandelierParent
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}

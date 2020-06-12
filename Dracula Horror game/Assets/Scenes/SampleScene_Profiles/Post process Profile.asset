@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4099865560789386788
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bba290776795de40be65e06977bd97e, type: 3}
+  m_Name: TextureOverlay
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  texture:
+    overrideState: 1
+    value: {fileID: 8400000, guid: abfeee6ef21f0c740be0aa294da6ec33, type: 2}
+    defaultState: 1
+  tiling:
+    overrideState: 0
+    value: {x: 1, y: 1}
+  offset:
+    overrideState: 0
+    value: {x: 0, y: 0}
+  keepAspectRatio:
+    overrideState: 0
+    value: 0
+  alphaIsTransparent:
+    overrideState: 0
+    value: 1
 --- !u!114 &-2266233948167887193
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1327,6 +1359,7 @@ MonoBehaviour:
   - {fileID: -2266233948167887193}
   - {fileID: 2739304294559940811}
   - {fileID: 3686575627269165552}
+  - {fileID: -4099865560789386788}
 --- !u!114 &2739304294559940811
 MonoBehaviour:
   m_ObjectHideFlags: 3

@@ -95,36 +95,6 @@ public class EnemyDestinationChooser : MonoBehaviour
                     alreadyInvoking = false;
                 }
             }
-
-            //Check if target pos is the location of a sound and if he is on that location
-            /*if (posCheck == TargetPos && heardSound && !SearchLastPlayerLocation && !goCloserToPlayer)
-            {
-                standStillTimer = 0;
-                heardSound = false;
-                locationMadeByRandom = false;
-                alreadyInvoking = false;
-            }
-            //Check if target pos is the location of a sound and if he is on that location
-            else if (posCheck == TargetPos && SearchLastPlayerLocation && !goCloserToPlayer)
-            {
-                standStillTimer = 0;
-                SearchLastPlayerLocation = false;
-                locationMadeByRandom = false;
-                alreadyInvoking = false;
-            }
-            //If he is on the pos when he wanted to go closer to the player
-            else if (goCloserToPlayer && posCheck == TargetPos)
-            {
-                goCloserToPlayer = false;
-                standStillTimer = 0;
-            }
-            //Check if target pos is made by random and if he is on that location
-            else if ((!locationMadeByRandom || posCheck == TargetPos && locationMadeByRandom) && !alreadyInvoking)
-            {
-                standStillTimer = 0;
-                Invoke("ChooseRandomLocation", 2);
-                alreadyInvoking = true;
-            }*/
         }
     }
 
@@ -154,17 +124,20 @@ public class EnemyDestinationChooser : MonoBehaviour
         standStillTimer = 0;
         tooFarTimer = 0;
         tooFarSec = Random.Range(4, 9);
-        /*goCloserToPlayer = true;
-        locationMadeByRandom = false;
-        standStillTimer = 0;
-        alreadyInvoking = false;
-        heardSound = false;
-        SearchLastPlayerLocation = false;*/
         alreadyInvoking = false;
         enemyState = state.GOTOWARDSPLAYER;
-        Vector3 playerPos = spotter.Player.position;
-        playerPos.y = 0;
-        TargetPos = playerPos;
+        if (groundHit.collider != null)
+        {
+            Vector3 roomPos = groundHit.collider.transform.position;
+            roomPos.y = 0;
+            TargetPos = roomPos;
+        }
+        else
+        {
+            Vector3 playerPos = spotter.Player.position;
+            playerPos.y = 0;
+            TargetPos = playerPos;
+        }
     }
 
     private void ChooseRandomLocation()
@@ -195,7 +168,7 @@ public class EnemyDestinationChooser : MonoBehaviour
 
         RaycastHit hit;
 
-        int layerCheck = LayerMask.GetMask("Ground") | LayerMask.GetMask("DontDetectGround") | LayerMask.GetMask("ChandelierBox");
+        int layerCheck = LayerMask.GetMask("Ground") | LayerMask.GetMask("DontDetectGround") | LayerMask.GetMask("Chandelier");
         layerCheck = ~layerCheck;
 
         if (Physics.Raycast(maybeTargetPos, Vector3.up, out hit, transform.localScale.y, layerCheck))

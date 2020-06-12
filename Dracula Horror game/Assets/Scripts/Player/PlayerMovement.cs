@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
-                    footStepAudio.StepLoop(movement.magnitude, 0.8f, 0.6f);
+                    footStepAudio.StepLoop(movement.magnitude, 1.2f, 0.6f);
                 }
             }
             else
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
                     //    footStepAudio.StartStepping(0.1f, 0.7f);
                     //}
 
-                    footStepAudio.StepLoop(movement.magnitude, 1f, 0.8f);
+                    footStepAudio.StepLoop(movement.magnitude, 1.4f, 0.8f);
 
                     if (speed > walkSpeed)
                     {
@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
                 }    
                 else
                 {
-                    footStepAudio.StepLoop(movement.magnitude, 0.8f, 0.6f);
+                    footStepAudio.StepLoop(movement.magnitude, 1.2f, 0.6f);
                     /*if (movement.magnitude > 0.1f)
                     {
                         footStepAudio.StartStepping(0.2f, 0.4f);

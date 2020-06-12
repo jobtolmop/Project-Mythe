@@ -2,16 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UIHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseParent;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject collectionPanel;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject collectionButton;
+    [SerializeField] private GameObject backButton;
+    [SerializeField] private GameObject qualityButton;
+    [SerializeField] private GameObject settingsButton;
     [SerializeField] private GameObject paperPanel;
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject deathPanel;
+    [SerializeField] private GameObject fadeInPanel;
     [SerializeField] private GameObject arrows;
     [SerializeField] private Transform dotImage;
 
     public Transform Dot { get { return dotImage; } }
+    public GameObject WinPanel { get { return winPanel; } } 
 
     private PaperSpawner paperSpawner;
     [SerializeField] private Image paper;
@@ -26,8 +38,7 @@ public class UIHandler : MonoBehaviour
 
     private void Start()
     {        
-        pausePanel.SetActive(false);
-        QualitySettings.SetQualityLevel(5);
+        pauseParent.SetActive(false);
         paperSpawner = FindObjectOfType<PaperSpawner>();
     }
 
@@ -39,13 +50,11 @@ public class UIHandler : MonoBehaviour
         //QuitGameCheck();
 
         PageScroll();
-
-        GraphicsCheck();
     }
 
     private void PauseGameCheck()
     {
-        if (Input.GetButtonDown("Cancel") && !winPanel.activeSelf)
+        if (Input.GetButtonDown("Cancel") && !winPanel.activeSelf && !deathPanel.activeSelf)
         {
             if (paperPanel.activeSelf)
             {
@@ -56,13 +65,18 @@ public class UIHandler : MonoBehaviour
             {
                 if (Time.timeScale > 0)
                 {
+                    pauseParent.SetActive(true);
                     pausePanel.SetActive(true);
+                    collectionPanel.SetActive(false);
+                    settingsPanel.SetActive(false);
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(collectionButton.gameObject);
                     pausePanel.GetComponentInChildren<Text>().text = Mathf.Abs(paperSpawner.Papers.Count - paperSpawner.PapersToSpawn) + "/" + paperSpawner.PapersToSpawn;
                     Time.timeScale = 0f;
                 }
                 else
                 {
-                    pausePanel.SetActive(false);
+                    pauseParent.SetActive(false);
                     Time.timeScale = 1f;
                 }
             }
@@ -84,12 +98,51 @@ public class UIHandler : MonoBehaviour
         {
             timer = 0;
         }
+    }
 
+    public void ToggleCollectionPanel(bool toggle)
+    {
+        collectionPanel.SetActive(toggle);
+        pausePanel.SetActive(!toggle);
+
+        if (toggle)
+        {
+            collectionPanel.GetComponentInChildren<Text>().text = Mathf.Abs(paperSpawner.Papers.Count - paperSpawner.PapersToSpawn) + "/" + paperSpawner.PapersToSpawn;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(backButton);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(collectionButton);
+        }        
+    }
+
+    public void ToggleSettingsPanel(bool toggle)
+    {
+        settingsPanel.SetActive(toggle);
+        pausePanel.SetActive(!toggle);        
+
+        if (toggle)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(settingsButton);
+        }        
     }
 
     private void PageScroll()
     {
-        if (ids.Count == 0 || !pausePanel.activeSelf)
+        int nextPaper = 0;
+
+        if (ids.Count == 0 || !collectionPanel.activeSelf)
         {
             paper.gameObject.SetActive(false);
             arrows.SetActive(false);
@@ -105,7 +158,7 @@ public class UIHandler : MonoBehaviour
             }
             else
             {
-                int nextPaper = ids[0] - 1;
+                nextPaper = ids[0] - 1;
                 paper.sprite = paperSpawner.Sprites[nextPaper];
                 paper.gameObject.SetActive(true);
                 arrows.SetActive(false);
@@ -141,45 +194,32 @@ public class UIHandler : MonoBehaviour
         {
             if (currId < ids.Count - 1)
             {
-                currId++;
-                int nextPaper = ids[currId] - 1;
-                if (nextPaper < 0)
-                {
-                    paper.sprite = controls;
-                }
-                else
-                {
-                    paper.sprite = paperSpawner.Sprites[nextPaper];
-                }
+                currId++;               
             }            
         }
         else if(Input.GetButtonDown("Left"))
         {
             if (currId > 0)
             {
-                currId--;
-                int nextPaper = ids[currId] - 1;
-                if (nextPaper < 0)
-                {
-                    paper.sprite = controls;
-                }
-                else
-                {
-                    paper.sprite = paperSpawner.Sprites[nextPaper];
-                }                
+                currId--;          
             }
+        }
+
+        nextPaper = ids[currId] - 1;
+
+        if (nextPaper < 0)
+        {
+            paper.sprite = controls;
+        }
+        else
+        {
+            paper.sprite = paperSpawner.Sprites[nextPaper];
         }
     }
 
-    private void GraphicsCheck()
+    public void ExitToMainMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            QualitySettings.IncreaseLevel();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            QualitySettings.DecreaseLevel();
-        }
+        fadeInPanel.SetActive(true);
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 }

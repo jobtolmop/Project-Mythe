@@ -68,7 +68,6 @@ public class PaperPickUp : MonoBehaviour
         if (spawner.Papers.Count <= 0)
         {
             spawner.Win();
-            AudioManager.instance.Play("Door_Open");
         }
     }
 

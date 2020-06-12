@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WinGame : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class WinGame : MonoBehaviour
 
     private void Start()
     {
-        winPanel = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(5).gameObject;
+        winPanel = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIHandler>().WinPanel;
         spawner = FindObjectOfType<PaperSpawner>();
         winPanel.SetActive(false);
     }
@@ -29,13 +30,13 @@ public class WinGame : MonoBehaviour
                 winPanel.transform.GetChild(1).GetComponent<Text>().text = "You uncovered the truth and you told the people in your village about what had happened with you and the people who went missing in this mansion. When you showed the documents alot of people believed your story so the village is planning on an attack to kill that monster! You decide to not go there as well, because you don't want to see that place ever again...";
             } 
 
-            StartCoroutine("QuitGame");
+            StartCoroutine("ExitToMainMenu");
         }
     }
 
-    private IEnumerator QuitGame()
+    private IEnumerator ExitToMainMenu()
     {
-        yield return new WaitForSeconds(10);
-        Application.Quit();
+        yield return new WaitForSecondsRealtime(15);
+        SceneManager.LoadScene("MainMenu");
     }
 }

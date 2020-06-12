@@ -9,6 +9,9 @@ public class PlayerSoundMaker : MonoBehaviour
     [SerializeField] private GameObject crouchSound;
     [SerializeField] private GameObject jumpSound;
     [SerializeField] private GameObject landingSound;
+    [SerializeField] private AudioSource jumpLandSource;
+
+    [SerializeField] private AudioClip[] sfx;
 
     private PlayerMovement movement;
 
@@ -62,22 +65,21 @@ public class PlayerSoundMaker : MonoBehaviour
     {
         if (movement.Jumping)
         {
-            jumpSound.SetActive(true);
+            jumpLandSource.volume = 0.2f;
+            jumpLandSource.PlayOneShot(sfx[0]);
         }
         else
         {
-            landingSound.SetActive(true);
+            jumpLandSource.volume = 1f;
+            jumpLandSource.PlayOneShot(sfx[1]);
         }
+
+        jumpSound.SetActive(movement.Jumping);
+        landingSound.SetActive(!movement.Jumping);
         
         yield return new WaitForSeconds(0.5f);
 
-        if (movement.Jumping)
-        {
-            jumpSound.SetActive(false);
-        }
-        else
-        {
-            landingSound.SetActive(false);
-        }
+        jumpSound.SetActive(false);
+        landingSound.SetActive(false);
     }
 }
