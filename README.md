@@ -36,7 +36,7 @@ PC
 | Asset planning (pdf)                  | [AssetPlanning]
 |<img width=500/>|<img width=300/>|
 
-   [Backlog]: <https://trello.com/b/hik72z4q/mythe-2019-voorbeeld-trello>
+   [Backlog]: <https://trello.com/b/sZ4u4PUp/mythe-team-9-dracula>
    [Logboek]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/logboek.pdf>
    [GameDesignDoc]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/GameDesignDoc.pdf>
    [RetrospectiveVerslagen]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/RetrospectiveVerslagen.pdf>
