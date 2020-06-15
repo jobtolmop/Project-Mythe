@@ -37,7 +37,7 @@ Een first person horror game in het kasteel van Dracula!
    [Logboek]: <https://github.com/jobtolmop/Project-Mythe/blob/master/MytheLogboek.pdf>
    [GameDesignDoc]: <https://github.com/jobtolmop/Project-Mythe/blob/master/DraculaGDD.pdf>
    [RetrospectiveVerslagen]: <https://github.com/jobtolmop/Project-Mythe/blob/master/Sprint%20Retrospective.pdf>
-   [ReviewVerslagen]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/ReviewVerslagen.pdf>
+   [ReviewVerslagen]: <https://github.com/jobtolmop/Project-Mythe/blob/master/SprintReviews.pdf>
    [Prototype]: https://drive.google.com/file/d/1XauhGUaALmvWylR2h0Ta8ul1asOlpkbG/view?usp=sharing
 
    
