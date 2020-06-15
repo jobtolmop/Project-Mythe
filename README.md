@@ -31,7 +31,6 @@ Een first person horror game in het kasteel van Dracula!
 | Sprint review verslagen (pdf)         | [ReviewVerslagen]
 | Link naar online speelbaar prototype  | [Prototype]
 | Logboek (pdf)                         | [Logboek]
-| Asset planning (pdf)                  | [AssetPlanning]
 |<img width=500/>|<img width=300/>|
 
    [Backlog]: <https://trello.com/b/sZ4u4PUp/mythe-team-9-dracula>
@@ -40,6 +39,5 @@ Een first person horror game in het kasteel van Dracula!
    [RetrospectiveVerslagen]: <https://github.com/jobtolmop/Project-Mythe/blob/master/Sprint%20Retrospective.pdf>
    [ReviewVerslagen]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/ReviewVerslagen.pdf>
    [Prototype]: https://drive.google.com/file/d/1XauhGUaALmvWylR2h0Ta8ul1asOlpkbG/view?usp=sharing
-   [Folder op teams]: <https://www.linknaarmijnfolderopteams.nl>
-   [AssetPlanning]: <https://github.com/BerendWeij/agp_inlever_template/blob/master/producten/AssetPlanning.pdf>
+
    
