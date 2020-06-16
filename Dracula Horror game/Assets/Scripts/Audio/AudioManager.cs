@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
+    [SerializeField] private AudioMixerGroup mixer;
+    
     private Sound currSound;
 
     private Sound currS;
@@ -39,6 +41,7 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = mixer;
         }
     }
 

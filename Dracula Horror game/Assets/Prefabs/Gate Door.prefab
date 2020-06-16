@@ -922,7 +922,8 @@ AudioSource:
   m_GameObject: {fileID: 5060025629302091296}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7fb0b12591fd4c94c8c95e279e2332d0,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 9709ef3648a07b94fbcc3f536f473b35, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1153,6 +1154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5177678901686207010}
+  - component: {fileID: 5068486934891921440}
   m_Layer: 12
   m_Name: Gate Door
   m_TagString: EndDoor
@@ -1175,6 +1177,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!205 &5068486934891921440
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5177678901686207005}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.0004917383, y: 3.65492, z: 1.0212033}
+  m_Size: 7.073554
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.14675136
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3441554852358664964}
+    - renderer: {fileID: 4746342963655804268}
+    - renderer: {fileID: 2974093848782461988}
+    - renderer: {fileID: 579657215383583439}
+    - renderer: {fileID: 7544014268306797075}
+    - renderer: {fileID: 8159291475262215159}
+    - renderer: {fileID: 2683992861313992670}
+    - renderer: {fileID: 975935584079912913}
+    - renderer: {fileID: 4383791745095713247}
+  m_Enabled: 1
 --- !u!1 &5523506195749043534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,7 +1546,8 @@ AudioSource:
   m_GameObject: {fileID: 8730774255515626633}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7fb0b12591fd4c94c8c95e279e2332d0,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0a8792cd2d17e7548af4625b8e2de97e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

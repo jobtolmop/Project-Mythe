@@ -13603,6 +13603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 946562938010475449}
+  - component: {fileID: 1732887960343554099}
   m_Layer: 0
   m_Name: Maze
   m_TagString: Untagged
@@ -13626,6 +13627,26 @@ Transform:
   m_Father: {fileID: 946562939056948392}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &1732887960343554099
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946562938010475448}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 5, z: 22.50005}
+  m_Size: 35.0001
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.100326546
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 946562937963675810}
+    - renderer: {fileID: 946562937989509576}
+  m_Enabled: 1
 --- !u!1 &946562938233893328
 GameObject:
   m_ObjectHideFlags: 0

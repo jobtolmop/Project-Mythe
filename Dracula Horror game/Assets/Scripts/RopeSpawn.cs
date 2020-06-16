@@ -18,7 +18,7 @@ public class RopeSpawn : MonoBehaviour
     bool snapFirst, snapLast;
 
     //private Transform player;
-    private MeshRenderer chandelierRenderer;
+    //private MeshRenderer chandelierRenderer;
     
     private void Start()
     {
@@ -26,21 +26,21 @@ public class RopeSpawn : MonoBehaviour
         //player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (chandelierRenderer != null && other.CompareTag("Player"))
-        {
-            chandelierRenderer.enabled = true;
-        }        
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (chandelierRenderer != null && other.CompareTag("Player"))
+    //    {
+    //        chandelierRenderer.enabled = true;
+    //    }        
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (chandelierRenderer != null && other.CompareTag("Player"))
-        {
-            chandelierRenderer.enabled = false;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (chandelierRenderer != null && other.CompareTag("Player"))
+    //    {
+    //        chandelierRenderer.enabled = false;
+    //    }
+    //}
 
     public void Spawn()
     {
@@ -71,8 +71,8 @@ public class RopeSpawn : MonoBehaviour
 
         GameObject chand = Instantiate(chandelierPrefab, new Vector3(transform.position.x, transform.position.y + partDistance * (parentObject.transform.childCount - 1), transform.position.z), Quaternion.identity, parentObject.transform);
         chand.GetComponent<CharacterJoint>().connectedBody = parentObject.transform.GetChild(parentObject.transform.childCount - 2).GetComponent<Rigidbody>();
-        chandelierRenderer = chand.GetComponent<MeshRenderer>();
-        chandelierRenderer.enabled = false;
+        //chandelierRenderer = chand.GetComponent<MeshRenderer>();
+        //chandelierRenderer.enabled = false;
 
         if (snapLast)
         {

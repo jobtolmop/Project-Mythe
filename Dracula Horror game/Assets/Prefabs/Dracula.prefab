@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 8038991055223330556}
   - component: {fileID: 8038991055223330557}
   - component: {fileID: 8038991055223330558}
+  - component: {fileID: 3930537918168201860}
   m_Layer: 11
   m_Name: Dracula
   m_TagString: Enemy
@@ -368,6 +369,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!205 &3930537918168201860
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038991055223330535}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.004267931, y: -0.13186169, z: -0.3195634}
+  m_Size: 3.573309
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.09861915
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8693330489356449364}
+  m_Enabled: 1
 --- !u!1 &8038991055783513998
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +762,12 @@ GameObject:
 --- !u!4 &1771516260496212472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2f793b7d468405343a66a732c724c728,
+    type: 3}
+  m_PrefabInstance: {fileID: 6768633616884640482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8693330489356449364 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6535868282413196106, guid: 2f793b7d468405343a66a732c724c728,
     type: 3}
   m_PrefabInstance: {fileID: 6768633616884640482}
   m_PrefabAsset: {fileID: 0}

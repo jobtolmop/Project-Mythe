@@ -24,19 +24,16 @@ public class BookCaseMove : MonoBehaviour
     
     void FixedUpdate()
     {
-        bool enemyClose = false;
-
-        if ((enemy.position - transform.position).sqrMagnitude < 100)
+        if ((enemy.position - transform.position).sqrMagnitude < 25)
         {
             obstacle.enabled = true;
-            enemyClose = true;
         }
         else
         {
             obstacle.enabled = false;
         }
 
-        if (button.ButtonPressed || enemyClose)
+        if (button.ButtonPressed || (enemy.position - transform.position).sqrMagnitude < 100)
         {
             transform.position = Vector3.MoveTowards(transform.position, posToMove, speed * Time.deltaTime);
         }

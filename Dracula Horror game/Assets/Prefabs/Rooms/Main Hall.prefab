@@ -6213,8 +6213,8 @@ PrefabInstance:
         your desired location!
 
 
-        Closing a door makes a sound and slamming
-        it against a wall too so BE CAREFUL!'
+        Slamming an door against a wall is really
+        loud so BE CAREFUL!'
       objectReference: {fileID: 0}
     - target: {fileID: 8140533655391452530, guid: dc5468a5b0b94d34582acaa4d513f3ce,
         type: 3}

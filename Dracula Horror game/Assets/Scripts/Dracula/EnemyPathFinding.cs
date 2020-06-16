@@ -38,12 +38,7 @@ public class EnemyPathFinding : MonoBehaviour
     {
         anim.SetFloat("Speed", agent.velocity.magnitude);
 
-        if (transform.position.y > 10 || transform.position.y < -10 || agent.nextPosition.y > 10)
-        {
-            agent.Warp(new Vector3(transform.position.x, 1.8f, transform.position.z));
-        }
-
-        if (CantMove)
+        if (CantMove || spotter.PlayerDead)
         {
             agent.velocity = Vector3.zero;
             return;

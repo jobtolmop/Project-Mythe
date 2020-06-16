@@ -1913,6 +1913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   candle: {fileID: 9051989839509964672}
+  fadeRate: 0.2
 --- !u!114 &9051989838878670489
 MonoBehaviour:
   m_ObjectHideFlags: 0

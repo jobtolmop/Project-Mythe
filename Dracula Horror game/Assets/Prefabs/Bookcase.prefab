@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 6829621990501363382}
   - component: {fileID: 521557852975691151}
   - component: {fileID: 8386432082402167215}
+  - component: {fileID: 8269754180474203194}
   m_Layer: 12
   m_Name: Bookcase
   m_TagString: Untagged
@@ -109,6 +110,25 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: -0.04557204, y: 2.306152, z: -0.011776}
   m_TimeToStationary: 0.5
+--- !u!205 &8269754180474203194
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6133188243769050063}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 2.3075657, z: -0.0151795745}
+  m_Size: 6.5214643
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.10260352
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 845037173891450549}
+  m_Enabled: 1
 --- !u!1001 &4095298706374860071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2412,6 +2432,12 @@ GameObject:
 --- !u!4 &9056695657281009213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: bcfb59107714f5f40b2990933c1deea4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4095298706374860071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &845037173891450549 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3706252129474435986, guid: bcfb59107714f5f40b2990933c1deea4,
     type: 3}
   m_PrefabInstance: {fileID: 4095298706374860071}
   m_PrefabAsset: {fileID: 0}

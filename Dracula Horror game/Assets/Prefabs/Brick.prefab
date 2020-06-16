@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 3131766643832988201}
   - component: {fileID: 3131766643832988206}
   - component: {fileID: 4816419654325076644}
+  - component: {fileID: 5416897662009039856}
   m_Layer: 12
   m_Name: Brick
   m_TagString: Untagged
@@ -375,3 +376,21 @@ MonoBehaviour:
   isHolding: 0
   rotationSpeed: 10
   multiplier: 1
+--- !u!205 &5416897662009039856
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131766643832988207}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.14674415
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1

@@ -7850,6 +7850,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Astronomy statue
       objectReference: {fileID: 0}
+    - target: {fileID: 4774198355418572748, guid: b867104bbc78cc946baa4ccaa3b83d50,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.30494732
+      objectReference: {fileID: 0}
+    - target: {fileID: 4774198355418572748, guid: b867104bbc78cc946baa4ccaa3b83d50,
+        type: 3}
+      propertyPath: m_FadeMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4774198355418572748, guid: b867104bbc78cc946baa4ccaa3b83d50,
+        type: 3}
+      propertyPath: m_AnimateCrossFading
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5101081561285629333, guid: b867104bbc78cc946baa4ccaa3b83d50,
         type: 3}
       propertyPath: m_LocalPosition.x

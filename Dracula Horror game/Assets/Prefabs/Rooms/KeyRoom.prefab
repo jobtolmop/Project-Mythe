@@ -2541,7 +2541,7 @@ MonoBehaviour:
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
-  m_SelectedVertices: 01000000
+  m_SelectedVertices: 
 --- !u!64 &6661784892369265069
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3619,6 +3619,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8269754180474203194, guid: 0403d4c1b98fc874a9ed10a53fafe63b,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.50221294
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0403d4c1b98fc874a9ed10a53fafe63b, type: 3}
 --- !u!4 &6875180773528948082 stripped
@@ -4162,6 +4167,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068486934891921440, guid: 9c52f5617c2d2a745872c09598648674,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.45148855
       objectReference: {fileID: 0}
     - target: {fileID: 5135732469207649710, guid: 9c52f5617c2d2a745872c09598648674,
         type: 3}
@@ -5252,6 +5262,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269754180474203194, guid: 0403d4c1b98fc874a9ed10a53fafe63b,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.45462504
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0403d4c1b98fc874a9ed10a53fafe63b, type: 3}
@@ -7478,6 +7493,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8269754180474203194, guid: 0403d4c1b98fc874a9ed10a53fafe63b,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.40540624
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0403d4c1b98fc874a9ed10a53fafe63b, type: 3}
 --- !u!4 &1372372540285057423 stripped
@@ -8859,6 +8879,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8269754180474203194, guid: 0403d4c1b98fc874a9ed10a53fafe63b,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.42149997
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0403d4c1b98fc874a9ed10a53fafe63b, type: 3}
 --- !u!4 &4249102316697757249 stripped
@@ -9758,6 +9783,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269754180474203194, guid: 0403d4c1b98fc874a9ed10a53fafe63b,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.30841404
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0403d4c1b98fc874a9ed10a53fafe63b, type: 3}

@@ -12,10 +12,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject playButton;
 
     private void Start()
-    {
-        AudioManager.instance.StopPlaying("Chase");
+    {        
         fadePanel.SetActive(false);
         creditsPanel.SetActive(false);
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.StopPlaying("Chase");
+        }        
     }
 
     public void StartGame()

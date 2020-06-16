@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
             GetComponentInParent<PlayerMovement>().enabled = false;
             GetComponentInParent<CandleControls>().enabled = false;
             other.GetComponent<EnemyPlayerSpotter>().PlayerDead = true;
+            AudioManager.instance.FadeOut = true;
             AudioManager.instance.FadeOutRate = 0.005f;
         }
     }

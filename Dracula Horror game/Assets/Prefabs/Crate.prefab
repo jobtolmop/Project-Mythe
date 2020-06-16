@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 5419769543309113415}
   - component: {fileID: 1998541824776052804}
   - component: {fileID: 1732031950848473400}
+  - component: {fileID: 4577290739503931475}
   m_Layer: 12
   m_Name: Crate
   m_TagString: Untagged
@@ -232,6 +233,30 @@ MonoBehaviour:
   isHolding: 0
   rotationSpeed: 10
   multiplier: 1
+--- !u!205 &4577290739503931475
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459511699811009615}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.021506816, z: 0}
+  m_Size: 0.9918799
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.046851564
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3033323896610067820}
+    - renderer: {fileID: 816780668763763591}
+    - renderer: {fileID: 7191605317437401807}
+    - renderer: {fileID: 1083125897093176546}
+    - renderer: {fileID: 8650974539754322306}
+    - renderer: {fileID: 5614838001100983505}
+  m_Enabled: 1
 --- !u!1 &3193408536313033204
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +297,8 @@ AudioSource:
   m_GameObject: {fileID: 3193408536313033204}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7fb0b12591fd4c94c8c95e279e2332d0,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0a8792cd2d17e7548af4625b8e2de97e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -587,7 +613,8 @@ AudioSource:
   m_GameObject: {fileID: 3893558824057330937}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7fb0b12591fd4c94c8c95e279e2332d0,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a45a813c388f0ab4aa143efa70371969, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5

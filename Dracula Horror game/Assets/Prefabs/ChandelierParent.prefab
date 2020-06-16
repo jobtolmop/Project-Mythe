@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1168335515332931645}
   - component: {fileID: 1168335515332931644}
-  - component: {fileID: 2681650438257355743}
   - component: {fileID: 8817211484207315467}
   m_Layer: 27
   m_Name: ChandelierParent
@@ -55,19 +54,6 @@ MonoBehaviour:
   partDistance: 0.21
   snapFirst: 1
   snapLast: 0
---- !u!65 &2681650438257355743
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168335515332931643}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 9.136121, z: 1}
-  m_Center: {x: 0, y: -4.0680604, z: 0}
 --- !u!54 &8817211484207315467
 Rigidbody:
   m_ObjectHideFlags: 0

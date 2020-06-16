@@ -132,7 +132,8 @@ AudioSource:
   m_GameObject: {fileID: 3651922988930840444}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7fb0b12591fd4c94c8c95e279e2332d0,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 9709ef3648a07b94fbcc3f536f473b35, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -525,7 +526,8 @@ AudioSource:
   m_GameObject: {fileID: 5027985153827522816}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 7fb0b12591fd4c94c8c95e279e2332d0,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0a8792cd2d17e7548af4625b8e2de97e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1888,6 +1890,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8836282409154146956}
+  - component: {fileID: 5229001984209184262}
   m_Layer: 12
   m_Name: Door
   m_TagString: Door
@@ -1914,6 +1917,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &5229001984209184262
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8836282409154146947}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.00999999, y: -0.03999996, z: 0.0686959}
+  m_Size: 4.92
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.045749456
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8102412075141034975}
+    - renderer: {fileID: 5853779466759279924}
+    - renderer: {fileID: 4153640706408369276}
+    - renderer: {fileID: 6152213521577523793}
+    - renderer: {fileID: 2479068160821124913}
+    - renderer: {fileID: 5536646940004139920}
+    - renderer: {fileID: 6039512402473167050}
+  m_Enabled: 1
 --- !u!1001 &8112888189405853503
 PrefabInstance:
   m_ObjectHideFlags: 0

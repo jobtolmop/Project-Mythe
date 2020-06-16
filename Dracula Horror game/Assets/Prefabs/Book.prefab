@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1777507235520491464}
   - component: {fileID: 1777507235520491466}
   - component: {fileID: 1777507235520491465}
-  - component: {fileID: 2008774585649414505}
+  - component: {fileID: 7837666934333632506}
   m_Layer: 12
   m_Name: Book
   m_TagString: Untagged
@@ -67,17 +67,25 @@ MonoBehaviour:
   isHolding: 0
   rotationSpeed: 10
   multiplier: 0.25
---- !u!192 &2008774585649414505
-OcclusionArea:
+--- !u!205 &7837666934333632506
+LODGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777507235520491479}
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.0999999, z: 0.3070351}
-  m_Center: {x: 0, y: 0, z: 0.003517561}
-  m_IsViewVolume: 1
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0.003517568}
+  m_Size: 0.5
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.045494143
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5464997227635597880}
+  m_Enabled: 1
 --- !u!65 &3614667561543290714
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,6 +187,12 @@ GameObject:
 --- !u!4 &7327389382748546295 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: af64358a6ee592e4099a05827f8955f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2362886895591722989}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5464997227635597880 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: af64358a6ee592e4099a05827f8955f2,
     type: 3}
   m_PrefabInstance: {fileID: 2362886895591722989}
   m_PrefabAsset: {fileID: 0}

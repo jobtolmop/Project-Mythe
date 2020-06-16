@@ -21,6 +21,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject fadeInPanel;
     [SerializeField] private GameObject arrows;
     [SerializeField] private Transform dotImage;
+    [SerializeField] private Text fpsText;
 
     public Transform Dot { get { return dotImage; } }
     public GameObject WinPanel { get { return winPanel; } } 
@@ -45,6 +46,22 @@ public class UIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            fpsText.gameObject.SetActive(!fpsText.gameObject.activeSelf);
+        }
+
+        if (fpsText.gameObject.activeSelf)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            if (timer > 0.5f)
+            {
+                int fps = (int)(1f / Time.unscaledDeltaTime);
+                fpsText.text = "FPS: " + fps;
+                timer = 0;
+            }
+        }        
         PauseGameCheck();
 
         //QuitGameCheck();
@@ -76,27 +93,12 @@ public class UIHandler : MonoBehaviour
                 }
                 else
                 {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
                     pauseParent.SetActive(false);
                     Time.timeScale = 1f;
                 }
             }
-        }
-    }
-
-    private void QuitGameCheck()
-    {
-        if (Input.GetButton("Cancel"))
-        {
-            timer += Time.fixedUnscaledDeltaTime;
-
-            if (timer > 10)
-            {
-                Application.Quit();
-            }
-        }
-        else
-        {
-            timer = 0;
         }
     }
 
