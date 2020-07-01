@@ -27,6 +27,11 @@ public class PlayerPickup : MonoBehaviour
 
     private void Update()
     {
+        if (transform.position.y < -2)
+        {
+            transform.position = new Vector3(transform.position.x, 3, transform.position.z);
+        }
+
         //check if isHolding
         if (isHolding)
         {

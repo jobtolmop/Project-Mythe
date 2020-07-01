@@ -1,5 +1,6 @@
 ﻿using UnityEngine.Audio;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -45,19 +46,23 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public IEnumerator StartFadeOut()
     {
-        if (FadeOut && currSound != null)
+        if (currSound != null)
         {
-            if (currSound.volume > 0)
+            FadeOut = true;
+
+            while (currSound.volume > 0 && FadeOut)
             {
                 currSound.source.volume -= FadeOutRate;
+                yield return null;
             }
-            else
+
+            if (FadeOut)
             {
                 currSound.source.Stop();
                 FadeOut = false;
-            }
+            }            
         }
     }
 

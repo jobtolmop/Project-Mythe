@@ -22,13 +22,17 @@ public class BreakDoor : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private SoundEffectProp sfx;
     [SerializeField] private Transform model;
+    private NavMeshAgent enemyAgent;
+    private float timer = 0;
+    [SerializeField] private bool locked = false;
+    public bool Locked { set { locked = value; } }
 
     private void Start()
     {
-        obstacle.carving = false;
         neutralPos = rb.transform.rotation;
         enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
         enemyDestinationChooser = enemy.GetComponent<EnemyDestinationChooser>();
+        enemyAgent = enemy.GetComponent<NavMeshAgent>();
     }
 
     private void Update()
@@ -73,6 +77,16 @@ public class BreakDoor : MonoBehaviour
             else
             {
                 enemyDestinationChooser.DoorTrigger = null;
+
+                if (enemyAgent.velocity.magnitude < 1 && !breaking)
+                {
+                    timer += Time.deltaTime;
+
+                    if (timer > 1 && !breaking)
+                    {
+                        StartCoroutine("WaitDoorBreak");                        
+                    }
+                }
             }                     
         }        
     }
@@ -81,6 +95,11 @@ public class BreakDoor : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            if (!locked)
+            {
+                rb.isKinematic = false;
+            }
+            
             obstacle.carving = false;
             enemyDestinationChooser.DoorTrigger = null;       
         }
@@ -94,6 +113,7 @@ public class BreakDoor : MonoBehaviour
         yield return new WaitForSeconds(1);
         health -= 1;
         sfx.HitSFX.Play();
+        timer = 0;
 
         if (health <= 0)
         {
@@ -107,7 +127,7 @@ public class BreakDoor : MonoBehaviour
             //Destroy(trigger);
             //enemyDestinationChooser.DoorTrigger = null;
             //Destroy(obstacle);
-            obstacle.carving = false;
+            obstacle.enabled = false;
 
             if (explodingDoor)
             {

@@ -27,15 +27,17 @@ public class SoundEffectProp : MonoBehaviour
     private bool alreadyBreaking = false;
 
     private bool pushedByPlayer = false;
+    private bool waitedForSound = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        StartCoroutine("WaitForMakingSound");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (DoorHold)
+        if (DoorHold || !waitedForSound)
         {
             return;
         }
@@ -100,5 +102,12 @@ public class SoundEffectProp : MonoBehaviour
 
         soundCollider.radius = 0.01f;
         soundCollider.gameObject.SetActive(false);
+    }
+
+    private IEnumerator WaitForMakingSound()
+    {
+        yield return new WaitForSeconds(3);
+
+        waitedForSound = true;
     }
 }

@@ -137,7 +137,8 @@ public class SettingsMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("Quality", i);
         QualitySettings.SetQualityLevel(i);
-        QualitySettings.shadowResolution = (ShadowResolution)PlayerPrefs.GetInt("ShadowRes", 3);
+        SettingsStartValues();
+
     }
 
     public void SetFullscreen(bool toggle)

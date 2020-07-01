@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class UIHandler : MonoBehaviour
 {
+    private Animator anim;
     [SerializeField] private GameObject pauseParent;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject collectionPanel;
@@ -18,13 +19,17 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private GameObject paperPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject deathPanel;
+    [SerializeField] private GameObject cutscenePanel;
     [SerializeField] private GameObject fadeInPanel;
     [SerializeField] private GameObject arrows;
     [SerializeField] private Transform dotImage;
     [SerializeField] private Text fpsText;
+    [SerializeField] private Text loadingText;
 
     public Transform Dot { get { return dotImage; } }
     public GameObject WinPanel { get { return winPanel; } } 
+    public GameObject FadeInPanel { get { return fadeInPanel; } } 
+    public Text LoadingText { get { return loadingText; } } 
 
     private PaperSpawner paperSpawner;
     [SerializeField] private Image paper;
@@ -38,9 +43,13 @@ public class UIHandler : MonoBehaviour
     private float timer = 0;
 
     private void Start()
-    {        
+    {
+        GameManager.instance.ReadyLoading = false;
+        loadingText.gameObject.SetActive(false);
+        anim = GetComponent<Animator>();
         pauseParent.SetActive(false);
         paperSpawner = FindObjectOfType<PaperSpawner>();
+        GameManager.instance.UI = this;
     }
 
     // Update is called once per frame
@@ -61,17 +70,24 @@ public class UIHandler : MonoBehaviour
                 fpsText.text = "FPS: " + fps;
                 timer = 0;
             }
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex != 2)
+        {
+            PauseGameCheck();
+
+            PageScroll();
         }        
-        PauseGameCheck();
+    }
 
-        //QuitGameCheck();
-
-        PageScroll();
+    public void PlayCutsceneAudio()
+    {
+        AudioManager.instance.Play("Opening");
     }
 
     private void PauseGameCheck()
     {
-        if (Input.GetButtonDown("Cancel") && !winPanel.activeSelf && !deathPanel.activeSelf)
+        if (Input.GetButtonDown("Cancel") && !winPanel.activeSelf && !deathPanel.activeSelf && !cutscenePanel.activeSelf && !fadeInPanel.activeSelf)
         {
             if (paperPanel.activeSelf)
             {
@@ -88,7 +104,10 @@ public class UIHandler : MonoBehaviour
                     settingsPanel.SetActive(false);
                     EventSystem.current.SetSelectedGameObject(null);
                     EventSystem.current.SetSelectedGameObject(collectionButton.gameObject);
-                    pausePanel.GetComponentInChildren<Text>().text = Mathf.Abs(paperSpawner.Papers.Count - paperSpawner.PapersToSpawn) + "/" + paperSpawner.PapersToSpawn;
+                    if (paperSpawner != null)
+                    {
+                        pausePanel.GetComponentInChildren<Text>().text = Mathf.Abs(paperSpawner.Papers.Count - paperSpawner.PapersToSpawn) + "/" + paperSpawner.PapersToSpawn;
+                    }                    
                     Time.timeScale = 0f;
                 }
                 else
@@ -221,7 +240,6 @@ public class UIHandler : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        fadeInPanel.SetActive(true);
-        SceneManager.LoadSceneAsync("MainMenu");
+        StartCoroutine(GameManager.instance.LoadAsync(0));
     }
 }

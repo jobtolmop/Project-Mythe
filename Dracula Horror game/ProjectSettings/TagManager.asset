@@ -20,6 +20,7 @@ TagManager:
   - PuzzleGround
   - Key
   - Chandelier
+  - Bookcase
   layers:
   - Default
   - TransparentFX
@@ -49,7 +50,7 @@ TagManager:
   - Rope
   - Arm
   - Chandelier
-  - 
+  - Sound
   - 
   - 
   - 

@@ -338,7 +338,7 @@ MonoBehaviour:
     m_Bits: 12777271
   layerCandleDetect:
     serializedVersion: 2
-    m_Bits: 13555511
+    m_Bits: 14177847
 --- !u!136 &8038991055223330557
 CapsuleCollider:
   m_ObjectHideFlags: 0

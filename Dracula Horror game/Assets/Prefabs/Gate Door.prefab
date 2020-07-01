@@ -66,6 +66,7 @@ MonoBehaviour:
   door: {fileID: 6707449387397329453}
   sfx: {fileID: 1187531566702781859}
   model: {fileID: 5356279622360123960}
+  locked: 1
 --- !u!54 &7880763779256538953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1114,6 +1115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftRb: {fileID: 2033195198482391808}
   rightRb: {fileID: 8776218534555089258}
+  doorBreakL: {fileID: 7906460072329787732}
+  doorBreakR: {fileID: 7051744322113301690}
 --- !u!1 &5135732469207649710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,6 +1493,7 @@ MonoBehaviour:
   door: {fileID: 6707449387397329453}
   sfx: {fileID: 1187531566702781859}
   model: {fileID: 2217552174403885218}
+  locked: 1
 --- !u!54 &226546865437276573
 Rigidbody:
   m_ObjectHideFlags: 0

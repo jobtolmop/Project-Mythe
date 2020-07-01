@@ -2568,7 +2568,7 @@ GameObject:
   - component: {fileID: 6661784892628986411}
   - component: {fileID: 6661784892628986408}
   - component: {fileID: 6661784892628986409}
-  - component: {fileID: 6661784892628986414}
+  - component: {fileID: 2978047044465452555}
   m_Layer: 10
   m_Name: Plane
   m_TagString: PuzzleGround
@@ -3159,8 +3159,8 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!64 &6661784892628986414
-MeshCollider:
+--- !u!65 &2978047044465452555
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3169,10 +3169,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 30, y: 2.588647, z: 40}
+  m_Center: {x: 15, y: -1.2943234, z: 20}
 --- !u!1 &7281546608454390690
 GameObject:
   m_ObjectHideFlags: 0
@@ -4171,7 +4170,7 @@ PrefabInstance:
     - target: {fileID: 5068486934891921440, guid: 9c52f5617c2d2a745872c09598648674,
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.45148855
+      value: 0.34671536
       objectReference: {fileID: 0}
     - target: {fileID: 5135732469207649710, guid: 9c52f5617c2d2a745872c09598648674,
         type: 3}
@@ -4303,6 +4302,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6661784891455886555}
     m_Modifications:
+    - target: {fileID: 813788129380643387, guid: db0586e7a6216864887e5d6ea1df5328,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892379132430106766, guid: db0586e7a6216864887e5d6ea1df5328,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2004459091319614176, guid: db0586e7a6216864887e5d6ea1df5328,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4357,6 +4366,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630358271988945989, guid: db0586e7a6216864887e5d6ea1df5328,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378029951141851612, guid: db0586e7a6216864887e5d6ea1df5328,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7058415924522508717, guid: db0586e7a6216864887e5d6ea1df5328,
         type: 3}
@@ -7496,7 +7515,7 @@ PrefabInstance:
     - target: {fileID: 8269754180474203194, guid: 0403d4c1b98fc874a9ed10a53fafe63b,
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.40540624
+      value: 0.31323132
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0403d4c1b98fc874a9ed10a53fafe63b, type: 3}
@@ -8882,7 +8901,7 @@ PrefabInstance:
     - target: {fileID: 8269754180474203194, guid: 0403d4c1b98fc874a9ed10a53fafe63b,
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.42149997
+      value: 0.31957924
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0403d4c1b98fc874a9ed10a53fafe63b, type: 3}

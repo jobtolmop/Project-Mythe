@@ -610,7 +610,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 1, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -1199,7 +1199,8 @@ AudioSource:
   m_GameObject: {fileID: 6030787246767980712}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 1ec5e3362904a3f4fb937cab906d7b68,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: e715751e83b261b4ab86b1defa40bfbb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
@@ -1825,6 +1826,7 @@ GameObject:
   - component: {fileID: 9051989838878670489}
   - component: {fileID: 5739700284987942285}
   - component: {fileID: 2909843385415263213}
+  - component: {fileID: 9035172047021347628}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1885,7 +1887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d3a7a6aedbf484294446b93afab9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
+  speed: 6
   runSpeed: 9
   walkSpeed: 6
   crouchSpeed: 3
@@ -1971,6 +1973,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9035172047021347628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9051989838878670178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be8f00956f2c7446ab249aacb8a1f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fxMixer: {fileID: 24100000, guid: 7fb0b12591fd4c94c8c95e279e2332d0, type: 2}
+  landingSfx: {fileID: 3220190270331863018}
+  muteListener: 1
 --- !u!1 &9051989838947038577
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,9 +2031,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.6
-  m_Height: 2
+  m_Height: 2.5021913
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.001954198, z: 0}
 --- !u!54 &9051989838947038579
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2973,6 +2990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PS_Parent (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
+      propertyPath: m_Layer
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 1652784949999524, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2984,6 +3005,10 @@ PrefabInstance:
     - target: {fileID: 1878652760548056, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1911683160194432, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
+      propertyPath: m_Layer
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 4250067245354182, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_LocalScale.y

@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerSoundMaker soundMaker;
     private FootStepAudio footStepAudio;
 
+    private bool delayedGrounded = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (controller.isGrounded)
         {
-            if (jumping)
+            if (jumping || !delayedGrounded && velocity.y < -5f)
             {
                 jumping = false;
                 soundMaker.PlayCoroutineJumpLand();
@@ -116,10 +118,6 @@ public class PlayerMovement : MonoBehaviour
                 else
                 {
                     footStepAudio.StepLoop(movement.magnitude, 1.2f, 0.6f);
-                    /*if (movement.magnitude > 0.1f)
-                    {
-                        footStepAudio.StartStepping(0.2f, 0.4f);
-                    }*/
                 }
             }
 
@@ -144,7 +142,9 @@ public class PlayerMovement : MonoBehaviour
                 soundMaker.PlayCoroutineJumpLand();
                 velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             }
-        }        
+        }
+
+        delayedGrounded = controller.isGrounded;
 
         velocity.y += gravity * Time.deltaTime;
     }

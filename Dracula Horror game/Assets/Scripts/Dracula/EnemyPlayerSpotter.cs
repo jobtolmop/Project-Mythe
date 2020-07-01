@@ -90,7 +90,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
                 if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layerDetectPlayer))
                 {
-                    //Debug.Log("Collider currently hitting: " + hit.collider);
+                    Debug.Log("Collider currently hitting: " + hit.collider);
 
                     if (hit.collider.gameObject.CompareTag("PlayerCol") || hit.collider.gameObject.CompareTag("Candle"))
                     {
@@ -152,8 +152,8 @@ public class EnemyPlayerSpotter : MonoBehaviour
             {
                 chooser.EnemyState = EnemyDestinationChooser.state.SEARCHLASTSEEN;
                 chooser.TargetPos = lastSeenPos;
-
-                AudioManager.instance.FadeOut = true;
+                
+                StartCoroutine(AudioManager.instance.StartFadeOut());
             }
 
             PlayerSpotted = false;                                        
@@ -169,7 +169,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
         if (Physics.Raycast(pos, dirToCandle, out candleHit, 100, layerCandleDetect))
         {
-            if (candleHit.collider != null && candleHit.collider.gameObject.CompareTag("CandleCol"))
+            if (candleHit.collider.gameObject.CompareTag("CandleCol"))
             {
                 return true;
             }

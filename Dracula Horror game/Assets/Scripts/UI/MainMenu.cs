@@ -12,18 +12,23 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject playButton;
 
     private void Start()
-    {        
+    {
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         fadePanel.SetActive(false);
         creditsPanel.SetActive(false);
         if (AudioManager.instance != null)
         {
             AudioManager.instance.StopPlaying("Chase");
+            AudioManager.instance.Play("MainMenu");
+            AudioManager.instance.CurrSound.source.volume = 1;
         }        
     }
 
     public void StartGame()
     {        
-        SceneManager.LoadSceneAsync("SampleScene");
+        StartCoroutine(GameManager.instance.LoadAsync(1));
         fadePanel.SetActive(true);
     }
 

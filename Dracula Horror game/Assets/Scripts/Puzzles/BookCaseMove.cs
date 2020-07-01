@@ -16,15 +16,15 @@ public class BookCaseMove : MonoBehaviour
 
     private void Start()
     {
-        enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
         originalPos = transform.position;
         posToMove = movePos.position;
         obstacle = GetComponent<NavMeshObstacle>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy").transform;        
     }
     
-    void FixedUpdate()
+    void Update()
     {
-        if ((enemy.position - transform.position).sqrMagnitude < 25)
+        if (enemy != null && (enemy.position - transform.position).sqrMagnitude < 25)
         {
             obstacle.enabled = true;
         }
@@ -33,7 +33,7 @@ public class BookCaseMove : MonoBehaviour
             obstacle.enabled = false;
         }
 
-        if (button.ButtonPressed || (enemy.position - transform.position).sqrMagnitude < 100)
+        if (button.ButtonPressed || (enemy != null && (enemy.position - transform.position).sqrMagnitude < 100))
         {
             transform.position = Vector3.MoveTowards(transform.position, posToMove, speed * Time.deltaTime);
         }

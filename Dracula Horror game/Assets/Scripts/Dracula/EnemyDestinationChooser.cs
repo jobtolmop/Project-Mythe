@@ -166,6 +166,11 @@ public class EnemyDestinationChooser : MonoBehaviour
 
         Vector3 maybeTargetPos = new Vector3(ground.transform.position.x + Random.Range(-x + 2, x - 2), 0, ground.transform.position.z + Random.Range(-z + 2, z - 2));
 
+        if (maybeTargetPos.z < 40 && DontGoAfterPlayer)
+        {
+            return;
+        }
+
         RaycastHit hit;
 
         int layerCheck = LayerMask.GetMask("Ground") | LayerMask.GetMask("DontDetectGround") | LayerMask.GetMask("Chandelier");

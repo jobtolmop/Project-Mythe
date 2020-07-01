@@ -1281,6 +1281,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: bcfb59107714f5f40b2990933c1deea4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bookcase
+      objectReference: {fileID: 0}
     - target: {fileID: -858326364574694866, guid: bcfb59107714f5f40b2990933c1deea4,
         type: 3}
       propertyPath: m_Layer

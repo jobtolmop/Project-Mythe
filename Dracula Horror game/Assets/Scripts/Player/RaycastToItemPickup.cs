@@ -23,6 +23,7 @@ public class RaycastToItemPickup : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 3, layer))
         {
+            Debug.Log(hit.collider);
             if (hit.collider.gameObject.layer == 12 || hit.collider.gameObject.layer == 23)
             {
                 ui.Dot.localScale = new Vector3(1.5f, 1.5f, 1);
@@ -79,20 +80,28 @@ public class RaycastToItemPickup : MonoBehaviour
                     }
                 }
                 else
-                {                    
-                    Release();
+                {
+                    if (Input.GetButtonUp("PickUp"))
+                    {
+                        Release();
+                    }
                 }
             }
             else
             {
                 ui.Dot.localScale = Vector3.one;
+
+                if (Input.GetButtonUp("PickUp"))
+                {
+                    Release();
+                }
             }
         }
         else
         {
             ui.Dot.localScale = Vector3.one;
 
-            if (!Input.GetButton("PickUp"))
+            if (Input.GetButtonUp("PickUp"))
             {
                 Release();
             }            
@@ -100,7 +109,7 @@ public class RaycastToItemPickup : MonoBehaviour
     }
 
     private void Release()
-    {        
+    {
         doorHold = false;
         if (pickedUpObject != null && pickedUpObject.GetComponent<SoundEffectProp>() != null)
         {
