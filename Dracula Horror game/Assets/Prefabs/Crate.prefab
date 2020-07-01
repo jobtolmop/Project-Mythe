@@ -805,7 +805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7486029720780747854}
   - component: {fileID: 3629692688562447782}
-  m_Layer: 12
+  m_Layer: 28
   m_Name: SoundCol
   m_TagString: Sound
   m_Icon: {fileID: 0}

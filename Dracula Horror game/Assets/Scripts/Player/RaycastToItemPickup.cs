@@ -23,7 +23,6 @@ public class RaycastToItemPickup : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 3, layer))
         {
-            Debug.Log(hit.collider);
             if (hit.collider.gameObject.layer == 12 || hit.collider.gameObject.layer == 23)
             {
                 ui.Dot.localScale = new Vector3(1.5f, 1.5f, 1);

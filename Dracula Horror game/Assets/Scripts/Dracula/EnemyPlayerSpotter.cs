@@ -90,8 +90,6 @@ public class EnemyPlayerSpotter : MonoBehaviour
 
                 if (Physics.Raycast(eyes.position, dirToObject, out hit, viewDistance, layerDetectPlayer))
                 {
-                    Debug.Log("Collider currently hitting: " + hit.collider);
-
                     if (hit.collider.gameObject.CompareTag("PlayerCol") || hit.collider.gameObject.CompareTag("Candle"))
                     {
                         //Only applies if looking for light
@@ -99,11 +97,7 @@ public class EnemyPlayerSpotter : MonoBehaviour
                         
                         if (hit.collider.gameObject.CompareTag("Candle"))
                         {
-                            seesLight = PointSeesCandlePos(hit.point);
-                            if (seesLight)
-                            {
-                                Debug.Log("Saw light!");
-                            }                            
+                            seesLight = PointSeesCandlePos(hit.point);                          
                         }
                         
                         if (seesLight)

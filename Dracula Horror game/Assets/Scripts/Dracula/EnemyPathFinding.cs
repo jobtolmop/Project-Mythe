@@ -101,12 +101,31 @@ public class EnemyPathFinding : MonoBehaviour
     {
         if (collision.gameObject.layer == 12 && agent.velocity.magnitude > 7)
         {
-            float colMass = collision.gameObject.GetComponent<Rigidbody>().mass / 10 / 2;
-           
-            if (agent.speed > 3)
+            float colMass = collision.gameObject.GetComponentInParent<Rigidbody>().mass / 10 / 2;
+
+            Debug.Log(collision.gameObject.GetComponentInParent<SoundEffectProp>() != null && collision.gameObject.GetComponentInParent<SoundEffectProp>().ThrownByPlayer);
+
+            if (collision.gameObject.GetComponentInParent<SoundEffectProp>() != null && collision.gameObject.GetComponentInParent<SoundEffectProp>().ThrownByPlayer)
             {
-                agent.speed -= colMass;
-            }             
+                CantMove = true;
+                anim.speed = 1;
+                agent.speed = 0;
+                anim.SetBool("Hit", true);
+                Invoke("CanMoveAgain", colMass);
+            }
+            else
+            {
+                if (agent.speed > 3)
+                {
+                    agent.speed -= colMass;
+                }
+            }                        
         }
+    }
+
+    private void CanMoveAgain()
+    {
+        anim.SetBool("Hit", false);
+        CantMove = false;
     }
 }

@@ -90,7 +90,10 @@ public class SoundEffectProp : MonoBehaviour
             }
         }
 
-        ThrownByPlayer = false;
+        if (!collision.gameObject.CompareTag("Enemy"))
+        {
+            ThrownByPlayer = false;
+        }        
     }
 
     private IEnumerator SoundDelay()
